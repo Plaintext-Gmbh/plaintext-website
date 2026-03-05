@@ -161,16 +161,19 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- Team Section -->
   <section id="about" class="py-24 bg-white">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row items-center gap-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-16">Unser Team</h2>
+      
+      <!-- Daniel Marthaler -->
+      <div class="flex flex-col md:flex-row items-center gap-12 mb-20">
         <div class="w-48 h-48 rounded-full shrink-0 overflow-hidden shadow-xl">
-          <!-- Echtes Bild hier einfügen -->
           <img src="/daniel.jpg" alt="Daniel Marthaler" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-sky-500 to-cyan-500 flex items-center justify-center text-white text-6xl font-bold\'>DM</div>'" />
         </div>
         <div>
-          <h2 class="text-3xl font-bold mb-4">Daniel Marthaler</h2>
+          <h3 class="text-3xl font-bold mb-2">Daniel Marthaler</h3>
+          <p class="text-blue-600 font-semibold mb-4">Founder & Software Architect</p>
           <p class="text-gray-600 mb-6">
             Mit langjähriger Erfahrung in der Softwareentwicklung bringe ich nicht nur technisches Know-how mit, 
             sondern auch die Fähigkeit, Brücken zwischen verschiedenen Teams zu schlagen. 
@@ -178,6 +181,27 @@ import Layout from '../layouts/Layout.astro';
           </p>
           <div class="flex flex-wrap gap-2">
             {['Software Architekt', 'DevOps Engineer', 'Team Lead', 'Product Owner', 'Cloud Engineer'].map(role => (
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">{role}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Jasmin Marthaler -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+        <div class="w-48 h-48 rounded-full shrink-0 overflow-hidden shadow-xl">
+          <img src="/jasmin.jpg" alt="Jasmin Marthaler" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-6xl font-bold\'>JM</div>'" />
+        </div>
+        <div class="text-center md:text-right">
+          <h3 class="text-3xl font-bold mb-2">Jasmin Marthaler</h3>
+          <p class="text-blue-600 font-semibold mb-4">Lead Back Office</p>
+          <p class="text-gray-600 mb-6">
+            Als Lead Back Office sorge ich für reibungslose Abläufe und professionelle Administration. 
+            Von Projektkoordination bis zur Kundenbetreuung – ich bringe Struktur in komplexe Prozesse 
+            und schaffe den Freiraum für technische Innovation.
+          </p>
+          <div class="flex flex-wrap gap-2 justify-center md:justify-end">
+            {['Projektkoordination', 'Kundenbetreuung', 'Administration', 'Prozessoptimierung'].map(role => (
               <span class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">{role}</span>
             ))}
           </div>
