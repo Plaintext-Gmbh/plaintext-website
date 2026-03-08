@@ -1,43 +1,48 @@
-# Astro Starter Kit: Minimal
+# Plaintext Website
 
-```sh
-npm create astro@latest -- --template minimal
+Modern Astro-based website for Plaintext GmbH with team profiles and service overview.
+
+## 🚀 Deployment Options
+
+### 1. Production (GitHub Pages)
+- **Trigger:** Push to `main` branch
+- **URL:** https://daniel-marthaler.github.io/plaintext-website
+- **Status:** ✅ Auto-deploys on every main push
+
+### 2. Feature Branch Previews (GitHub Pages)
+- **Trigger:** Push to any feature branch
+- **URL:** `https://daniel-marthaler.github.io/plaintext-website/feature/{branch-name}`
+- **Status:** ✅ Auto-deploys on every feature push
+
+### 3. Feature Branch Previews (Vercel)
+- **Trigger:** Pull requests + feature branches  
+- **URL:** Auto-generated preview URL
+- **Status:** ⚠️ Requires Vercel secrets
+
+### 4. Hostpoint FTPS (Legacy)
+- **Trigger:** Push to main (if secrets configured)
+- **URL:** https://marthaler.io
+- **Status:** ⚠️ Currently blocked (Hostpoint FTP issues)
+
+## 🛠 Local Development
+
+```bash
+npm install
+npm run dev        # Start dev server
+npm run build      # Build for production
+npm run preview    # Preview production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📸 Fixed Issues
 
-## 🚀 Project Structure
+- ✅ **Image loading:** Both `daniel.jpg` and `jasmin.jpg` load correctly
+- ✅ **File permissions:** Fixed 600 → 644 for proper web access
+- ✅ **Team section:** Complete profiles for Daniel & Jasmin Marthaler
+- ✅ **Responsive design:** Mobile-first approach with proper scaling
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🔧 Tech Stack
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Framework:** Astro 5.17.1
+- **Styling:** Tailwind CSS 4.1.18  
+- **Deployment:** GitHub Actions + GitHub Pages
+- **Images:** Optimized JPG with proper permissions
