@@ -2,12 +2,17 @@ name: Deploy to Hostpoint
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
+  pull_request:
+    branches: [main, master] 
+    types: [closed]
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Only deploy when PR is merged (not just closed)
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     
     steps:
       - name: Checkout
@@ -38,3 +43,9 @@ jobs:
           security: strict
           timeout: 60000
           log-level: verbose
+          
+      - name: Deployment Success
+        run: |
+          echo "🚀 Deployment to Hostpoint successful!"
+          echo "📍 URL: https://marthaler.io" 
+          echo "✅ Images: daniel.jpg + jasmin.jpg deployed"
