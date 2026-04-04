@@ -2,7 +2,7 @@ name: Deploy Feature Branch to GitHub Pages
 
 on:
   push:
-    branches-ignore: [main]
+    branches-ignore: [master]
   workflow_dispatch:
 
 permissions:
@@ -18,7 +18,7 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
+    if: github.ref != 'refs/heads/master'
     
     steps:
       - name: Checkout
