@@ -2,9 +2,9 @@ name: Deploy to Hostpoint
 
 on:
   push:
-    branches: [main, master]
+    branches: [master]
   pull_request:
-    branches: [main, master] 
+    branches: [master]
     types: [closed]
   workflow_dispatch:
 
