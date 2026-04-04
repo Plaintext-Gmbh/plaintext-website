@@ -40,7 +40,7 @@ jobs:
           echo "<div style='position:fixed;top:10px;right:10px;background:#ff6b35;color:white;padding:5px 10px;border-radius:5px;z-index:9999;font-family:monospace;'>🔍 Feature: ${{ github.ref_name }}</div>" >> dist/index.html
 
       - name: Deploy to GitHub Pages (Feature Branch)
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
