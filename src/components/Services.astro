@@ -1,0 +1,42 @@
+---
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).services;
+---
+
+<section id="services" class="py-24 md:py-32 bg-[var(--color-ink-50)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal max-w-2xl mb-16">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-brand-500)] mb-4">{s.eyebrow}</p>
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">{s.title}</h2>
+      <p class="mt-5 text-lg text-[var(--color-ink-500)] leading-relaxed">{s.body}</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+      {s.items.map((item, i) => (
+        <article
+          class={`card reveal ${i === 0 ? 'is-featured md:col-span-2' : ''}`}
+          style={`transition-delay: ${i * 60}ms;`}
+        >
+          {item.kicker && (
+            <span class="inline-block font-mono text-xs uppercase tracking-wider px-2 py-1 rounded-md bg-[var(--color-brand-500)] text-white mb-3">
+              {item.kicker}
+            </span>
+          )}
+          <h3 class="text-xl md:text-2xl font-bold mb-3">{item.title}</h3>
+          <p class="text-[var(--color-ink-500)] leading-relaxed">{item.body}</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {item.chips.map((c) => (
+              <span class="chip-mono px-2.5 py-1 rounded-md bg-white border border-[var(--color-ink-100)] text-[var(--color-ink-700)]">{c}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

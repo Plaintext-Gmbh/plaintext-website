@@ -1,0 +1,32 @@
+---
+import Brand from './Brand.astro';
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).footer;
+const homeHref = lang === 'de' ? '/' : '/en/';
+---
+
+<footer class="bg-[var(--color-ink-900)] text-[var(--color-ink-300)] py-12">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
+    <Brand href={homeHref} size="1.2rem" invert />
+
+    <div class="text-xs font-mono space-y-1 md:ml-auto">
+      <div>© {new Date().getFullYear()} Plaintext GmbH. {s.rights}</div>
+      <div class="text-[var(--color-ink-500)]">{s.impressum}</div>
+    </div>
+
+    <a
+      href="https://github.com/Plaintext-Gmbh"
+      target="_blank"
+      rel="noopener"
+      class="text-xs font-mono text-[var(--color-ink-300)] hover:text-white transition"
+    >
+      github.com/Plaintext-Gmbh
+    </a>
+  </div>
+</footer>

@@ -1,0 +1,27 @@
+---
+interface Props {
+  size?: string;
+  invert?: boolean;
+  href?: string;
+}
+const { size = '1.4rem', invert = false, href = '/' } = Astro.props;
+const color = invert ? 'white' : 'var(--color-ink-900)';
+const accent = invert ? 'var(--color-brand-300)' : 'var(--color-brand-500)';
+---
+
+<a
+  href={href}
+  class="wordmark"
+  style={`font-size: ${size}; color: ${color};`}
+  aria-label="Plaintext GmbH"
+>
+  <img
+    src="/projectmind-icon.svg"
+    alt=""
+    class="mark-icon brand-pulse"
+    aria-hidden="true"
+    style="width: 1.05em; height: 1.05em; margin-right: 0.45em; transform: translateY(0.12em);"
+  />
+  <span>plaintext</span>
+  <span style={`color: ${accent}; font-weight: 600; margin-left: 0.04em;`}>.</span>
+</a>

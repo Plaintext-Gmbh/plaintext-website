@@ -1,0 +1,37 @@
+---
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).tech;
+---
+
+<section id="tech" class="py-24 md:py-32 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal max-w-2xl mb-14">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-brand-500)] mb-4">{s.eyebrow}</p>
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">{s.title}</h2>
+      <p class="mt-5 text-lg text-[var(--color-ink-500)]">{s.body}</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
+      {s.groups.map(([heading, tags], i) => (
+        <div class="reveal" style={`transition-delay: ${i * 60}ms;`}>
+          <h3 class="text-sm font-mono uppercase tracking-[0.15em] text-[var(--color-ink-500)] mb-4 pb-2 border-b border-[var(--color-ink-100)]">
+            {heading}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span class="chip-mono px-2.5 py-1.5 rounded-md bg-[var(--color-ink-50)] text-[var(--color-ink-700)] border border-[var(--color-ink-100)] hover:border-[var(--color-brand-300)] hover:text-[var(--color-brand-500)] transition">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

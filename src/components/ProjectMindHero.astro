@@ -1,0 +1,136 @@
+---
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).pm;
+const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/projectmind/master/scripts/install.sh | sh';
+---
+
+<section
+  id="projectmind"
+  class="relative py-28 md:py-36 overflow-hidden"
+  style="background: linear-gradient(135deg, #0a0a14 0%, #14133a 50%, #0d0c4d 100%); color: white;"
+>
+  <!-- Decorative orbiting glow — subtle, hints at the hub-pattern. -->
+  <div
+    class="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full opacity-30 blur-3xl pointer-events-none"
+    style="background: radial-gradient(circle, var(--color-brand-500), transparent 70%);"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute -bottom-32 -left-32 w-[420px] h-[420px] rounded-full opacity-20 blur-3xl pointer-events-none"
+    style="background: radial-gradient(circle, var(--color-accent-mint), transparent 70%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="reveal max-w-3xl">
+      <div class="flex items-center gap-3 mb-6">
+        <img src="/projectmind-icon.svg" alt="" class="w-12 h-12 brand-pulse" aria-hidden="true" />
+        <p class="font-mono text-xs uppercase tracking-[0.25em] text-[var(--color-brand-300)]">
+          {s.eyebrow}
+          <span class="mx-2 text-white/30">·</span>
+          {s.kicker}
+        </p>
+      </div>
+
+      <h2 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.02]">
+        {s.title}
+      </h2>
+      <p class="mt-4 text-2xl md:text-3xl font-light text-[var(--color-brand-300)] italic">
+        {s.subtitle}
+      </p>
+      <p class="mt-8 text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl">
+        {s.body}
+      </p>
+    </div>
+
+    <div class="mt-16 grid md:grid-cols-2 gap-8 lg:gap-10">
+      <ul class="space-y-6 reveal" style="transition-delay: 80ms;">
+        {s.bullets.map(([head, body]) => (
+          <li class="flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center" style="background: rgba(45, 43, 254, 0.25); border: 1px solid rgba(137, 133, 254, 0.4);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <div>
+              <div class="font-semibold text-white">{head}</div>
+              <div class="text-white/70 text-sm leading-relaxed mt-1">{body}</div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="reveal" style="transition-delay: 160ms;">
+        <div class="rounded-xl p-6" style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px);">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-3 h-3 rounded-full bg-red-400/70"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-400/70"></span>
+            <span class="w-3 h-3 rounded-full bg-green-400/70"></span>
+            <span class="ml-auto font-mono text-xs text-white/40">{s.install}</span>
+          </div>
+
+          <div class="code-block" data-install-cmd>
+            <span class="prompt">$</span>
+            <code>{installCmd}</code>
+            <button
+              type="button"
+              class="copy-btn"
+              data-copy-target="install-cmd"
+              data-default-label={s.secondary}
+              data-copied-label={s.copied}
+            >
+              {s.secondary}
+            </button>
+          </div>
+
+          <p class="mt-4 text-sm text-white/50 font-mono">{s.installNote}</p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href="https://github.com/Plaintext-Gmbh/projectmind"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-on-dark"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+              {s.primary}
+            </a>
+            <a
+              href="https://github.com/Plaintext-Gmbh/projectmind#quickstart"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-ghost-on-dark"
+            >
+              {s.learnMore}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Click-to-copy for the install command. We re-use the same selector across
+  // the page so the language switch doesn't break attached handlers — Astro
+  // re-renders on navigation so this script is included on each page.
+  document.querySelectorAll('[data-copy-target="install-cmd"]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const block = btn.closest('[data-install-cmd]');
+      const code = block?.querySelector('code')?.textContent ?? '';
+      try {
+        await navigator.clipboard.writeText(code);
+        const copied = btn.getAttribute('data-copied-label') ?? 'copied';
+        const def = btn.getAttribute('data-default-label') ?? 'copy';
+        btn.textContent = copied;
+        setTimeout(() => { btn.textContent = def; }, 1600);
+      } catch {
+        // Clipboard blocked — silent.
+      }
+    });
+  });
+</script>
