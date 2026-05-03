@@ -47,7 +47,7 @@ jobs:
         uses: actions/deploy-pages@v5
 
       - name: Comment deployment URL
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         if: github.event_name == 'push'
         with:
           script: |
