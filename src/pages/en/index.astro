@@ -1,15 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import ProjectMindHero from '../components/ProjectMindHero.astro';
-import Services from '../components/Services.astro';
-import TechStack from '../components/TechStack.astro';
-import Team from '../components/Team.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Hero from '../../components/Hero.astro';
+import ProjectMindHero from '../../components/ProjectMindHero.astro';
+import Services from '../../components/Services.astro';
+import TechStack from '../../components/TechStack.astro';
+import Team from '../../components/Team.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
 
-const lang = 'de' as const;
+const lang = 'en' as const;
 ---
 
 <Layout lang={lang}>
@@ -26,8 +26,6 @@ const lang = 'de' as const;
 </Layout>
 
 <script is:inline>
-  // Reveal-on-scroll: fade + lift sections as they enter the viewport.
-  // Falls back to "always visible" via the .no-js class if JS is off.
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(
       (entries) => {

@@ -3,17 +3,12 @@ name: Deploy to Hostpoint
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
-    types: [closed]
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    # Only deploy when PR is merged (not just closed)
-    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -30,6 +25,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Deploy to www/plaintext.ch on Hostpoint. Operational files that live
+      # next to the site but are not part of the build (server-side logs, large
+      # backup zips, the watch.php endpoint that holds an API token, private
+      # uploads) are excluded so the FTP-Deploy-Action never deletes them.
       - name: Deploy to Hostpoint via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
@@ -39,13 +38,20 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./dist/
-          server-dir: /www/marthaler.io/
+          server-dir: /www/plaintext.ch/
           security: strict
           timeout: 60000
           log-level: verbose
-          
-      - name: Deployment Success
+          exclude: |
+            **/*.zip
+            **/*.log
+            **/*.txt
+            **/watch.php
+            **/privat*
+            **/42.png
+            **/logo.png
+
+      - name: Deployment success
         run: |
-          echo "🚀 Deployment to Hostpoint successful!"
-          echo "📍 URL: https://marthaler.io" 
-          echo "✅ Images: daniel.jpg + jasmin.jpg deployed"
+          echo "Deployment to Hostpoint successful"
+          echo "URL: https://plaintext.ch"

@@ -1,0 +1,37 @@
+---
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).contact;
+---
+
+<section
+  id="contact"
+  class="relative py-28 md:py-36 overflow-hidden"
+  style="background: linear-gradient(135deg, var(--color-brand-700) 0%, var(--color-brand-500) 100%); color: white;"
+>
+  <div class="absolute inset-0 grid-backdrop opacity-40 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative max-w-4xl mx-auto px-6 reveal">
+    <p class="font-mono text-xs uppercase tracking-[0.25em] text-white/70 mb-5">{s.eyebrow}</p>
+    <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight">{s.title}</h2>
+    <p class="mt-6 text-xl text-white/85 max-w-2xl leading-relaxed">{s.body}</p>
+
+    <a
+      href={`mailto:${s.button}`}
+      class="mt-10 inline-flex items-center gap-3 bg-white text-[var(--color-brand-700)] px-8 py-5 rounded-xl font-bold text-lg md:text-xl hover:bg-[var(--color-brand-50)] transition transform hover:scale-[1.02]"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      {s.button}
+    </a>
+
+    <p class="mt-12 text-sm text-white/60 font-mono">{s.address}</p>
+  </div>
+</section>

@@ -1,24 +1,43 @@
 ---
 import '../styles/global.css';
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+
 interface Props {
-  title: string;
+  lang: Lang;
 }
-const { title } = Astro.props;
+const { lang } = Astro.props;
+const s = t(lang);
+const otherLang = lang === 'de' ? 'en' : 'de';
+const otherHref = lang === 'de' ? '/en/' : '/';
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={s.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Plaintext GmbH - Software Architektur, DevOps & Cloud Engineering" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content={s.meta.description} />
+    <meta name="theme-color" content="#2D2BFE" />
+    <meta property="og:title" content={s.meta.title} />
+    <meta property="og:description" content={s.meta.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/projectmind-icon.svg" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" type="image/svg+xml" href="/projectmind-icon.svg" />
+    <link rel="alternate" hreflang={lang} href={lang === 'de' ? '/' : '/en/'} />
+    <link rel="alternate" hreflang={otherLang} href={otherHref} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{s.meta.title}</title>
   </head>
-  <body class="bg-gray-50 text-gray-900 font-[Inter]">
+  <body>
     <slot />
   </body>
 </html>
