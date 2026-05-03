@@ -45,6 +45,19 @@ const de = {
     learnMore: 'Mehr im Repo',
     diagramAria: 'Schematische Darstellung einer Codebasis als Knotengraph',
   },
+  others: {
+    eyebrow: 'Auch von uns',
+    title: 'Open-Source-Framework',
+    body: 'Bewährte Technologien, klare Architekturen, jahrelang gepflegt. Boring tech is good tech — wir konzentrieren uns auf das eigentliche Problem, nicht auf das Frontend-Framework des Quartals.',
+    items: [
+      {
+        name: 'plaintext-root',
+        body: 'Unser Anwendungs-Framework: Multi-Tenancy, Security, Menü-System, Admin-Module, Discovery. Die Basis, auf der unsere Kunden-Anwendungen seit Jahren laufen — und die wir als Open Source unter MPL 2.0 bereitstellen.',
+        link: 'https://github.com/Plaintext-Gmbh/plaintext-root',
+        linkLabel: 'github.com/Plaintext-Gmbh/plaintext-root',
+      },
+    ],
+  },
   services: {
     eyebrow: 'Leistungen',
     title: 'Was wir mitbringen',
@@ -160,6 +173,19 @@ const en: typeof de = {
     copied: 'copied ✓',
     learnMore: 'More in the repo',
     diagramAria: 'Schematic of a codebase as a node graph',
+  },
+  others: {
+    eyebrow: 'Also from us',
+    title: 'Open-source framework',
+    body: 'Boring technology, clear architectures, maintained for years. Boring tech is good tech — we focus on the actual problem, not the frontend framework of the quarter.',
+    items: [
+      {
+        name: 'plaintext-root',
+        body: 'Our application framework: multi-tenancy, security, menu system, admin modules, discovery. The foundation our customer apps have been running on for years — released as open source under MPL 2.0.',
+        link: 'https://github.com/Plaintext-Gmbh/plaintext-root',
+        linkLabel: 'github.com/Plaintext-Gmbh/plaintext-root',
+      },
+    ],
   },
   services: {
     eyebrow: 'Services',
