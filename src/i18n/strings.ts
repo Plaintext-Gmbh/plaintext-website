@@ -124,8 +124,59 @@ const de = {
   },
   footer: {
     rights: 'Alle Rechte vorbehalten.',
-    impressum: 'Plaintext GmbH · CHE-Nummer auf Anfrage',
+    impressum: 'Plaintext GmbH · CHE-488.786.867',
     sourceLabel: 'Diese Seite ist in Astro gebaut, der Code liegt offen.',
+    imprintLabel: 'Impressum',
+    imprintHref: '/impressum/',
+  },
+  imprint: {
+    title: 'Impressum',
+    backLabel: '← Zurück',
+    company: 'Plaintext GmbH',
+    addressLines: ['Neuhusmatte 155', '3083 Trimstein', 'Schweiz'],
+    email: 'info@plaintext.ch',
+    uid: 'CHE-488.786.867 HR/MWST',
+    sections: [
+      {
+        heading: 'Rechtliches',
+        body: [
+          'Wir bemühen uns, das Informationsangebot dieser Website aktuell, inhaltlich richtig und vollständig anzubieten. Dennoch ist das Auftreten von Fehlern nicht vollständig auszuschliessen. Eine Garantie für die Vollständigkeit, Richtigkeit und letzte Aktualität kann daher nicht übernommen werden.',
+          'Wir behalten uns ausdrücklich vor, jederzeit Inhalte ohne Ankündigung ganz oder teilweise zu ändern, zu löschen oder zeitweise nicht zu veröffentlichen.',
+          'Der Zugang und die Benutzung dieser Website geschehen auf eigene Gefahr des Benutzers. Wir sind nicht verantwortlich und übernehmen keinerlei Haftung für Schäden materieller oder immaterieller Art, unter anderem für direkte, indirekte, zufällige, vorab konkret zu bestimmende oder Folgeschäden, die angeblich durch den oder in Verbindung mit dem Zugang und/oder der Benutzung dieses Internetangebotes aufgetreten sind.',
+          'Unser Internetangebot kann externe Links auf die Internetseiten Dritter enthalten. Auf den Inhalt dieser Seiten haben wir keinen Einfluss. Wir übernehmen keine Verantwortung für die Inhalte und die Verfügbarkeit von Internetseiten Dritter, die über externe Links dieses Informationsangebotes erreicht werden.',
+        ],
+      },
+      {
+        heading: 'Datenschutz',
+        body: [
+          'Gestützt auf Artikel 13 der schweizerischen Bundesverfassung und die datenschutzrechtlichen Bestimmungen des Bundes hat jede Person Anspruch auf Schutz ihrer Privatsphäre sowie auf Schutz vor Missbrauch ihrer persönlichen Daten. Die Plaintext GmbH hält diese Bestimmungen ein. Persönliche Daten werden streng vertraulich behandelt.',
+          'In enger Zusammenarbeit mit unseren Hosting-Providern bemühen wir uns, die Datenbanken so gut wie möglich vor fremden Zugriffen, Verlusten, Missbrauch oder vor Fälschung zu schützen.',
+          'Beim Zugriff auf unsere Webseiten werden folgende Daten in Logfiles gespeichert: IP-Adresse, Datum, Uhrzeit, Browser-Anfrage und allgemein übertragene Informationen zum Betriebssystem resp. Browser. Diese Nutzungsdaten bilden die Basis für statistische, anonyme Auswertungen, so dass Trends erkennbar sind, anhand derer die Plaintext GmbH ihr Angebot entsprechend verbessern kann.',
+        ],
+      },
+      {
+        heading: 'Personenbezogene Daten',
+        body: [
+          'Verantwortliche Stelle für die Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten ist die Plaintext GmbH. Sofern Sie der Erhebung, Verarbeitung oder Nutzung Ihrer Daten nach Massgabe von Datenschutzbestimmungen insgesamt oder für einzelne Massnahmen widersprechen wollen, können Sie Ihren Widerspruch per E-Mail oder Brief an obenstehende Kontaktdaten senden.',
+          'Personenbezogene Daten sind Informationen, die dazu genutzt werden können, Ihre Identität zu erfahren. Darunter fallen Ihr Name, die Adresse, Postanschrift, Telefonnummer. Informationen, die nicht mit Ihrer Identität in Verbindung gebracht werden (wie zum Beispiel die Anzahl der Nutzer einer Website), gehören nicht dazu. Sie können unsere Website grundsätzlich ohne Offenlegung Ihrer Identität nutzen.',
+          'Bei der freiwilligen Kontaktaufnahme wird Ihre E-Mail-Adresse in eine separate Datenbank aufgenommen, welche nicht mit den anonymen Logfiles verknüpft wird. Sie haben jederzeit die Möglichkeit, Ihre Registrierung wieder rückgängig zu machen.',
+        ],
+      },
+      {
+        heading: 'Cookies',
+        body: [
+          'Auf unserer Website können Cookies zum Einsatz kommen, die für die Zeit Ihres Besuchs auf der Website gültig sind. Durch das Weitersurfen auf unserer Website erklären Sie sich mit der Nutzung von Cookies einverstanden.',
+          'Die meisten Browser sind so eingestellt, dass sie Cookies automatisch akzeptieren. Wenn Sie Cookies blockieren oder löschen wollen, können Sie diese Änderungen in den Browsereinstellungen vornehmen. Zur Verwaltung von Cookies ermöglichen Ihnen die meisten Browser, alle Cookies zu akzeptieren oder abzulehnen bzw. nur bestimmte Arten von Cookies zu akzeptieren.',
+        ],
+      },
+      {
+        heading: 'Copyright',
+        body: [
+          'Die auf unseren Websites enthaltenen Informationen werden der Öffentlichkeit zugänglich gemacht. Durch das Herunterladen oder Kopieren von Inhalten, Bildern, Fotos oder anderen Dateien werden keinerlei Rechte bezüglich der Inhalte übertragen. Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf den Websites gehören uns ausschliesslich oder den speziell genannten Rechtsinhabern.',
+          'Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.',
+        ],
+      },
+    ],
   },
 } as const;
 
@@ -253,8 +304,59 @@ const en: typeof de = {
   },
   footer: {
     rights: 'All rights reserved.',
-    impressum: 'Plaintext GmbH · UID on request',
+    impressum: 'Plaintext GmbH · CHE-488.786.867',
     sourceLabel: 'This site is built with Astro, the source is open.',
+    imprintLabel: 'Imprint',
+    imprintHref: '/en/imprint/',
+  },
+  imprint: {
+    title: 'Imprint',
+    backLabel: '← Back',
+    company: 'Plaintext GmbH',
+    addressLines: ['Neuhusmatte 155', '3083 Trimstein', 'Switzerland'],
+    email: 'info@plaintext.ch',
+    uid: 'CHE-488.786.867 HR/MWST',
+    sections: [
+      {
+        heading: 'Legal',
+        body: [
+          'We do our best to keep the information on this site current, accurate and complete. Even so, errors are possible, and we make no warranty as to completeness, accuracy or up-to-dateness.',
+          'We reserve the right to modify, remove or temporarily suspend any content at any time and without prior notice.',
+          'Use of this site is at the user\'s own risk. We accept no liability for material or non-material damages, including direct, indirect, incidental, foreseeable or consequential damages, allegedly caused by access to or use of this online service.',
+          'Our site may contain external links to third-party sites. We have no control over the content of those sites and accept no responsibility for their content or availability.',
+        ],
+      },
+      {
+        heading: 'Privacy',
+        body: [
+          'Based on Article 13 of the Swiss Federal Constitution and the Swiss federal data-protection legislation, every person is entitled to the protection of their privacy and to protection against misuse of their personal data. Plaintext GmbH respects these provisions. Personal data is treated in strict confidence.',
+          'In close cooperation with our hosting providers, we make every effort to protect databases against unauthorised access, loss, misuse or falsification.',
+          'When you access our pages, the following data is recorded in log files: IP address, date, time, browser request and general information about your operating system or browser. This usage data forms the basis of anonymous statistical analyses that allow us to identify trends and improve our service accordingly.',
+        ],
+      },
+      {
+        heading: 'Personal data',
+        body: [
+          'Plaintext GmbH is the entity responsible for the collection, processing and use of your personal data. If you wish to object to the collection, processing or use of your data — entirely or for individual measures — you may submit your objection by email or letter to the contact details above.',
+          'Personal data is information that can be used to identify you (name, address, postal address, telephone number). Information that cannot be associated with your identity (such as the total number of users of a website) is excluded. You may, in principle, use our website without disclosing your identity.',
+          'When you contact us voluntarily, your email address is added to a separate database that is not linked to the anonymous log files. You may revoke your registration at any time.',
+        ],
+      },
+      {
+        heading: 'Cookies',
+        body: [
+          'Our site may use cookies that are valid for the duration of your visit. By continuing to browse, you consent to the use of cookies.',
+          'Most browsers are configured to accept cookies automatically. If you want to block or delete cookies, you can do so via your browser settings. Most browsers let you accept or reject all cookies, or accept only specific types of cookies.',
+        ],
+      },
+      {
+        heading: 'Copyright',
+        body: [
+          'The information on our sites is made publicly available. Downloading or copying content, images, photos or other files transfers no rights regarding that content. Copyright and all other rights to content, images, photos or files on the sites belong exclusively to us or to the named rights-holders.',
+          'Reproduction of any element requires the written consent of the rights-holders in advance.',
+        ],
+      },
+    ],
   },
 } as const;
 

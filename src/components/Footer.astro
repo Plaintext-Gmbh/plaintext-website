@@ -20,13 +20,21 @@ const homeHref = lang === 'de' ? '/' : '/en/';
       <div class="text-[var(--color-ink-500)]">{s.impressum}</div>
     </div>
 
-    <a
-      href="https://github.com/Plaintext-Gmbh"
-      target="_blank"
-      rel="noopener"
-      class="text-xs font-mono text-[var(--color-ink-300)] hover:text-white transition"
-    >
-      github.com/Plaintext-Gmbh
-    </a>
+    <div class="flex items-center gap-5 text-xs font-mono">
+      <a
+        href={s.imprintHref}
+        class="text-[var(--color-ink-300)] hover:text-white transition"
+      >
+        {s.imprintLabel}
+      </a>
+      <a
+        href="https://github.com/Plaintext-Gmbh"
+        target="_blank"
+        rel="noopener"
+        class="text-[var(--color-ink-300)] hover:text-white transition"
+      >
+        github.com/Plaintext-Gmbh
+      </a>
+    </div>
   </div>
 </footer>

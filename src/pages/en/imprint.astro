@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Imprint from '../../components/Imprint.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en' as const;
+---
+
+<Layout lang={lang}>
+  <Nav lang={lang} />
+  <Imprint lang={lang} />
+  <Footer lang={lang} />
+</Layout>
