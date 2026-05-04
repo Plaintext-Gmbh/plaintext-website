@@ -30,7 +30,7 @@ jobs:
       # backup zips, the watch.php endpoint that holds an API token, private
       # uploads) are excluded so the FTP-Deploy-Action never deletes them.
       - name: Deploy to Hostpoint via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
