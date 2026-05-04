@@ -15,7 +15,7 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
   class="relative py-28 md:py-36 overflow-hidden"
   style="background: linear-gradient(135deg, #0a0a14 0%, #14133a 50%, #0d0c4d 100%); color: white;"
 >
-  <!-- Decorative orbiting glow — subtle, hints at the hub-pattern. -->
+  <!-- Decorative orbiting glow, subtle, hints at the hub pattern. -->
   <div
     class="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full opacity-30 blur-3xl pointer-events-none"
     style="background: radial-gradient(circle, var(--color-brand-500), transparent 70%);"
@@ -116,7 +116,7 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
 
 <script is:inline>
   // Click-to-copy for the install command. We re-use the same selector across
-  // the page so the language switch doesn't break attached handlers — Astro
+  // the page so the language switch doesn't break attached handlers. Astro
   // re-renders on navigation so this script is included on each page.
   document.querySelectorAll('[data-copy-target="install-cmd"]').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -129,7 +129,7 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
         btn.textContent = copied;
         setTimeout(() => { btn.textContent = def; }, 1600);
       } catch {
-        // Clipboard blocked — silent.
+        // Clipboard blocked, silent.
       }
     });
   });
