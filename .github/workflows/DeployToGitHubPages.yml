@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages (Production)
+name: DeployToGitHubPages
 
 on:
   push:
@@ -11,11 +11,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  buildAndDeploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -25,35 +25,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
+      - name: SetupNode
         uses: actions/setup-node@v6
         with:
           node-version: '24'
-          cache: 'npm'
+          cache: npm
 
-      - name: Install dependencies
+      - name: InstallDependencies
         run: npm ci
 
       - name: Build
         run: npm run build
 
-      - name: Setup Pages
+      - name: SetupPages
         uses: actions/configure-pages@v6
 
-      - name: Upload artifact
+      - name: UploadArtifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: './dist'
+          path: ./dist
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v5
-
-      - name: Comment deployment URL
-        uses: actions/github-script@v9
-        if: github.event_name == 'push'
-        with:
-          script: |
-            console.log('🚀 Production deployment successful!')
-            console.log('📍 URL: https://daniel-marthaler.github.io/plaintext-website')
-            console.log('✅ Images fixed: daniel.jpg + jasmin.jpg')

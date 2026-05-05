@@ -1,0 +1,69 @@
+name: CleanupLogs
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Welche Logs entfernen?
+        required: true
+        default: keepLast5
+        type: choice
+        options:
+          - keepLast5
+          - cleanAll
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: CleanupRuns
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODE: ${{ inputs.mode }}
+          SELF_RUN_ID: ${{ github.run_id }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          KEEP=5
+          [[ "$MODE" == "cleanAll" ]] && KEEP=0
+          echo "Mode: $MODE — keep $KEEP run(s) per workflow"
+
+          mapfile -t WORKFLOWS < <(
+            gh api --paginate "repos/${REPO}/actions/workflows" \
+              --jq '.workflows[] | "\(.id)\t\(.name)"'
+          )
+
+          deletedTotal=0
+          skippedSelf=0
+          for entry in "${WORKFLOWS[@]}"; do
+            wfId="${entry%%	*}"
+            wfName="${entry#*	}"
+            mapfile -t RUNS < <(
+              gh api --paginate "repos/${REPO}/actions/workflows/${wfId}/runs?per_page=100" \
+                --jq '.workflow_runs | sort_by(.created_at) | reverse | .[].id'
+            )
+            total=${#RUNS[@]}
+            if (( total <= KEEP )); then
+              echo "[$wfName] $total run(s) — nichts zu löschen"
+              continue
+            fi
+            toDelete=("${RUNS[@]:$KEEP}")
+            echo "[$wfName] $total run(s), lösche ${#toDelete[@]}"
+            for runId in "${toDelete[@]}"; do
+              if [[ "$runId" == "$SELF_RUN_ID" ]]; then
+                skippedSelf=$((skippedSelf + 1))
+                continue
+              fi
+              if gh api -X DELETE "repos/${REPO}/actions/runs/${runId}" --silent 2>/dev/null; then
+                deletedTotal=$((deletedTotal + 1))
+              else
+                echo "  WARN: Lösung von Run $runId fehlgeschlagen"
+              fi
+            done
+          done
+
+          echo "Fertig — gelöscht: $deletedTotal, eigener Run übersprungen: $skippedSelf"

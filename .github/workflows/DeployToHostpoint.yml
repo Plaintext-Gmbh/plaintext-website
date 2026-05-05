@@ -1,4 +1,4 @@
-name: Deploy to Hostpoint
+name: DeployToHostpoint
 
 on:
   push:
@@ -6,30 +6,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  buildAndDeploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
+      - name: SetupNode
         uses: actions/setup-node@v6
         with:
           node-version: '24'
-          cache: 'npm'
+          cache: npm
 
-      - name: Install dependencies
+      - name: InstallDependencies
         run: npm ci
 
       - name: Build
         run: npm run build
 
-      # Deploy to www/plaintext.ch on Hostpoint. Operational files that live
-      # next to the site but are not part of the build (server-side logs, large
-      # backup zips, the watch.php endpoint that holds an API token, private
-      # uploads) are excluded so the FTP-Deploy-Action never deletes them.
-      - name: Deploy to Hostpoint via FTPS
+      # Operative Dateien neben der Site (Server-Logs, Backup-ZIPs, watch.php mit
+      # API-Token, private Uploads) sind kein Teil des Builds und werden
+      # ausgeschlossen, damit die FTP-Deploy-Action sie nicht löscht.
+      - name: DeployViaFtps
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -51,7 +50,7 @@ jobs:
             **/42.png
             **/logo.png
 
-      - name: Deployment success
+      - name: ReportSuccess
         run: |
           echo "Deployment to Hostpoint successful"
           echo "URL: https://plaintext.ch"
