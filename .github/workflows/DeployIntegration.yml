@@ -91,16 +91,28 @@ jobs:
           echo "Aktive Branch-Slugs (${#LIVE_SLUGS[@]}):"
           printf '  - %s\n' "${LIVE_SLUGS[@]}"
 
+          ftp_listing=$(lftp -e "
+            set ftp:ssl-force true
+            set ftp:ssl-protect-data true
+            set ssl:verify-certificate true
+            set ftp:passive-mode true
+            open -u ${FTP_USER},${FTP_PASS} ${FTP_SERVER}
+            cls -1l --basename --sort=name /www/plaintext.ch/integration/
+            bye
+          " 2>&1) || {
+            echo "::error::lftp Listing fehlgeschlagen"
+            printf '%s\n' "${ftp_listing}"
+            exit 1
+          }
+          echo "Raw lftp listing:"
+          printf '%s\n' "${ftp_listing}" | sed 's/^/  | /'
+
           mapfile -t FTP_DIRS < <(
-            lftp -u "${FTP_USER},${FTP_PASS}" -e "
-              set ftp:ssl-force true
-              set ftp:ssl-protect-data true
-              set ssl:verify-certificate true
-              set ftp:passive-mode true
-              cls -F1 /www/plaintext.ch/integration/
-              bye
-            " "${FTP_SERVER}" 2>/dev/null \
-              | grep '/$' | sed 's:/$::' | grep -v '^$' || true
+            printf '%s\n' "${ftp_listing}" \
+              | awk '/^d/ {print $NF}' \
+              | sed 's:/$::' \
+              | grep -vxE '\.|\.\.|' \
+              | sort -u || true
           )
           echo "FTP-Verzeichnisse unter /integration/ (${#FTP_DIRS[@]}):"
           printf '  - %s\n' "${FTP_DIRS[@]}"
@@ -121,14 +133,15 @@ jobs:
             if (( !found )); then
               orphaned=$((orphaned + 1))
               echo "Loesche verwaistes Verzeichnis: $dir"
-              lftp -u "${FTP_USER},${FTP_PASS}" -e "
+              lftp -e "
                 set ftp:ssl-force true
                 set ftp:ssl-protect-data true
                 set ssl:verify-certificate true
                 set ftp:passive-mode true
+                open -u ${FTP_USER},${FTP_PASS} ${FTP_SERVER}
                 rm -r /www/plaintext.ch/integration/${dir}
                 bye
-              " "${FTP_SERVER}"
+              "
             fi
           done
 
@@ -142,8 +155,28 @@ jobs:
           URL: ${{ steps.slug.outputs.url }}
           SHA: ${{ github.sha }}
         run: |
-          set -euo pipefail
-          PR_NUMBER=$(gh pr list --repo "${REPO}" --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')
+          set -uo pipefail
+
+          retry_gh() {
+            local max=4 attempt=1 out rc
+            while (( attempt <= max )); do
+              out=$("$@" 2>&1)
+              rc=$?
+              if (( rc == 0 )); then
+                printf '%s' "${out}"
+                return 0
+              fi
+              echo "gh attempt ${attempt}/${max} failed (rc=${rc}): ${out}" >&2
+              sleep $((attempt * 5))
+              attempt=$((attempt + 1))
+            done
+            return 1
+          }
+
+          if ! PR_NUMBER=$(retry_gh gh pr list --repo "${REPO}" --head "${BRANCH}" --state open --json number --jq '.[0].number // empty'); then
+            echo "::warning::gh pr list failed nach Retries — kein Comment gepostet"
+            exit 0
+          fi
           if [[ -z "${PR_NUMBER}" ]]; then
             echo "Kein offener PR fuer Branch '${BRANCH}' gefunden — kein Comment"
             exit 0
@@ -168,17 +201,28 @@ jobs:
             echo "| Deployed | ${NOW} |"
           } > "${RUNNER_TEMP}/comment.md"
 
-          EXISTING_ID=$(gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments" \
-            --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n1)
+          if ! EXISTING_ID=$(retry_gh gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+              --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id"); then
+            echo "::warning::gh api comments-Listing failed — versuche neuen Comment zu posten"
+            EXISTING_ID=""
+          else
+            EXISTING_ID=$(printf '%s' "${EXISTING_ID}" | head -n1)
+          fi
 
           if [[ -n "${EXISTING_ID}" ]]; then
             echo "Aktualisiere bestehenden Comment ${EXISTING_ID}"
-            gh api -X PATCH "repos/${REPO}/issues/comments/${EXISTING_ID}" \
-              -F body=@"${RUNNER_TEMP}/comment.md"
+            retry_gh gh api -X PATCH "repos/${REPO}/issues/comments/${EXISTING_ID}" \
+              -F body=@"${RUNNER_TEMP}/comment.md" || {
+              echo "::warning::PATCH des Comments fehlgeschlagen"
+              exit 0
+            }
           else
             echo "Erstelle neuen Comment auf PR #${PR_NUMBER}"
-            gh api -X POST "repos/${REPO}/issues/${PR_NUMBER}/comments" \
-              -F body=@"${RUNNER_TEMP}/comment.md"
+            retry_gh gh api -X POST "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+              -F body=@"${RUNNER_TEMP}/comment.md" || {
+              echo "::warning::POST des Comments fehlgeschlagen"
+              exit 0
+            }
           fi
 
       - name: ReportUrl
