@@ -28,32 +28,34 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Operative Dateien neben der Site (Server-Logs, Backup-ZIPs, watch.php mit
-      # API-Token, private Uploads) sind kein Teil des Builds und werden
-      # ausgeschlossen, damit die FTP-Deploy-Action sie nicht löscht.
-      - name: DeployViaFtps
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+      - name: SetupSshKey
+        uses: webfactory/ssh-agent@v0.9.1
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: ./dist/
-          server-dir: /www/plaintext.ch/
-          security: strict
-          timeout: 60000
-          log-level: verbose
-          exclude: |
-            **/*.zip
-            **/*.log
-            **/*.txt
-            **/watch.php
-            **/privat*
-            **/42.png
-            **/logo.png
-            integration/**
-            **/integration/**
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: AddKnownHost
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      # Operative Dateien neben der Site (Server-Logs, Backup-ZIPs, watch.php mit
+      # API-Token, private Uploads, integration/* per-branch builds) gehoeren
+      # nicht zum Build und werden via rsync --exclude unangetastet gelassen.
+      # rsync-Excludes sind bidirektional: ausgeschlossene Dateien sind fuer
+      # rsync nicht sichtbar, --delete laesst sie also liegen.
+      - name: DeployViaRsync
+        run: |
+          rsync -avz --delete \
+            --exclude='*.zip' \
+            --exclude='*.log' \
+            --exclude='*.txt' \
+            --exclude='watch.php' \
+            --exclude='privat*' \
+            --exclude='42.png' \
+            --exclude='logo.png' \
+            --exclude='integration/' \
+            ./dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/plaintext.ch/
 
       - name: ReportSuccess
         run: |
