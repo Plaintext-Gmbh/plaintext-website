@@ -91,17 +91,17 @@ jobs:
           echo "Aktive Branch-Slugs (${#LIVE_SLUGS[@]}):"
           printf '  - %s\n' "${LIVE_SLUGS[@]}"
 
-          ftp_listing=$(lftp -u "${FTP_USER},${FTP_PASS}" -e "
+          ftp_listing=$(lftp -e "
             set ftp:ssl-force true
             set ftp:ssl-protect-data true
             set ssl:verify-certificate true
             set ftp:passive-mode true
-            cd /www/plaintext.ch/integration/
-            cls -F1 --sort=name
+            open -u ${FTP_USER},${FTP_PASS} ${FTP_SERVER}
+            cls -1l --basename --sort=name /www/plaintext.ch/integration/
             bye
-          " "${FTP_SERVER}" 2>&1) || {
+          " 2>&1) || {
             echo "::error::lftp Listing fehlgeschlagen"
-            echo "${ftp_listing}"
+            printf '%s\n' "${ftp_listing}"
             exit 1
           }
           echo "Raw lftp listing:"
@@ -109,9 +109,9 @@ jobs:
 
           mapfile -t FTP_DIRS < <(
             printf '%s\n' "${ftp_listing}" \
-              | grep '/$' \
-              | sed 's:/$::' \
-              | grep -v '^$' || true
+              | awk '/^d/ {print $NF}' \
+              | grep -vxE '\.|\.\.' \
+              | sort -u || true
           )
           echo "FTP-Verzeichnisse unter /integration/ (${#FTP_DIRS[@]}):"
           printf '  - %s\n' "${FTP_DIRS[@]}"
@@ -132,14 +132,15 @@ jobs:
             if (( !found )); then
               orphaned=$((orphaned + 1))
               echo "Loesche verwaistes Verzeichnis: $dir"
-              lftp -u "${FTP_USER},${FTP_PASS}" -e "
+              lftp -e "
                 set ftp:ssl-force true
                 set ftp:ssl-protect-data true
                 set ssl:verify-certificate true
                 set ftp:passive-mode true
+                open -u ${FTP_USER},${FTP_PASS} ${FTP_SERVER}
                 rm -r /www/plaintext.ch/integration/${dir}
                 bye
-              " "${FTP_SERVER}"
+              "
             fi
           done
 
