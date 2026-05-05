@@ -5,6 +5,10 @@ on:
     branches-ignore: [master]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 concurrency:
   group: integration-${{ github.ref }}
   cancel-in-progress: true
@@ -12,6 +16,9 @@ concurrency:
 jobs:
   buildAndDeploy:
     runs-on: ubuntu-latest
+    environment:
+      name: integration
+      url: ${{ steps.slug.outputs.url }}
 
     steps:
       - name: Checkout
@@ -34,8 +41,11 @@ jobs:
           slug="${REF_NAME//\//-}"
           slug="${slug//[^a-zA-Z0-9_-]/-}"
           slug="${slug,,}"
+          url="https://plaintext.ch/integration/${slug}/"
           echo "value=$slug" >> "$GITHUB_OUTPUT"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "Integration slug: $slug"
+          echo "Integration URL:  $url"
 
       - name: Build
         env:
@@ -58,8 +68,133 @@ jobs:
           log-level: verbose
           state-name: .ftp-deploy-sync-state.json
 
-      - name: ReportUrl
+      - name: CleanupOrphanedIntegrations
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          CURRENT_SLUG: ${{ steps.slug.outputs.value }}
         run: |
-          url="https://plaintext.ch/integration/${{ steps.slug.outputs.value }}/"
-          echo "::notice title=Integration deployed::$url"
-          echo "Integration URL: $url"
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp >/dev/null
+
+          mapfile -t LIVE_SLUGS < <(
+            gh api --paginate "repos/${REPO}/branches" --jq '.[].name' | while read -r b; do
+              s="${b//\//-}"
+              s="${s//[^a-zA-Z0-9_-]/-}"
+              echo "${s,,}"
+            done | sort -u
+          )
+          echo "Aktive Branch-Slugs (${#LIVE_SLUGS[@]}):"
+          printf '  - %s\n' "${LIVE_SLUGS[@]}"
+
+          mapfile -t FTP_DIRS < <(
+            lftp -u "${FTP_USER},${FTP_PASS}" -e "
+              set ftp:ssl-force true
+              set ftp:ssl-protect-data true
+              set ssl:verify-certificate true
+              set ftp:passive-mode true
+              cls -F1 /www/plaintext.ch/integration/
+              bye
+            " "${FTP_SERVER}" 2>/dev/null \
+              | grep '/$' | sed 's:/$::' | grep -v '^$' || true
+          )
+          echo "FTP-Verzeichnisse unter /integration/ (${#FTP_DIRS[@]}):"
+          printf '  - %s\n' "${FTP_DIRS[@]}"
+
+          orphaned=0
+          for dir in "${FTP_DIRS[@]}"; do
+            [[ -z "$dir" ]] && continue
+            if [[ "$dir" == "$CURRENT_SLUG" ]]; then
+              continue
+            fi
+            found=0
+            for live in "${LIVE_SLUGS[@]}"; do
+              if [[ "$dir" == "$live" ]]; then
+                found=1
+                break
+              fi
+            done
+            if (( !found )); then
+              orphaned=$((orphaned + 1))
+              echo "Loesche verwaistes Verzeichnis: $dir"
+              lftp -u "${FTP_USER},${FTP_PASS}" -e "
+                set ftp:ssl-force true
+                set ftp:ssl-protect-data true
+                set ssl:verify-certificate true
+                set ftp:passive-mode true
+                rm -r /www/plaintext.ch/integration/${dir}
+                bye
+              " "${FTP_SERVER}"
+            fi
+          done
+
+          echo "Cleanup fertig — ${orphaned} verwaiste Verzeichnisse entfernt"
+
+      - name: PostPrComment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          URL: ${{ steps.slug.outputs.url }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          PR_NUMBER=$(gh pr list --repo "${REPO}" --head "${BRANCH}" --state open --json number --jq '.[0].number // empty')
+          if [[ -z "${PR_NUMBER}" ]]; then
+            echo "Kein offener PR fuer Branch '${BRANCH}' gefunden — kein Comment"
+            exit 0
+          fi
+          echo "Gefundener PR: #${PR_NUMBER}"
+
+          MARKER="<!-- integration-deploy-comment -->"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          SHORT_SHA="${SHA:0:7}"
+
+          {
+            echo "${MARKER}"
+            echo ""
+            echo "🚀 **Integration Deploy**"
+            echo ""
+            echo "[${URL}](${URL})"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Branch | \`${BRANCH}\` |"
+            echo "| Commit | \`${SHORT_SHA}\` |"
+            echo "| Deployed | ${NOW} |"
+          } > "${RUNNER_TEMP}/comment.md"
+
+          EXISTING_ID=$(gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+            --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n1)
+
+          if [[ -n "${EXISTING_ID}" ]]; then
+            echo "Aktualisiere bestehenden Comment ${EXISTING_ID}"
+            gh api -X PATCH "repos/${REPO}/issues/comments/${EXISTING_ID}" \
+              -F body=@"${RUNNER_TEMP}/comment.md"
+          else
+            echo "Erstelle neuen Comment auf PR #${PR_NUMBER}"
+            gh api -X POST "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+              -F body=@"${RUNNER_TEMP}/comment.md"
+          fi
+
+      - name: ReportUrl
+        env:
+          URL: ${{ steps.slug.outputs.url }}
+          BRANCH: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+        run: |
+          echo "::notice title=Integration deployed::${URL}"
+          {
+            echo "## Integration deployed"
+            echo ""
+            echo "**[${URL}](${URL})**"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Branch | \`${BRANCH}\` |"
+            echo "| Commit | \`${SHA:0:7}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
