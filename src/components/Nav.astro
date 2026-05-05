@@ -9,8 +9,10 @@ interface Props {
 const { lang } = Astro.props;
 const s = t(lang).nav;
 const otherLang = lang === 'de' ? 'en' : 'de';
-const otherHref = lang === 'de' ? '/en/' : '/';
-const homeHref = lang === 'de' ? '/' : '/en/';
+const base = import.meta.env.BASE_URL;
+const enHref = `${base}en/`;
+const otherHref = lang === 'de' ? enHref : base;
+const homeHref = lang === 'de' ? base : enHref;
 ---
 
 <nav class="fixed inset-x-0 top-0 z-50 backdrop-blur bg-white/80 border-b border-[var(--color-ink-100)]">

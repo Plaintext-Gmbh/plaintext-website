@@ -8,7 +8,9 @@ interface Props {
 }
 const { lang } = Astro.props;
 const s = t(lang).footer;
-const homeHref = lang === 'de' ? '/' : '/en/';
+const base = import.meta.env.BASE_URL;
+const homeHref = lang === 'de' ? base : `${base}en/`;
+const imprintHref = `${base}${s.imprintHref}`;
 ---
 
 <footer class="bg-[var(--color-ink-900)] text-[var(--color-ink-300)] py-12">
@@ -22,7 +24,7 @@ const homeHref = lang === 'de' ? '/' : '/en/';
 
     <div class="flex items-center gap-5 text-xs font-mono">
       <a
-        href={s.imprintHref}
+        href={imprintHref}
         class="text-[var(--color-ink-300)] hover:text-white transition"
       >
         {s.imprintLabel}

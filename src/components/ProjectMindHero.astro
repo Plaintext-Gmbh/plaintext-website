@@ -7,6 +7,7 @@ interface Props {
 }
 const { lang } = Astro.props;
 const s = t(lang).pm;
+const base = import.meta.env.BASE_URL;
 const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/projectmind/master/scripts/install.sh | sh';
 ---
 
@@ -30,7 +31,7 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
   <div class="relative max-w-6xl mx-auto px-6">
     <div class="reveal max-w-3xl">
       <div class="flex items-center gap-3 mb-6">
-        <img src="/projectmind-icon.svg" alt="" class="w-12 h-12 brand-pulse" aria-hidden="true" />
+        <img src={`${base}projectmind-icon.svg`} alt="" class="w-12 h-12 brand-pulse" aria-hidden="true" />
         <p class="font-mono text-xs uppercase tracking-[0.25em] text-[var(--color-brand-300)]">
           {s.eyebrow}
           <span class="mx-2 text-white/30">·</span>

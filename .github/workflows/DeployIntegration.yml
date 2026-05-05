@@ -1,0 +1,65 @@
+name: DeployIntegration
+
+on:
+  push:
+    branches-ignore: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: integration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  buildAndDeploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: SetupNode
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: InstallDependencies
+        run: npm ci
+
+      - name: SanitizeBranchSlug
+        id: slug
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          slug="${REF_NAME//\//-}"
+          slug="${slug//[^a-zA-Z0-9_-]/-}"
+          slug="${slug,,}"
+          echo "value=$slug" >> "$GITHUB_OUTPUT"
+          echo "Integration slug: $slug"
+
+      - name: Build
+        env:
+          ASTRO_BASE: /integration/${{ steps.slug.outputs.value }}/
+          ASTRO_SITE: https://plaintext.ch
+        run: npm run build
+
+      - name: DeployViaFtps
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: /www/plaintext.ch/integration/${{ steps.slug.outputs.value }}/
+          security: strict
+          timeout: 60000
+          log-level: verbose
+          state-name: .ftp-deploy-sync-state.json
+
+      - name: ReportUrl
+        run: |
+          url="https://plaintext.ch/integration/${{ steps.slug.outputs.value }}/"
+          echo "::notice title=Integration deployed::$url"
+          echo "Integration URL: $url"

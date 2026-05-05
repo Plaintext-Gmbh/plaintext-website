@@ -9,7 +9,11 @@ interface Props {
 const { lang } = Astro.props;
 const s = t(lang);
 const otherLang = lang === 'de' ? 'en' : 'de';
-const otherHref = lang === 'de' ? '/en/' : '/';
+const base = import.meta.env.BASE_URL;
+const homeHref = base;
+const enHref = `${base}en/`;
+const otherHref = lang === 'de' ? enHref : homeHref;
+const selfHref = lang === 'de' ? homeHref : enHref;
 ---
 
 <!doctype html>
@@ -22,11 +26,11 @@ const otherHref = lang === 'de' ? '/en/' : '/';
     <meta property="og:title" content={s.meta.title} />
     <meta property="og:description" content={s.meta.description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/projectmind-icon.svg" />
+    <meta property="og:image" content={`${base}projectmind-icon.svg`} />
     <meta name="twitter:card" content="summary" />
 
-    <link rel="icon" type="image/svg+xml" href="/projectmind-icon.svg" />
-    <link rel="alternate" hreflang={lang} href={lang === 'de' ? '/' : '/en/'} />
+    <link rel="icon" type="image/svg+xml" href={`${base}projectmind-icon.svg`} />
+    <link rel="alternate" hreflang={lang} href={selfHref} />
     <link rel="alternate" hreflang={otherLang} href={otherHref} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
