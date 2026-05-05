@@ -49,6 +49,8 @@ jobs:
             **/privat*
             **/42.png
             **/logo.png
+            integration/**
+            **/integration/**
 
       - name: ReportSuccess
         run: |

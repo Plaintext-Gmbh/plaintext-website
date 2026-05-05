@@ -127,7 +127,7 @@ const de = {
     impressum: 'Plaintext GmbH · CHE-488.786.867',
     sourceLabel: 'Diese Seite ist in Astro gebaut, der Code liegt offen.',
     imprintLabel: 'Impressum',
-    imprintHref: '/impressum/',
+    imprintHref: 'impressum/',
   },
   imprint: {
     title: 'Impressum',
@@ -307,7 +307,7 @@ const en: typeof de = {
     impressum: 'Plaintext GmbH · CHE-488.786.867',
     sourceLabel: 'This site is built with Astro, the source is open.',
     imprintLabel: 'Imprint',
-    imprintHref: '/en/imprint/',
+    imprintHref: 'en/imprint/',
   },
   imprint: {
     title: 'Imprint',
