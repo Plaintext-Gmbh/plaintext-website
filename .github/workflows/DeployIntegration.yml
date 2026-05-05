@@ -91,16 +91,27 @@ jobs:
           echo "Aktive Branch-Slugs (${#LIVE_SLUGS[@]}):"
           printf '  - %s\n' "${LIVE_SLUGS[@]}"
 
+          ftp_listing=$(lftp -u "${FTP_USER},${FTP_PASS}" -e "
+            set ftp:ssl-force true
+            set ftp:ssl-protect-data true
+            set ssl:verify-certificate true
+            set ftp:passive-mode true
+            cd /www/plaintext.ch/integration/
+            cls -F1 --sort=name
+            bye
+          " "${FTP_SERVER}" 2>&1) || {
+            echo "::error::lftp Listing fehlgeschlagen"
+            echo "${ftp_listing}"
+            exit 1
+          }
+          echo "Raw lftp listing:"
+          printf '%s\n' "${ftp_listing}" | sed 's/^/  | /'
+
           mapfile -t FTP_DIRS < <(
-            lftp -u "${FTP_USER},${FTP_PASS}" -e "
-              set ftp:ssl-force true
-              set ftp:ssl-protect-data true
-              set ssl:verify-certificate true
-              set ftp:passive-mode true
-              cls -F1 /www/plaintext.ch/integration/
-              bye
-            " "${FTP_SERVER}" 2>/dev/null \
-              | grep '/$' | sed 's:/$::' | grep -v '^$' || true
+            printf '%s\n' "${ftp_listing}" \
+              | grep '/$' \
+              | sed 's:/$::' \
+              | grep -v '^$' || true
           )
           echo "FTP-Verzeichnisse unter /integration/ (${#FTP_DIRS[@]}):"
           printf '  - %s\n' "${FTP_DIRS[@]}"
