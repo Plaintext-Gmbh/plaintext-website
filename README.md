@@ -46,3 +46,5 @@ npm run preview    # Preview production build
 - **Styling:** Tailwind CSS 4.1.18  
 - **Deployment:** GitHub Actions + GitHub Pages
 - **Images:** Optimized JPG with proper permissions
+
+<!-- ci-test: integration-cleanup-verify 2026-05-05 -->
