@@ -1,18 +1,19 @@
-name: housekeeping
+name: Housekeeping
 
-# Manually-triggered chores. Pick a task from the dropdown:
+# Manuell ausgelöste Wartungsaufgaben. Aufgabe aus dem Dropdown wählen:
 #
-#  * **deleteLogs5**  — keep the latest 5 completed runs *per workflow*.
-#  * **deleteLogAll** — delete every completed run for every workflow.
+#  * deleteLogs5  — pro Workflow die 5 neuesten abgeschlossenen Runs behalten.
+#  * deleteLogAll — alle abgeschlossenen Runs jedes Workflows löschen.
 #
-# Currently-running and queued runs are always left alone.
-# Add new tasks by extending the `task` choice and the corresponding step.
+# Laufende und gequeute Runs (conclusion == null) werden grundsätzlich in Ruhe gelassen.
+# Zusätzlich wird der eigene Run (SELF_RUN_ID) nie gelöscht (Defense in Depth).
+# Weitere Aufgaben lassen sich durch Erweitern der `task`-Choice und eines passenden Steps ergänzen.
 
 on:
   workflow_dispatch:
     inputs:
       task:
-        description: 'Task to run'
+        description: 'Auszuführende Aufgabe'
         required: true
         default: 'deleteLogs5'
         type: choice
@@ -29,11 +30,12 @@ jobs:
     name: ${{ inputs.task }}
     runs-on: ubuntu-22.04
     steps:
-      - name: deleteLogs5 — keep latest 5 runs per workflow
+      - name: deleteLogs5 — pro Workflow die 5 neuesten Runs behalten
         if: inputs.task == 'deleteLogs5'
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          SELF_RUN_ID: ${{ github.run_id }}
         run: |
           set -euo pipefail
           mapfile -t workflow_ids < <(
@@ -44,6 +46,12 @@ jobs:
           total_failed=0
           total_kept=0
           for wf in "${workflow_ids[@]}"; do
+            # Hinweis: --jq wird pro Page ausgewertet, nicht auf das zusammengeführte Ergebnis.
+            # `sort_by(.created_at) | reverse` sortiert daher nur INNERHALB einer Page.
+            # Korrekt ist das trotzdem, weil die Actions-API Runs bereits created_at-absteigend
+            # liefert (Page 1 = die neuesten 100). Über alle Pages bleibt die Reihenfolge somit
+            # global absteigend, und `select(.conclusion != null)` filtert pro Element ohne die
+            # Reihenfolge zu verändern.
             mapfile -t ids < <(
               gh api --paginate "repos/${REPO}/actions/workflows/${wf}/runs?per_page=100" \
                 --jq '.workflow_runs
@@ -54,13 +62,18 @@ jobs:
             count=${#ids[@]}
             keep=5
             if [ "$count" -le "$keep" ]; then
-              echo "::notice::workflow=${wf} only ${count} completed — keeping all"
+              echo "::notice::workflow=${wf} nur ${count} abgeschlossen — alle behalten"
               total_kept=$((total_kept + count))
               continue
             fi
             wf_deleted=0
             wf_failed=0
             for id in "${ids[@]:$keep}"; do
+              # Eigenen Run nie löschen (Defense in Depth; im Normalfall ist er ohnehin in_progress).
+              if [ "$id" = "$SELF_RUN_ID" ]; then
+                echo "::notice::eigenen Run ${id} übersprungen"
+                continue
+              fi
               if gh api -X DELETE "repos/${REPO}/actions/runs/${id}" 2>/dev/null; then
                 wf_deleted=$((wf_deleted + 1))
               else
@@ -74,13 +87,15 @@ jobs:
           done
           echo "::notice::TOTAL deleted=${total_deleted} failed=${total_failed} kept=${total_kept}"
 
-      - name: deleteLogAll — delete every completed run for every workflow
+      - name: deleteLogAll — alle abgeschlossenen Runs jedes Workflows löschen
         if: inputs.task == 'deleteLogAll'
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          SELF_RUN_ID: ${{ github.run_id }}
         run: |
           set -euo pipefail
+          # Nur abgeschlossene Runs (conclusion != null) — laufende/gequeute bleiben unangetastet.
           mapfile -t ids < <(
             gh api --paginate "repos/${REPO}/actions/runs?per_page=100" \
               --jq '.workflow_runs
@@ -89,16 +104,23 @@ jobs:
           )
           total=${#ids[@]}
           if [ "$total" -eq 0 ]; then
-            echo "::notice::no completed runs to delete"
+            echo "::notice::keine abgeschlossenen Runs zu löschen"
             exit 0
           fi
           deleted=0
           failed=0
+          skipped_self=0
           for id in "${ids[@]}"; do
+            # Eigenen Run nie löschen (Defense in Depth; im Normalfall ist er ohnehin in_progress).
+            if [ "$id" = "$SELF_RUN_ID" ]; then
+              skipped_self=$((skipped_self + 1))
+              echo "::notice::eigenen Run ${id} übersprungen"
+              continue
+            fi
             if gh api -X DELETE "repos/${REPO}/actions/runs/${id}" 2>/dev/null; then
               deleted=$((deleted + 1))
             else
               failed=$((failed + 1))
             fi
           done
-          echo "::notice::deleted=${deleted} failed=${failed} total=${total}"
+          echo "::notice::deleted=${deleted} failed=${failed} skipped_self=${skipped_self} total=${total}"
