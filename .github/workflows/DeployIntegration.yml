@@ -53,33 +53,41 @@ jobs:
           ASTRO_SITE: https://plaintext.ch
         run: npm run build
 
-      - name: DeployViaFtps
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+      - name: SetupSsh
+        uses: webfactory/ssh-agent@v0.9.1
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: ./dist/
-          server-dir: /www/plaintext.ch/integration/${{ steps.slug.outputs.value }}/
-          security: strict
-          timeout: 60000
-          log-level: verbose
-          state-name: .ftp-deploy-sync-state.json
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: AddKnownHosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: DeployViaRsync
+        # Integration-Build (eigenes per-branch-Unterverzeichnis) via rsync/SSH statt FTPS
+        # (gleicher Mechanismus wie DeployProd; macht die FTP_*-Secrets obsolet). --delete
+        # säubert genau das slug-Unterverzeichnis (pro Branch isoliert). slug ist sanitisiert,
+        # hier zusätzlich gegen leer geguardet, damit das Ziel nie auf integration/ kollabiert.
+        env:
+          SLUG: ${{ steps.slug.outputs.value }}
+        run: |
+          if [[ -z "$SLUG" ]]; then
+            echo "::error::Leerer Integration-Slug — Abbruch (Ziel würde auf integration/ kollabieren)."
+            exit 1
+          fi
+          rsync -avz --delete \
+            ./dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/plaintext.ch/integration/${SLUG}/
 
       - name: CleanupOrphanedIntegrations
+        # Verwaiste per-branch-Verzeichnisse via SSH aufräumen (statt lftp/FTPS). Nutzt den
+        # bereits geladenen ssh-agent + known_hosts der Deploy-Schritte.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USER: ${{ secrets.FTP_USERNAME }}
-          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           CURRENT_SLUG: ${{ steps.slug.outputs.value }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
           set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq lftp >/dev/null
 
           mapfile -t LIVE_SLUGS < <(
             gh api --paginate "repos/${REPO}/branches" --jq '.[].name' | while read -r b; do
@@ -91,38 +99,24 @@ jobs:
           echo "Aktive Branch-Slugs (${#LIVE_SLUGS[@]}):"
           printf '  - %s\n' "${LIVE_SLUGS[@]}"
 
-          ftp_listing=$(lftp -e "
-            set ftp:ssl-force true
-            set ftp:ssl-protect-data true
-            set ssl:verify-certificate true
-            set ftp:passive-mode true
-            open -u ${FTP_USER},${FTP_PASS} ${FTP_SERVER}
-            cls -1l --basename --sort=name /www/plaintext.ch/integration/
-            bye
-          " 2>&1) || {
-            echo "::error::lftp Listing fehlgeschlagen"
-            printf '%s\n' "${ftp_listing}"
-            exit 1
-          }
-          echo "Raw lftp listing:"
-          printf '%s\n' "${ftp_listing}" | sed 's/^/  | /'
-
-          mapfile -t FTP_DIRS < <(
-            printf '%s\n' "${ftp_listing}" \
-              | awk '/^d/ {print $NF}' \
+          # Vorhandene Integration-Verzeichnisse per SSH listen (nur Namen).
+          mapfile -t REMOTE_DIRS < <(
+            ssh "${SSH_USER}@${SSH_HOST}" \
+              "ls -1 www/plaintext.ch/integration/ 2>/dev/null || true" \
               | sed 's:/$::' \
-              | grep -vxE '\.|\.\.|' \
+              | grep -vxE '\.|\.\.' \
               | sort -u || true
           )
-          echo "FTP-Verzeichnisse unter /integration/ (${#FTP_DIRS[@]}):"
-          printf '  - %s\n' "${FTP_DIRS[@]}"
+          echo "Remote-Verzeichnisse unter integration/ (${#REMOTE_DIRS[@]}):"
+          printf '  - %s\n' "${REMOTE_DIRS[@]}"
 
           orphaned=0
-          for dir in "${FTP_DIRS[@]}"; do
+          for dir in "${REMOTE_DIRS[@]}"; do
             [[ -z "$dir" ]] && continue
-            if [[ "$dir" == "$CURRENT_SLUG" ]]; then
-              continue
-            fi
+            # Guard: nie auf integration/ selbst oder Sonderpfade löschen; nur sanitisierte Slugs.
+            [[ "$dir" == "." || "$dir" == ".." ]] && continue
+            [[ ! "$dir" =~ ^[A-Za-z0-9_-]+$ ]] && { echo "Überspringe unerwarteten Namen: '$dir'"; continue; }
+            [[ "$dir" == "$CURRENT_SLUG" ]] && continue
             found=0
             for live in "${LIVE_SLUGS[@]}"; do
               if [[ "$dir" == "$live" ]]; then
@@ -132,16 +126,8 @@ jobs:
             done
             if (( !found )); then
               orphaned=$((orphaned + 1))
-              echo "Loesche verwaistes Verzeichnis: $dir"
-              lftp -e "
-                set ftp:ssl-force true
-                set ftp:ssl-protect-data true
-                set ssl:verify-certificate true
-                set ftp:passive-mode true
-                open -u ${FTP_USER},${FTP_PASS} ${FTP_SERVER}
-                rm -r /www/plaintext.ch/integration/${dir}
-                bye
-              "
+              echo "Lösche verwaistes Verzeichnis: $dir"
+              ssh "${SSH_USER}@${SSH_HOST}" "rm -rf -- www/plaintext.ch/integration/${dir}"
             fi
           done
 

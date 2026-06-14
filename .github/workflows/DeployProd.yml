@@ -44,16 +44,11 @@ jobs:
       # rsync-Excludes sind bidirektional: ausgeschlossene Dateien sind fuer
       # rsync nicht sichtbar, --delete laesst sie also liegen.
       - name: DeployViaRsync
+        # Schutz-Excludes als Single Source of Truth in deploy-excludes.txt (geteilt mit
+        # deploy-direct.sh) statt inline dupliziert.
         run: |
           rsync -avz --delete \
-            --exclude='*.zip' \
-            --exclude='*.log' \
-            --exclude='*.txt' \
-            --exclude='watch.php' \
-            --exclude='privat*' \
-            --exclude='42.png' \
-            --exclude='logo.png' \
-            --exclude='integration/' \
+            --exclude-from=deploy-excludes.txt \
             ./dist/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/plaintext.ch/
 
