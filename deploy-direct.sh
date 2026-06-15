@@ -18,25 +18,31 @@ set -euo pipefail
 SSH_TARGET="${SSH_TARGET:-danielm9@sl237.web.hostpoint.ch}"
 REMOTE_PATH="${REMOTE_PATH:-www/plaintext.ch/}"
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Safety-Belt-Guard: REMOTE_PATH ist per Env überschreibbar und wird unten mit
+# `rsync --delete` auf einem Shared-Host (mehrere Sites unter www/<domain>/) genutzt.
+# Ein leerer/zu breiter Pfad (www/, /, ..) würde fremde Sites löschen. Darum hart
+# validieren: muss genau eine Domain-Ebene unter www/ sein und mit / enden.
+if [[ ! "$REMOTE_PATH" =~ ^www/[A-Za-z0-9._-]+/(integration/[A-Za-z0-9._-]+/)?$ ]]; then
+  echo "FEHLER: REMOTE_PATH='${REMOTE_PATH}' ist kein erlaubtes Ziel (erwartet: www/<domain>/ )." >&2
+  echo "        rsync --delete gegen einen zu breiten Pfad würde fremde Sites löschen — Abbruch." >&2
+  exit 1
+fi
+
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${GREEN}=== Hostpoint Upload (www/plaintext.ch) via rsync/ssh ===${NC}"
+echo -e "${GREEN}=== Hostpoint Upload (${REMOTE_PATH}) via rsync/ssh ===${NC}"
 
 echo -e "${YELLOW}Building website...${NC}"
 npm run build
 
 echo -e "${YELLOW}Uploading to ${SSH_TARGET}:${REMOTE_PATH}${NC}"
+# Schutz-Excludes als Single Source of Truth in deploy-excludes.txt (geteilt mit DeployProd.yml).
 rsync -avz --delete \
-  --exclude='*.zip' \
-  --exclude='*.log' \
-  --exclude='*.txt' \
-  --exclude='watch.php' \
-  --exclude='privat*' \
-  --exclude='42.png' \
-  --exclude='logo.png' \
-  --exclude='integration/' \
+  --exclude-from="${SCRIPT_DIR}/deploy-excludes.txt" \
   ./dist/ \
   "${SSH_TARGET}:${REMOTE_PATH}"
 

@@ -1,0 +1,14 @@
+# Single Source of Truth für rsync-Deploy-Excludes (plaintext.ch).
+# Operative Dateien neben der Site, die ein Deploy NICHT anfassen darf
+# (private Uploads, Server-Logs, Backup-ZIPs, watch.php mit API-Token,
+# integration/* per-branch Builds). rsync-Excludes sind bidirektional:
+# ausgeschlossene Dateien sind für rsync unsichtbar, --delete lässt sie liegen.
+# Genutzt von .github/workflows/DeployProd.yml und deploy-direct.sh via --exclude-from.
+*.zip
+*.log
+*.txt
+watch.php
+privat*
+42.png
+logo.png
+integration/
