@@ -86,6 +86,31 @@ const de = {
       },
     ],
   },
+  cases: {
+    eyebrow: 'Referenzen',
+    title: 'Ausgewählte Mandate',
+    body: 'Ein Auszug aus den letzten Jahren — aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
+    items: [
+      {
+        kicker: 'SaaS · Medienbranche',
+        title: 'CI/CD-Automatisierung für eine Abo-Plattform',
+        body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments — gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien. Dazu Wartung und Modernisierung eines selbst gehosteten GIS-Systems inklusive Rendering eigener Karten-Layer.',
+        chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
+      },
+      {
+        kicker: 'Bundesbehörde · Gesundheitswesen',
+        title: 'CI/CD-Infrastruktur auf GitHub-Basis',
+        body: 'Konzeption, Beratung, Einführung und Support einer CI/CD-Infrastruktur auf Basis von GitHub und GitHub Actions — vom Konzept bis zum laufenden Betrieb.',
+        chips: ['GitHub', 'GitHub Actions', 'Konzeption', 'Support'],
+      },
+      {
+        kicker: 'Bundesverwaltung · IT',
+        title: 'Systemarchitektur im agilen Release-Train',
+        body: 'Mehrjährige Arbeit als Systemarchitekt und Berater im Architekturteam eines grossen agilen Release-Trains: Architekturentscheide, Reviews und Begleitung der Umsetzungsteams.',
+        chips: ['SAFe', 'Systemarchitektur', 'Java', 'Beratung'],
+      },
+    ],
+  },
   tech: {
     eyebrow: 'Tech',
     title: 'Womit wir arbeiten',
@@ -263,6 +288,31 @@ const en: typeof de = {
         title: 'AI assistance',
         body: 'We bring in local and cloud-based AI services where they pull their weight: code reviews, docs, routine work. With ProjectMind, you see what the agents are doing.',
         chips: ['MCP', 'Claude Code', 'Codex', 'Local LLMs'],
+      },
+    ],
+  },
+  cases: {
+    eyebrow: 'Track record',
+    title: 'Selected engagements',
+    body: 'A sample from recent years — kept anonymous out of discretion. Happy to tell you more on request.',
+    items: [
+      {
+        kicker: 'SaaS · Media industry',
+        title: 'CI/CD automation for a subscription platform',
+        body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments — together with the in-house team and nearshoring teams in Poland and India. Plus maintenance and modernisation of a self-hosted GIS system including rendering of custom map layers.',
+        chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
+      },
+      {
+        kicker: 'Federal agency · Healthcare',
+        title: 'CI/CD infrastructure on GitHub',
+        body: 'Conception, consulting, rollout and support of a CI/CD infrastructure based on GitHub and GitHub Actions — from concept to day-to-day operations.',
+        chips: ['GitHub', 'GitHub Actions', 'Conception', 'Support'],
+      },
+      {
+        kicker: 'Federal administration · IT',
+        title: 'System architecture in an agile release train',
+        body: 'Multi-year engagement as system architect and advisor in the architecture team of a large agile release train: architecture decisions, reviews and hands-on guidance for the implementation teams.',
+        chips: ['SAFe', 'System architecture', 'Java', 'Advisory'],
       },
     ],
   },
