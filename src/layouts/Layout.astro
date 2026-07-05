@@ -14,6 +14,38 @@ const homeHref = base;
 const enHref = `${base}en/`;
 const otherHref = lang === 'de' ? enHref : homeHref;
 const selfHref = lang === 'de' ? homeHref : enHref;
+
+const site = 'https://plaintext.ch/';
+const canonical = lang === 'de' ? site : `${site}en/`;
+const ogImage = `${site}og-image.png`;
+
+// Structured data so search engines understand who we are and what we offer.
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Plaintext GmbH',
+  url: site,
+  email: 'hello@plaintext.ch',
+  foundingDate: '2020',
+  vatID: 'CHE-488.786.867',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Neuhusmatte 155',
+    postalCode: '3083',
+    addressLocality: 'Trimstein',
+    addressCountry: 'CH',
+  },
+  areaServed: 'CH',
+  founder: { '@type': 'Person', name: 'Daniel Marthaler' },
+  sameAs: ['https://github.com/Plaintext-Gmbh'],
+  knowsAbout: [
+    'Software architecture',
+    'CI/CD automation',
+    'Legacy modernisation',
+    'AI integration',
+    'Model Context Protocol',
+  ],
+};
 ---
 
 <!doctype html>
@@ -26,10 +58,17 @@ const selfHref = lang === 'de' ? homeHref : enHref;
     <meta property="og:title" content={s.meta.title} />
     <meta property="og:description" content={s.meta.description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={`${base}projectmind-icon.svg`} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={lang === 'de' ? 'de_CH' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
 
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={`${base}projectmind-icon.svg`} />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
     <link rel="alternate" hreflang={lang} href={selfHref} />
     <link rel="alternate" hreflang={otherLang} href={otherHref} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

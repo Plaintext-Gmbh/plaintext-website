@@ -3,9 +3,9 @@ export type Lang = 'de' | 'en';
 const de = {
   htmlLang: 'de',
   meta: {
-    title: 'Plaintext GmbH · Software-Architektur & ProjectMind',
+    title: 'Plaintext GmbH · Software-Architektur, CI/CD & AI-Integration',
     description:
-      'Plaintext GmbH baut Software, die hält. Wir entwickeln ProjectMind, den Architektur-Browser für AI-Coding-Agenten.',
+      'Software-Architektur, CI/CD-Automatisierung und Legacy-Modernisierung aus der Schweiz. iSAQB- und TOGAF-zertifiziert. Dazu ProjectMind, unser Open-Source-Architektur-Browser für AI-Coding-Agenten.',
   },
   nav: {
     projectmind: 'ProjectMind',
@@ -21,8 +21,8 @@ const de = {
     title2: 'die hält.',
     title3: 'Code, der spricht.',
     body: 'Wir entwerfen, bauen und modernisieren Software-Architekturen für Teams, die nicht in einem Jahr von vorn anfangen wollen. Und wir bauen das Werkzeug, mit dem AI-Coding-Agenten Ihre Codebasis lesen lernen.',
-    primary: 'ProjectMind ansehen',
-    secondary: 'Was wir machen',
+    primary: 'Was wir machen',
+    secondary: 'ProjectMind ansehen',
     badges: ['iSAQB CPSA-A', 'TOGAF', 'Spring · Java · Rust'],
   },
   pm: {
@@ -183,9 +183,9 @@ const de = {
 const en: typeof de = {
   htmlLang: 'en',
   meta: {
-    title: 'Plaintext GmbH · Software architecture & ProjectMind',
+    title: 'Plaintext GmbH · Software architecture, CI/CD & AI integration',
     description:
-      'Plaintext GmbH builds software that lasts. We make ProjectMind, the architecture browser for AI coding agents.',
+      'Software architecture, CI/CD automation and legacy modernisation from Switzerland. iSAQB and TOGAF certified. Plus ProjectMind, our open-source architecture browser for AI coding agents.',
   },
   nav: {
     projectmind: 'ProjectMind',
@@ -201,8 +201,8 @@ const en: typeof de = {
     title2: 'that lasts.',
     title3: 'Code that speaks.',
     body: 'We design, build and modernise software architectures for teams that don\'t want to start over in a year. And we build the tool that lets AI coding agents read your codebase.',
-    primary: 'See ProjectMind',
-    secondary: 'What we do',
+    primary: 'What we do',
+    secondary: 'See ProjectMind',
     badges: ['iSAQB CPSA-A', 'TOGAF', 'Spring · Java · Rust'],
   },
   pm: {
