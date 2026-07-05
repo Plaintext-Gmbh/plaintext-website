@@ -3,9 +3,9 @@ export type Lang = 'de' | 'en';
 const de = {
   htmlLang: 'de',
   meta: {
-    title: 'Plaintext GmbH · Software-Architektur & ProjectMind',
+    title: 'Plaintext GmbH · Software-Architektur, CI/CD & AI-Integration',
     description:
-      'Plaintext GmbH baut Software, die hält. Wir entwickeln ProjectMind, den Architektur-Browser für AI-Coding-Agenten.',
+      'Software-Architektur, CI/CD-Automatisierung und Legacy-Modernisierung aus der Schweiz. iSAQB- und TOGAF-zertifiziert. Dazu ProjectMind, unser Open-Source-Architektur-Browser für AI-Coding-Agenten.',
   },
   nav: {
     projectmind: 'ProjectMind',
@@ -21,8 +21,8 @@ const de = {
     title2: 'die hält.',
     title3: 'Code, der spricht.',
     body: 'Wir entwerfen, bauen und modernisieren Software-Architekturen für Teams, die nicht in einem Jahr von vorn anfangen wollen. Und wir bauen das Werkzeug, mit dem AI-Coding-Agenten Ihre Codebasis lesen lernen.',
-    primary: 'ProjectMind ansehen',
-    secondary: 'Was wir machen',
+    primary: 'Was wir machen',
+    secondary: 'ProjectMind ansehen',
     badges: ['iSAQB CPSA-A', 'TOGAF', 'Spring · Java · Rust'],
   },
   pm: {
@@ -83,6 +83,31 @@ const de = {
         title: 'AI-Unterstützung',
         body: 'Wir setzen lokale und cloudbasierte AI-Dienste ein, wo sie echten Mehrwert bringen: Code-Reviews, Doku, Routine. Mit ProjectMind sehen Sie, was die Agenten tun.',
         chips: ['MCP', 'Claude Code', 'Codex', 'Local LLMs'],
+      },
+    ],
+  },
+  cases: {
+    eyebrow: 'Referenzen',
+    title: 'Ausgewählte Mandate',
+    body: 'Ein Auszug aus den letzten Jahren — aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
+    items: [
+      {
+        kicker: 'SaaS · Medienbranche',
+        title: 'CI/CD-Automatisierung für eine Abo-Plattform',
+        body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments — gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien. Dazu Wartung und Modernisierung eines selbst gehosteten GIS-Systems inklusive Rendering eigener Karten-Layer.',
+        chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
+      },
+      {
+        kicker: 'Bundesbehörde · Gesundheitswesen',
+        title: 'CI/CD-Infrastruktur auf GitHub-Basis',
+        body: 'Konzeption, Beratung, Einführung und Support einer CI/CD-Infrastruktur auf Basis von GitHub und GitHub Actions — vom Konzept bis zum laufenden Betrieb.',
+        chips: ['GitHub', 'GitHub Actions', 'Konzeption', 'Support'],
+      },
+      {
+        kicker: 'Bundesverwaltung · IT',
+        title: 'Systemarchitektur im agilen Release-Train',
+        body: 'Mehrjährige Arbeit als Systemarchitekt und Berater im Architekturteam eines grossen agilen Release-Trains: Architekturentscheide, Reviews und Begleitung der Umsetzungsteams.',
+        chips: ['SAFe', 'Systemarchitektur', 'Java', 'Beratung'],
       },
     ],
   },
@@ -183,9 +208,9 @@ const de = {
 const en: typeof de = {
   htmlLang: 'en',
   meta: {
-    title: 'Plaintext GmbH · Software architecture & ProjectMind',
+    title: 'Plaintext GmbH · Software architecture, CI/CD & AI integration',
     description:
-      'Plaintext GmbH builds software that lasts. We make ProjectMind, the architecture browser for AI coding agents.',
+      'Software architecture, CI/CD automation and legacy modernisation from Switzerland. iSAQB and TOGAF certified. Plus ProjectMind, our open-source architecture browser for AI coding agents.',
   },
   nav: {
     projectmind: 'ProjectMind',
@@ -201,8 +226,8 @@ const en: typeof de = {
     title2: 'that lasts.',
     title3: 'Code that speaks.',
     body: 'We design, build and modernise software architectures for teams that don\'t want to start over in a year. And we build the tool that lets AI coding agents read your codebase.',
-    primary: 'See ProjectMind',
-    secondary: 'What we do',
+    primary: 'What we do',
+    secondary: 'See ProjectMind',
     badges: ['iSAQB CPSA-A', 'TOGAF', 'Spring · Java · Rust'],
   },
   pm: {
@@ -263,6 +288,31 @@ const en: typeof de = {
         title: 'AI assistance',
         body: 'We bring in local and cloud-based AI services where they pull their weight: code reviews, docs, routine work. With ProjectMind, you see what the agents are doing.',
         chips: ['MCP', 'Claude Code', 'Codex', 'Local LLMs'],
+      },
+    ],
+  },
+  cases: {
+    eyebrow: 'Track record',
+    title: 'Selected engagements',
+    body: 'A sample from recent years — kept anonymous out of discretion. Happy to tell you more on request.',
+    items: [
+      {
+        kicker: 'SaaS · Media industry',
+        title: 'CI/CD automation for a subscription platform',
+        body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments — together with the in-house team and nearshoring teams in Poland and India. Plus maintenance and modernisation of a self-hosted GIS system including rendering of custom map layers.',
+        chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
+      },
+      {
+        kicker: 'Federal agency · Healthcare',
+        title: 'CI/CD infrastructure on GitHub',
+        body: 'Conception, consulting, rollout and support of a CI/CD infrastructure based on GitHub and GitHub Actions — from concept to day-to-day operations.',
+        chips: ['GitHub', 'GitHub Actions', 'Conception', 'Support'],
+      },
+      {
+        kicker: 'Federal administration · IT',
+        title: 'System architecture in an agile release train',
+        body: 'Multi-year engagement as system architect and advisor in the architecture team of a large agile release train: architecture decisions, reviews and hands-on guidance for the implementation teams.',
+        chips: ['SAFe', 'System architecture', 'Java', 'Advisory'],
       },
     ],
   },
