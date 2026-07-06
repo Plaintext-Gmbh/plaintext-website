@@ -51,13 +51,13 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
     </div>
 
     <div class="mt-16 grid md:grid-cols-2 gap-8 lg:gap-10">
-      <ul class="space-y-6 reveal" style="transition-delay: 80ms;">
+      <ul class="space-y-6 reveal min-w-0" style="transition-delay: 80ms;">
         {s.bullets.map(([head, body]) => (
           <li class="flex gap-4">
             <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center" style="background: rgba(45, 43, 254, 0.25); border: 1px solid rgba(137, 133, 254, 0.4);">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
             </div>
-            <div>
+            <div class="min-w-0">
               <div class="font-semibold text-white">{head}</div>
               <div class="text-white/70 text-sm leading-relaxed mt-1">{body}</div>
             </div>
@@ -65,7 +65,7 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
         ))}
       </ul>
 
-      <div class="reveal" style="transition-delay: 160ms;">
+      <div class="reveal min-w-0" style="transition-delay: 160ms;">
         <div class="rounded-xl p-6" style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px);">
           <div class="flex items-center gap-2 mb-4">
             <span class="w-3 h-3 rounded-full bg-red-400/70"></span>
