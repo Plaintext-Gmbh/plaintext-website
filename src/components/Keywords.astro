@@ -1,0 +1,12 @@
+---
+interface Props {
+  items: readonly string[];
+  dark?: boolean;
+  class?: string;
+}
+const { items, dark = false, class: cls = '' } = Astro.props;
+---
+
+<ul class={`keywords ${dark ? 'on-dark' : ''} ${cls}`}>
+  {items.map((k) => <li>{k}</li>)}
+</ul>

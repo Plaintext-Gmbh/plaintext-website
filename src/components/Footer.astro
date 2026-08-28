@@ -13,30 +13,17 @@ const homeHref = lang === 'de' ? base : `${base}en/`;
 const imprintHref = `${base}${s.imprintHref}`;
 ---
 
-<footer class="bg-[var(--color-ink-900)] text-[var(--color-ink-300)] py-12">
-  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
-    <Brand href={homeHref} size="1.2rem" invert />
+<footer class="bg-ink-900 text-ink-300 py-10">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-5 md:gap-8 font-mono text-xs">
+    <Brand href={homeHref} size="1.1rem" invert />
 
-    <div class="text-xs font-mono space-y-1 md:ml-auto">
-      <div>© {new Date().getFullYear()} Plaintext GmbH. {s.rights}</div>
-      <div class="text-[var(--color-ink-500)]">{s.impressum}</div>
-    </div>
+    <p class="md:ml-auto text-ink-500">© {new Date().getFullYear()} {s.impressum}</p>
 
-    <div class="flex items-center gap-5 text-xs font-mono">
-      <a
-        href={imprintHref}
-        class="text-[var(--color-ink-300)] hover:text-white transition"
-      >
-        {s.imprintLabel}
-      </a>
-      <a
-        href="https://github.com/Plaintext-Gmbh"
-        target="_blank"
-        rel="noopener"
-        class="text-[var(--color-ink-300)] hover:text-white transition"
-      >
+    <nav class="flex items-center gap-5" aria-label="Footer">
+      <a href={imprintHref} class="hover:text-white transition-colors">{s.imprintLabel}</a>
+      <a href="https://github.com/Plaintext-Gmbh" target="_blank" rel="noopener" class="hover:text-white transition-colors">
         github.com/Plaintext-Gmbh
       </a>
-    </div>
+    </nav>
   </div>
 </footer>
