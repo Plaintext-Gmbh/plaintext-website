@@ -2,10 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import ProjectMindHero from '../components/ProjectMindHero.astro';
-import CaseStudies from '../components/CaseStudies.astro';
-import OtherProducts from '../components/OtherProducts.astro';
 import Services from '../components/Services.astro';
+import CaseStudies from '../components/CaseStudies.astro';
+import ProjectMindHero from '../components/ProjectMindHero.astro';
+import OtherProducts from '../components/OtherProducts.astro';
 import TechStack from '../components/TechStack.astro';
 import Team from '../components/Team.astro';
 import Contact from '../components/Contact.astro';
@@ -28,24 +28,3 @@ const lang = 'de' as const;
   </main>
   <Footer lang={lang} />
 </Layout>
-
-<script is:inline>
-  // Reveal-on-scroll: fade + lift sections as they enter the viewport.
-  // Falls back to "always visible" via the .no-js class if JS is off.
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
-    );
-    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-  } else {
-    document.documentElement.classList.add('no-js');
-  }
-</script>

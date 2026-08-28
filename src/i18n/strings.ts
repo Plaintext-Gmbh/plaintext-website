@@ -10,6 +10,7 @@ const de = {
   nav: {
     projectmind: 'ProjectMind',
     services: 'Leistungen',
+    cases: 'Referenzen',
     tech: 'Tech',
     team: 'Team',
     contact: 'Kontakt',
@@ -17,13 +18,12 @@ const de = {
   },
   hero: {
     eyebrow: 'Plaintext GmbH · seit 2020',
-    title1: 'Software,',
-    title2: 'die hält.',
-    title3: 'Code, der spricht.',
+    title1: 'Software, die hält.',
+    title2: 'Code, der spricht.',
     body: 'Wir entwerfen, bauen und modernisieren Software-Architekturen für Teams, die nicht in einem Jahr von vorn anfangen wollen. Und wir bauen das Werkzeug, mit dem AI-Coding-Agenten Ihre Codebasis lesen lernen.',
     primary: 'Was wir machen',
     secondary: 'ProjectMind ansehen',
-    badges: ['iSAQB CPSA-A', 'TOGAF', 'Spring · Java · Rust'],
+    facts: ['iSAQB CPSA-A', 'TOGAF', 'Java · Spring · Rust', 'Trimstein bei Bern'],
   },
   pm: {
     eyebrow: 'Unser Produkt',
@@ -154,9 +154,7 @@ const de = {
     address: 'Neuhusmatte 155 · 3083 Trimstein · Schweiz',
   },
   footer: {
-    rights: 'Alle Rechte vorbehalten.',
     impressum: 'Plaintext GmbH · CHE-488.786.867',
-    sourceLabel: 'Diese Seite ist in Astro gebaut, der Code liegt offen.',
     imprintLabel: 'Impressum',
     imprintHref: 'impressum/',
   },
@@ -221,6 +219,7 @@ const en: typeof de = {
   nav: {
     projectmind: 'ProjectMind',
     services: 'Services',
+    cases: 'Engagements',
     tech: 'Tech',
     team: 'Team',
     contact: 'Contact',
@@ -228,13 +227,12 @@ const en: typeof de = {
   },
   hero: {
     eyebrow: 'Plaintext GmbH · since 2020',
-    title1: 'Software',
-    title2: 'that lasts.',
-    title3: 'Code that speaks.',
+    title1: 'Software that lasts.',
+    title2: 'Code that speaks.',
     body: 'We design, build and modernise software architectures for teams that don\'t want to start over in a year. And we build the tool that lets AI coding agents read your codebase.',
     primary: 'What we do',
     secondary: 'See ProjectMind',
-    badges: ['iSAQB CPSA-A', 'TOGAF', 'Spring · Java · Rust'],
+    facts: ['iSAQB CPSA-A', 'TOGAF', 'Java · Spring · Rust', 'Trimstein near Bern'],
   },
   pm: {
     eyebrow: 'Our product',
@@ -365,9 +363,7 @@ const en: typeof de = {
     address: 'Neuhusmatte 155 · 3083 Trimstein · Switzerland',
   },
   footer: {
-    rights: 'All rights reserved.',
     impressum: 'Plaintext GmbH · CHE-488.786.867',
-    sourceLabel: 'This site is built with Astro, the source is open.',
     imprintLabel: 'Imprint',
     imprintHref: 'en/imprint/',
   },

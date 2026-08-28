@@ -42,16 +42,9 @@ npm run build      # Build for production
 npm run preview    # Preview production build
 ```
 
-## 📸 Fixed Issues
-
-- ✅ **Image loading:** Both `daniel.jpg` and `jasmin.jpg` load correctly
-- ✅ **File permissions:** Fixed 600 → 644 for proper web access
-- ✅ **Team section:** Complete profiles for Daniel & Jasmin Marthaler
-- ✅ **Responsive design:** Mobile-first approach with proper scaling
-
 ## 🔧 Tech Stack
 
-- **Framework:** Astro 5.17.1
-- **Styling:** Tailwind CSS 4.1.18  
+- **Framework:** Astro 7
+- **Styling:** Tailwind CSS 4 (`@theme`-Tokens in `src/styles/global.css`)
+- **i18n:** DE/EN, alle Texte zentral in `src/i18n/strings.ts`
 - **Deployment:** GitHub Actions + rsync/SSH auf Hostpoint
-- **Images:** Optimized JPG with proper permissions

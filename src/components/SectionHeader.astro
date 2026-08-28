@@ -1,0 +1,18 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  body?: string;
+  dark?: boolean;
+  class?: string;
+}
+const { eyebrow, title, body, dark = false, class: cls = 'mb-12 md:mb-14' } = Astro.props;
+---
+
+<div class={`reveal max-w-2xl ${cls}`}>
+  <p class={`eyebrow mb-3 ${dark ? 'text-brand-300' : ''}`}>{eyebrow}</p>
+  <h2 class={`text-3xl sm:text-4xl md:text-[2.75rem] font-extrabold tracking-tight leading-[1.1] ${dark ? 'text-white' : ''}`}>
+    {title}
+  </h2>
+  {body && <p class={`mt-4 text-lg leading-relaxed ${dark ? 'text-white/70' : 'text-ink-500'}`}>{body}</p>}
+</div>
