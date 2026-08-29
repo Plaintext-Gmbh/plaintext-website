@@ -17,6 +17,11 @@ set -euo pipefail
 
 SSH_TARGET="${SSH_TARGET:-danielm9@sl237.web.hostpoint.ch}"
 REMOTE_PATH="${REMOTE_PATH:-www/plaintext.ch/}"
+# Deploy-Key (ed25519, bei Hostpoint autorisiert; derselbe wie im GitHub-Secret
+# SSH_PRIVATE_KEY). ~/.ssh/id_rsa ist auf dem Mac kein Key, darum explizit + IdentitiesOnly.
+SSH_KEY="${SSH_KEY:-$HOME/.ssh/plaintext-website-deploy}"
+# DRY_RUN=1 → rsync -n: zeigt, was übertragen/gelöscht würde, fasst den Server nicht an.
+DRY_RUN="${DRY_RUN:-0}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -30,6 +35,14 @@ if [[ ! "$REMOTE_PATH" =~ ^www/[A-Za-z0-9._-]+/(integration/[A-Za-z0-9._-]+/)?$ 
   exit 1
 fi
 
+if [[ ! -r "$SSH_KEY" ]]; then
+  echo "FEHLER: SSH-Key '${SSH_KEY}' nicht lesbar (SSH_KEY=... setzen)." >&2
+  exit 1
+fi
+
+RSYNC_OPTS=(-avz --delete -e "ssh -i ${SSH_KEY} -o IdentitiesOnly=yes")
+[[ "$DRY_RUN" == "1" ]] && RSYNC_OPTS+=(--dry-run)
+
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
@@ -39,11 +52,15 @@ echo -e "${GREEN}=== Hostpoint Upload (${REMOTE_PATH}) via rsync/ssh ===${NC}"
 echo -e "${YELLOW}Building website...${NC}"
 npm run build
 
-echo -e "${YELLOW}Uploading to ${SSH_TARGET}:${REMOTE_PATH}${NC}"
+echo -e "${YELLOW}Uploading to ${SSH_TARGET}:${REMOTE_PATH}$([[ "$DRY_RUN" == "1" ]] && echo ' (DRY RUN)')${NC}"
 # Schutz-Excludes als Single Source of Truth in deploy-excludes.txt (geteilt mit DeployProd.yml).
-rsync -avz --delete \
+rsync "${RSYNC_OPTS[@]}" \
   --exclude-from="${SCRIPT_DIR}/deploy-excludes.txt" \
   ./dist/ \
   "${SSH_TARGET}:${REMOTE_PATH}"
 
-echo -e "${GREEN}Upload successful — https://plaintext.ch${NC}"
+if [[ "$DRY_RUN" == "1" ]]; then
+  echo -e "${GREEN}Dry run fertig — nichts übertragen${NC}"
+else
+  echo -e "${GREEN}Upload successful — https://plaintext.ch${NC}"
+fi
