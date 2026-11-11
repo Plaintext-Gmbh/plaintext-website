@@ -6,6 +6,7 @@ export const routes = {
   legacy: { de: 'legacy-migration/', en: 'en/legacy-migration/' },
   projectmind: { de: 'projectmind/', en: 'en/projectmind/' },
   imprint: { de: 'impressum/', en: 'en/imprint/' },
+  cv: { de: 'lebenslauf/', en: 'en/cv/' },
 } as const;
 export type Page = keyof typeof routes;
 
@@ -218,10 +219,22 @@ const de = {
       },
       {
         kicker: 'DevSecOps · Security',
-        title: 'CVE-Patching der Systemlandschaft',
+        title: 'Sicherstellen einer CVE-freien Systemlandschaft',
         body: 'Verantwortlich für das CVE-Patching einer ganzen Systemlandschaft: automatisierte Schwachstellen-Analysen mit Trivy, zentrale Auswertung und Priorisierung über DefectDojo und automatische Taskzuweisung an die zuständigen Teams via Jira. Vom Scan bis zum zugewiesenen Ticket ohne manuellen Zwischenschritt.',
         chips: ['Trivy', 'DefectDojo', 'Jira', 'CVE', 'DevSecOps'],
       },
+    ],
+  },
+  partners: {
+    eyebrow: 'Netzwerk',
+    title: 'Mit wem wir arbeiten',
+    body: 'Partner, mit denen wir Mandate gemeinsam angehen, und eine Community, die wir unterstützen.',
+    items: [
+      { kind: 'Partner', name: 'Zooey', href: 'https://www.zooey.ch/', logo: 'partners/zooey.svg', note: 'IT-Strategie, Enterprise- und Integrationsarchitektur.' },
+      { kind: 'Partner', name: 'Ximiq', href: 'https://ximiq.ch/', logo: 'partners/ximiq.svg', note: 'Consulting, Business Software, Cloud Services und Academy.' },
+      { kind: 'Partner', name: 'aspect3', href: 'https://www.aspect3.ch/', logo: 'partners/aspect3.png', note: 'Expertennetzwerk für komplexe Projekte: lean, agil, soziokratisch.' },
+      { kind: 'Partner', name: 'ArgonPro', href: '', logo: '', note: '' },
+      { kind: 'Wir unterstützen', name: 'Guild42', href: 'https://guild42.ch/', logo: 'partners/guild42.svg', note: 'Event- und Networking-Plattform für Software Engineering in Bern.' },
     ],
   },
   tech: {
@@ -242,6 +255,7 @@ const de = {
   team: {
     eyebrow: 'Team',
     title: 'Wir zwei',
+    cvLink: 'Zum Lebenslauf',
     daniel: {
       name: 'Daniel Marthaler',
       role: 'Founder · Software Architect',
@@ -529,10 +543,22 @@ const en: typeof de = {
       },
       {
         kicker: 'DevSecOps · Security',
-        title: 'CVE patching across the system landscape',
+        title: 'Keeping a system landscape free of known CVEs',
         body: 'Responsible for CVE patching across an entire system landscape: automated vulnerability scanning with Trivy, central triage and prioritisation via DefectDojo and automatic task assignment to the responsible teams through Jira. From scan to assigned ticket with no manual step in between.',
         chips: ['Trivy', 'DefectDojo', 'Jira', 'CVE', 'DevSecOps'],
       },
+    ],
+  },
+  partners: {
+    eyebrow: 'Network',
+    title: 'Who we work with',
+    body: 'Partners we take on engagements with, and a community we support.',
+    items: [
+      { kind: 'Partner', name: 'Zooey', href: 'https://www.zooey.ch/', logo: 'partners/zooey.svg', note: 'IT strategy, enterprise and integration architecture.' },
+      { kind: 'Partner', name: 'Ximiq', href: 'https://ximiq.ch/', logo: 'partners/ximiq.svg', note: 'Consulting, business software, cloud services and academy.' },
+      { kind: 'Partner', name: 'aspect3', href: 'https://www.aspect3.ch/', logo: 'partners/aspect3.png', note: 'Network of experts for complex projects: lean, agile, sociocratic.' },
+      { kind: 'Partner', name: 'ArgonPro', href: '', logo: '', note: '' },
+      { kind: 'We support', name: 'Guild42', href: 'https://guild42.ch/', logo: 'partners/guild42.svg', note: 'Event and networking platform for software engineering in Bern.' },
     ],
   },
   tech: {
@@ -553,6 +579,7 @@ const en: typeof de = {
   team: {
     eyebrow: 'Team',
     title: 'The two of us',
+    cvLink: 'View CV',
     daniel: {
       name: 'Daniel Marthaler',
       role: 'Founder · Software Architect',
