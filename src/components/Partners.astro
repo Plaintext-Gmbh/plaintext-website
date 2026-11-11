@@ -1,0 +1,35 @@
+---
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).partners;
+const base = import.meta.env.BASE_URL;
+---
+
+<Section id="partners" label={s.eyebrow} title={s.title} body={s.body}>
+  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    {s.items.map((item) => {
+      const Tag = item.href ? 'a' : 'div';
+      return (
+        <li>
+          <Tag href={item.href || undefined} target={item.href ? '_blank' : undefined} rel={item.href ? 'noopener' : undefined} class="panel block h-full group">
+            <p class="label">{item.kind}</p>
+            {/* Logos sind für dunklen Grund gezeichnet, darum die anthrazitfarbene Fläche. */}
+            <div class="mt-4 h-24 rounded-lg bg-[#2a2b3a] flex items-center justify-center px-6">
+              {item.logo
+                ? <img src={`${base}${item.logo}`} alt={item.name} loading="lazy" class="max-h-12 max-w-full" />
+                : <span class="text-white text-xl font-semibold tracking-tight">{item.name}</span>}
+            </div>
+            <h3 class="mt-4 font-semibold tracking-tight group-hover:text-brand-500">{item.name}</h3>
+            <p class="mt-1 text-sm text-ink-500 leading-relaxed">{item.note}</p>
+          </Tag>
+        </li>
+      );
+    })}
+  </ul>
+</Section>

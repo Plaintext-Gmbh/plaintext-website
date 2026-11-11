@@ -1,6 +1,6 @@
 ---
 import type { Lang } from '../i18n/strings';
-import { t } from '../i18n/strings';
+import { t, routes } from '../i18n/strings';
 import Section from './Section.astro';
 import Keywords from './Keywords.astro';
 
@@ -11,8 +11,8 @@ const { lang } = Astro.props;
 const s = t(lang).team;
 const base = import.meta.env.BASE_URL;
 const people = [
-  { ...s.daniel, img: 'daniel.jpg' },
-  { ...s.jasmin, img: 'jasmin.jpg' },
+  { ...s.daniel, img: 'daniel.jpg', cv: true },
+  { ...s.jasmin, img: 'jasmin.jpg', cv: false },
 ];
 ---
 
@@ -33,6 +33,7 @@ const people = [
           <h3 class="mt-1 text-xl font-semibold tracking-tight">{p.name}</h3>
           <p class="mt-3 text-ink-500 leading-relaxed">{p.body}</p>
           <Keywords items={p.chips} class="mt-4" />
+          {p.cv && <p class="mt-4"><a href={`${base}${routes.cv[lang]}`} class="link-arrow text-sm">{s.cvLink}</a></p>}
         </div>
       </div>
     ))}

@@ -6,6 +6,7 @@ export const routes = {
   legacy: { de: 'legacy-migration/', en: 'en/legacy-migration/' },
   projectmind: { de: 'projectmind/', en: 'en/projectmind/' },
   imprint: { de: 'impressum/', en: 'en/imprint/' },
+  cv: { de: 'lebenslauf/', en: 'en/cv/' },
 } as const;
 export type Page = keyof typeof routes;
 
@@ -69,8 +70,8 @@ const de = {
       {
         name: 'plaintext-root',
         body: 'Unser Anwendungs-Framework: Multi-Tenancy, Security, Menü-System, Admin-Module, Discovery. Die Basis, auf der unsere Kunden-Anwendungen seit Jahren laufen, und die wir als Open Source unter MPL 2.0 bereitstellen.',
-        link: 'https://github.com/Plaintext-Gmbh/plaintext-root',
-        linkLabel: 'github.com/Plaintext-Gmbh/plaintext-root',
+        link: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2',
+        linkLabel: 'Zum Repository auf GitHub',
       },
     ],
   },
@@ -90,13 +91,13 @@ const de = {
       {
         kicker: 'Schwerpunkt',
         title: 'Software- & Systemarchitektur',
-        body: 'iSAQB CPSA-A und TOGAF zertifiziert. Von Enterprise-Architektur bis Microservices, die richtige Form für Ihr Problem.',
-        chips: ['arc42', 'C4', 'DDD', 'Microservices'],
+        body: 'iSAQB CPSA-A und TOGAF zertifiziert. Architekturentscheide, Reviews und Dokumentation nach arc42 und C4, von der Enterprise-Architektur bis zum einzelnen Service, auch in grossen agilen Release-Trains nach SAFe. Mit unserem Inventar-Werkzeug inventarisieren wir Codebasen und erheben Daten als Grundlage für fundierte Architekturentscheide.',
+        chips: ['arc42', 'C4', 'DDD', 'Microservices', 'SAFe'],
       },
       {
         title: 'DevOps & CI/CD',
-        body: 'Automatisierte Build-, Deployment- und Staging-Prozesse mit GitHub Actions und GitOps-Praktiken.',
-        chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
+        body: 'Eine Pipeline für alle Buildarten statt einer pro Projekt: pro Service eine kurze Konfiguration, Releases per Parameter, Deployments auf klar getrennte Stufen. Umgesetzt mit GitHub Actions, Tekton oder ArgoCD, je nach Umgebung.',
+        chips: ['GitHub Actions', 'ArgoCD', 'Tekton', 'Nexus', 'SonarQube'],
       },
       {
         kicker: 'Produkt',
@@ -187,8 +188,8 @@ const de = {
         {
           kicker: 'SaaS · Medienbranche',
           title: 'CI/CD-Automatisierung für eine Abo-Plattform',
-          body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments, gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien.',
-          chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD'],
+          body: 'Build und Deployment aller Services laufen über eine einzige, generische Pipeline, die als gemeinsame Bibliothek gepflegt wird. Pro Service genügt eine Konfiguration von wenigen Zeilen: Java-Version, Buildart, Zielstufe. Releases werden per Parameter ausgelöst, die Versionen automatisch berechnet, die Container-Images in ein eigenes Repository publiziert und projektweise auf die Stufen ausgerollt. Umgesetzt gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien, inklusive Einführung von Cloudflare.',
+          chips: ['Docker', 'Docker Compose', 'Nexus', 'SonarQube', 'Cloudflare', 'CI/CD'],
         },
       ],
     },
@@ -198,6 +199,12 @@ const de = {
     title: 'Ausgewählte Mandate',
     body: 'Ein Auszug aus den letzten Jahren, aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
     items: [
+      {
+        kicker: 'SaaS · Medienbranche',
+        title: 'Login- und Abo-System auf Basis von Keycloak',
+        body: 'Zentrales Login für die Paywall-Webanwendung und die Mobile-Apps eines Abonnement-Angebots. Keycloak läuft als Blue-Green-Installation hinter NGINX, mit repliziertem PostgreSQL und einer Failover-Instanz. Jeder Geschäftspartner erhält einen eigenen Realm. Ein Import-Service auf Basis von Spring Boot übernimmt Daten per SFTP, ein Reporting-Service liefert die Auswertungen. Alle Container protokollieren zentral nach Graylog.',
+        chips: ['Keycloak', 'PostgreSQL', 'NGINX', 'Spring Boot', 'Graylog', 'Blue-Green'],
+      },
       {
         kicker: 'Bundesbehörde · Gesundheitswesen',
         title: 'CI/CD-Infrastruktur auf GitHub-Basis',
@@ -212,10 +219,22 @@ const de = {
       },
       {
         kicker: 'DevSecOps · Security',
-        title: 'CVE-Patching der Systemlandschaft',
+        title: 'Sicherstellen einer CVE-freien Systemlandschaft',
         body: 'Verantwortlich für das CVE-Patching einer ganzen Systemlandschaft: automatisierte Schwachstellen-Analysen mit Trivy, zentrale Auswertung und Priorisierung über DefectDojo und automatische Taskzuweisung an die zuständigen Teams via Jira. Vom Scan bis zum zugewiesenen Ticket ohne manuellen Zwischenschritt.',
         chips: ['Trivy', 'DefectDojo', 'Jira', 'CVE', 'DevSecOps'],
       },
+    ],
+  },
+  partners: {
+    eyebrow: 'Netzwerk',
+    title: 'Mit wem wir arbeiten',
+    body: 'Partner, mit denen wir Mandate gemeinsam angehen, und eine Community, die wir unterstützen.',
+    items: [
+      { kind: 'Partner', name: 'Zooey', href: 'https://www.zooey.ch/', logo: 'partners/zooey.svg', note: 'IT-Strategie, Enterprise- und Integrationsarchitektur.' },
+      { kind: 'Partner', name: 'Ximiq', href: 'https://ximiq.ch/', logo: 'partners/ximiq.svg', note: 'Consulting, Business Software, Cloud Services und Academy.' },
+      { kind: 'Partner', name: 'aspect3', href: 'https://www.aspect3.ch/', logo: 'partners/aspect3.png', note: 'Expertennetzwerk für komplexe Projekte: lean, agil, soziokratisch.' },
+      { kind: 'Partner', name: 'AgonPro', href: 'https://agonpro.ch/', logo: '', note: 'Business Transformation, IT-Sicherheit, Modern Work und Prozessoptimierung.' },
+      { kind: 'Wir unterstützen', name: 'Guild42', href: 'https://guild42.ch/', logo: 'partners/guild42.svg', note: 'Event- und Networking-Plattform für Software Engineering in Bern.' },
     ],
   },
   tech: {
@@ -223,17 +242,20 @@ const de = {
     title: 'Womit wir arbeiten',
     body: 'Ein Auszug. Wir lernen weiter, wenn das Problem es verlangt.',
     groups: [
-      ['Architektur', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven']],
-      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bash', 'Python']],
-      ['Plattform', ['Docker', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot']],
+      ['Architektur', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven', 'SAFe']],
+      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bitbucket', 'Nexus', 'Bash', 'Python']],
+      ['Plattform', ['Docker', 'Docker Compose', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot', 'PostgreSQL', 'NGINX']],
+      ['Betrieb & Logging', ['Graylog', 'Portainer', 'Cloudflare']],
       ['Code-Qualität', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code Review', 'Pair Programming']],
-      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2']],
+      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2', 'LDAP / Active Directory', 'SFTP']],
       ['AI & Automation', ['MCP', 'LLM-Tooling', 'Local LLMs', 'AI Agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
+      ['Open Source', ['OpenClaw', 'Hermes', 'MemPalace']],
     ],
   },
   team: {
     eyebrow: 'Team',
     title: 'Wir zwei',
+    cvLink: 'Zum Lebenslauf',
     daniel: {
       name: 'Daniel Marthaler',
       role: 'Founder · Software Architect',
@@ -372,8 +394,8 @@ const en: typeof de = {
       {
         name: 'plaintext-root',
         body: 'Our application framework: multi-tenancy, security, menu system, admin modules, discovery. The foundation our customer apps have been running on for years, released as open source under MPL 2.0.',
-        link: 'https://github.com/Plaintext-Gmbh/plaintext-root',
-        linkLabel: 'github.com/Plaintext-Gmbh/plaintext-root',
+        link: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2',
+        linkLabel: 'View the repository on GitHub',
       },
     ],
   },
@@ -393,13 +415,13 @@ const en: typeof de = {
       {
         kicker: 'Focus',
         title: 'Software & systems architecture',
-        body: 'iSAQB CPSA-A and TOGAF certified. From enterprise architecture to microservices, the right shape for your problem.',
-        chips: ['arc42', 'C4', 'DDD', 'Microservices'],
+        body: 'iSAQB CPSA-A and TOGAF certified. Architecture decisions, reviews and documentation with arc42 and C4, from enterprise architecture down to the individual service, including large agile release trains based on SAFe. With our inventory tool we take stock of codebases and collect the data that well-founded architecture decisions need.',
+        chips: ['arc42', 'C4', 'DDD', 'Microservices', 'SAFe'],
       },
       {
         title: 'DevOps & CI/CD',
-        body: 'Automated build, deployment and staging pipelines with GitHub Actions and GitOps practices.',
-        chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
+        body: 'One pipeline for every build type instead of one per project: a short configuration per service, releases triggered by parameter, deployments to clearly separated stages. Built with GitHub Actions, Tekton or ArgoCD, depending on the environment.',
+        chips: ['GitHub Actions', 'ArgoCD', 'Tekton', 'Nexus', 'SonarQube'],
       },
       {
         kicker: 'Product',
@@ -490,8 +512,8 @@ const en: typeof de = {
         {
           kicker: 'SaaS · Media industry',
           title: 'CI/CD automation for a subscription platform',
-          body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments, together with the in-house team and nearshoring teams in Poland and India.',
-          chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD'],
+          body: 'Build and deployment of every service run through a single generic pipeline, maintained as a shared library. Each service needs a configuration of just a few lines: Java version, build type, target stage. Releases are triggered by parameter, versions are calculated automatically, container images are published to a private repository and rolled out to the stages project by project. Delivered together with the in-house team and nearshoring teams in Poland and India, including the introduction of Cloudflare.',
+          chips: ['Docker', 'Docker Compose', 'Nexus', 'SonarQube', 'Cloudflare', 'CI/CD'],
         },
       ],
     },
@@ -501,6 +523,12 @@ const en: typeof de = {
     title: 'Selected engagements',
     body: 'A sample from recent years, kept anonymous out of discretion. Happy to tell you more on request.',
     items: [
+      {
+        kicker: 'SaaS · Media industry',
+        title: 'Login and subscription system based on Keycloak',
+        body: 'Central login for the paywall web application and the mobile apps of a subscription offering. Keycloak runs as a blue-green installation behind NGINX, with replicated PostgreSQL and a failover instance. Each business partner gets its own realm. An import service built on Spring Boot takes in data via SFTP, a reporting service delivers the evaluations. All containers log centrally to Graylog.',
+        chips: ['Keycloak', 'PostgreSQL', 'NGINX', 'Spring Boot', 'Graylog', 'Blue-green'],
+      },
       {
         kicker: 'Federal agency · Healthcare',
         title: 'CI/CD infrastructure on GitHub',
@@ -515,10 +543,22 @@ const en: typeof de = {
       },
       {
         kicker: 'DevSecOps · Security',
-        title: 'CVE patching across the system landscape',
+        title: 'Keeping a system landscape free of known CVEs',
         body: 'Responsible for CVE patching across an entire system landscape: automated vulnerability scanning with Trivy, central triage and prioritisation via DefectDojo and automatic task assignment to the responsible teams through Jira. From scan to assigned ticket with no manual step in between.',
         chips: ['Trivy', 'DefectDojo', 'Jira', 'CVE', 'DevSecOps'],
       },
+    ],
+  },
+  partners: {
+    eyebrow: 'Network',
+    title: 'Who we work with',
+    body: 'Partners we take on engagements with, and a community we support.',
+    items: [
+      { kind: 'Partner', name: 'Zooey', href: 'https://www.zooey.ch/', logo: 'partners/zooey.svg', note: 'IT strategy, enterprise and integration architecture.' },
+      { kind: 'Partner', name: 'Ximiq', href: 'https://ximiq.ch/', logo: 'partners/ximiq.svg', note: 'Consulting, business software, cloud services and academy.' },
+      { kind: 'Partner', name: 'aspect3', href: 'https://www.aspect3.ch/', logo: 'partners/aspect3.png', note: 'Network of experts for complex projects: lean, agile, sociocratic.' },
+      { kind: 'Partner', name: 'AgonPro', href: 'https://agonpro.ch/', logo: '', note: 'Business transformation, IT security, modern work and process optimisation.' },
+      { kind: 'We support', name: 'Guild42', href: 'https://guild42.ch/', logo: 'partners/guild42.svg', note: 'Event and networking platform for software engineering in Bern.' },
     ],
   },
   tech: {
@@ -526,17 +566,20 @@ const en: typeof de = {
     title: 'What we work with',
     body: 'A snapshot. We keep learning whatever the problem demands.',
     groups: [
-      ['Architecture', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven']],
-      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bash', 'Python']],
-      ['Platform', ['Docker', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot']],
+      ['Architecture', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven', 'SAFe']],
+      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bitbucket', 'Nexus', 'Bash', 'Python']],
+      ['Platform', ['Docker', 'Docker Compose', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot', 'PostgreSQL', 'NGINX']],
+      ['Operations & logging', ['Graylog', 'Portainer', 'Cloudflare']],
       ['Code quality', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code review', 'Pair programming']],
-      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2']],
+      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2', 'LDAP / Active Directory', 'SFTP']],
       ['AI & automation', ['MCP', 'LLM tooling', 'Local LLMs', 'AI agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
+      ['Open Source', ['OpenClaw', 'Hermes', 'MemPalace']],
     ],
   },
   team: {
     eyebrow: 'Team',
     title: 'The two of us',
+    cvLink: 'View CV',
     daniel: {
       name: 'Daniel Marthaler',
       role: 'Founder · Software Architect',

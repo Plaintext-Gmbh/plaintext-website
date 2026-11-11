@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Cv from '../components/Cv.astro';
+import Footer from '../components/Footer.astro';
+import { cv } from '../i18n/cv';
+
+const lang = 'de' as const;
+const m = cv(lang).meta;
+---
+
+<Layout lang={lang} page="cv" title={m.title} description={m.description}>
+  <Nav lang={lang} page="cv" />
+  <main><Cv lang={lang} /></main>
+  <Footer lang={lang} />
+</Layout>

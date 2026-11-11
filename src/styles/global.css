@@ -213,3 +213,11 @@ section[id] {
     scroll-behavior: auto;
   }
 }
+
+/* Lebenslauf und andere Seiten als PDF drucken: ohne Navigation und Fuss. */
+@media print {
+  body > nav,
+  footer {
+    display: none;
+  }
+}
