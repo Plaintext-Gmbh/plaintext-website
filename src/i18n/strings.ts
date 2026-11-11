@@ -178,9 +178,9 @@ const de = {
     reference: {
       label: 'Referenz',
       kicker: 'SaaS · Medienbranche',
-      title: 'CI/CD-Automatisierung für eine Abo-Plattform',
-      body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments, gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien. Dazu Wartung und Modernisierung eines selbst gehosteten GIS-Systems inklusive Rendering eigener Karten-Layer.',
-      chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
+      title: 'Migration einer GIS-Webanwendung auf eine neue Basis',
+      body: 'Eine in die Jahre gekommene GIS-Webanwendung wurde auf eine neue technische Basis gebracht: Betrieb in Docker-Containern und eine CI/CD-Pipeline für Build und Deployment. Zum Auftrag gehörte auch die Migration zu einem eigenen Cloud-Provider.',
+      chips: ['GIS', 'Docker', 'CI/CD', 'Cloud-Migration'],
     },
   },
   cases: {
@@ -471,9 +471,9 @@ const en: typeof de = {
     reference: {
       label: 'Reference',
       kicker: 'SaaS · Media industry',
-      title: 'CI/CD automation for a subscription platform',
-      body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments, together with the in-house team and nearshoring teams in Poland and India. Plus maintenance and modernisation of a self-hosted GIS system including rendering of custom map layers.',
-      chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
+      title: 'Migrating a GIS web application to a new foundation',
+      body: 'An ageing GIS web application was moved onto a new technical foundation: running in Docker containers, with a CI/CD pipeline for build and deployment. The engagement also included the migration to a dedicated cloud provider.',
+      chips: ['GIS', 'Docker', 'CI/CD', 'Cloud migration'],
     },
   },
   cases: {
