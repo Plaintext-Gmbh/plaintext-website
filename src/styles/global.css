@@ -2,9 +2,7 @@
 
 @theme {
   /* Ein Akzent: das Blau des Signets, flach eingesetzt. */
-  --color-brand-300: #8985fe;
   --color-brand-500: #2d2bfe;
-  --color-brand-700: #1d1ba8;
 
   /* Ink: die ursprünglichen Grautöne mit einem Hauch Blau. */
   --color-ink-0:   #ffffff;
@@ -105,13 +103,13 @@ section[id] {
   .tone-dark {
     background: #2a2b3a;
     --color-ink-900: #fff;
-    --color-brand-500: var(--color-brand-300);
+    /* Logo-Blau ist auf Anthrazit zu dunkel: Akzente hier in gedämpftem Weiss. */
+    --color-brand-500: rgba(255, 255, 255, 0.65);
   }
   .tone-blue {
-    background: #1d1ba8;
+    background: #2d2bfe;
     --color-ink-900: #fff;
     --color-brand-500: #fff;
-    --color-brand-700: var(--color-ink-100);
   }
 
   /* Ruhige Fläche ohne Rahmen: grau auf Weiss, weiss auf Grau. */
@@ -139,12 +137,12 @@ section[id] {
     font-size: 0.875rem;
     line-height: 1.25;
     white-space: nowrap;
-    background: var(--color-ink-900);
+    background: var(--color-ink-700); /* gleiche Farbe wie der Seitenkopf */
     color: white;
     transition: background 0.15s ease;
   }
   .btn:hover {
-    background: var(--color-brand-700);
+    background: var(--color-brand-500);
   }
 
   /* Textlink mit Pfeil. */
@@ -159,7 +157,7 @@ section[id] {
     text-underline-offset: 0.3em;
   }
   .link-arrow:hover {
-    color: var(--color-brand-700);
+    text-decoration-thickness: 2px;
   }
 
   /* Inline keyword list: "a · b · c" in mono. */
@@ -186,7 +184,7 @@ section[id] {
     font-size: 0.85rem;
     line-height: 1.6;
     color: #ededea;
-    background: #0a0a14;
+    background: #2a2b3a;
     border-radius: 0.5rem;
     padding: 0.9rem 1rem;
   }
