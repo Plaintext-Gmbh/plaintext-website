@@ -91,25 +91,17 @@ section[id] {
   .tone-grey {
     background: var(--color-ink-50);
   }
-  .tone-dark,
-  .tone-blue {
+  .tone-dark {
     color: #fff;
     --color-ink-700: rgba(255, 255, 255, 0.82);
     --color-ink-500: rgba(255, 255, 255, 0.65);
     --color-ink-300: rgba(255, 255, 255, 0.4);
     --color-ink-200: rgba(255, 255, 255, 0.22);
-  }
-  /* Anthrazit mit Blaustich statt Schwarz: Seitenkopf und Fuss. */
-  .tone-dark {
+    /* Anthrazit mit Blaustich statt Schwarz: Seitenkopf und Fuss. */
     background: #2a2b3a;
     --color-ink-900: #fff;
     /* Logo-Blau ist auf Anthrazit zu dunkel: Akzente hier in gedämpftem Weiss. */
     --color-brand-500: rgba(255, 255, 255, 0.65);
-  }
-  .tone-blue {
-    background: #2d2bfe;
-    --color-ink-900: #fff;
-    --color-brand-500: #fff;
   }
 
   /* Ruhige Fläche ohne Rahmen: grau auf Weiss, weiss auf Grau. */
