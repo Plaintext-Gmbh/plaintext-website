@@ -19,8 +19,8 @@ const base = import.meta.env.BASE_URL;
         <li>
           <Tag href={item.href || undefined} target={item.href ? '_blank' : undefined} rel={item.href ? 'noopener' : undefined} class="panel block h-full group">
             <p class="label">{item.kind}</p>
-            {/* Logos sind für dunklen Grund gezeichnet, darum die anthrazitfarbene Fläche. */}
-            <div class="mt-4 h-24 rounded-lg bg-[#2a2b3a] flex items-center justify-center px-6">
+            {/* Die meisten Logos sind für dunklen Grund gezeichnet; light markiert die Ausnahmen. */}
+            <div class:list={['mt-4 h-24 rounded-lg flex items-center justify-center px-6', 'light' in item && item.light ? 'bg-white' : 'bg-[#2a2b3a]']}>
               {item.logo
                 ? <img src={`${base}${item.logo}`} alt={item.name} loading="lazy" class="max-h-12 max-w-full" />
                 : <span class="text-white text-xl font-semibold tracking-tight">{item.name}</span>}
