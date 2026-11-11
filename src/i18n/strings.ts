@@ -1,5 +1,13 @@
 export type Lang = 'de' | 'en';
 
+// Pfade relativ zur Basis-URL, pro Seite und Sprache.
+export const routes = {
+  home: { de: '', en: 'en/' },
+  legacy: { de: 'legacy-migration/', en: 'en/legacy-migration/' },
+  imprint: { de: 'impressum/', en: 'en/imprint/' },
+} as const;
+export type Page = keyof typeof routes;
+
 const de = {
   htmlLang: 'de',
   meta: {
@@ -10,6 +18,8 @@ const de = {
   nav: {
     projectmind: 'ProjectMind',
     services: 'Leistungen',
+    legacy: 'Legacy-Migration',
+    menu: 'Menü',
     cases: 'Referenzen',
     tech: 'Tech',
     team: 'Team',
@@ -75,7 +85,9 @@ const de = {
         chips: ['GitHub Actions', 'ArgoCD', 'Jenkins', 'Tekton'],
       },
       {
+        kicker: 'Produkt',
         title: 'Legacy-Modernisierung',
+        link: 'Zum Produkt: Migration von Legacy-Applikationen',
         body: 'Renovation alter Systemlandschaften inkl. Containerisierung, Schritt für Schritt in die Moderne. Cloud, On-Prem oder hybrid.',
         chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
       },
@@ -86,21 +98,102 @@ const de = {
       },
     ],
   },
+  legacy: {
+    meta: {
+      title: 'Migration von Legacy-Applikationen · Plaintext GmbH',
+      description:
+        'Wir migrieren in die Jahre gekommene Applikationen in messbaren Schritten: Analyse, Testset, Mocks der Umsysteme, Migration und Übergabe mit Architekturdokumentation, lauffähigem Code und Tests.',
+    },
+    hero: {
+      eyebrow: 'Produkt · Legacy-Migration',
+      title: 'Migration von Legacy-Applikationen',
+      body: 'Ihre Applikation erfüllt ihren Zweck seit Jahren, doch Technologie, Betrieb und Weiterentwicklung werden zunehmend zum Risiko. Die Plaintext GmbH überführt sie in Ihrem Auftrag auf eine zeitgemässe Basis: in nachvollziehbaren Schritten, deren Erfolg sich messen lässt.',
+      primary: 'Gespräch vereinbaren',
+      secondary: 'Ablauf ansehen',
+      facts: ['Analyse vor Umbau', 'Tests als Sicherheitsnetz', 'Messbare Schritte', 'Dokumentierte Übergabe'],
+    },
+    situation: {
+      eyebrow: 'Ausgangslage',
+      title: 'Wenn bewährte Software zum Risiko wird',
+      body: 'Legacy-Applikationen tragen oft zentrale Geschäftsprozesse. Gerade deshalb ist ihre Ablösung heikel: Wer alles auf einmal ersetzt, gefährdet, was heute funktioniert. Wir gehen umgekehrt vor und sichern zuerst das Bestehende ab.',
+      items: [
+        ['Das Wissen ist verstreut', 'Fachliche Regeln stecken im Code, in Schnittstellen und in den Köpfen weniger Personen. Die Dokumentation fehlt oder ist veraltet.'],
+        ['Änderungen sind riskant', 'Ohne verlässliche Tests lässt sich kaum abschätzen, welche Folgen ein Eingriff hat. Entsprechend zurückhaltend wird weiterentwickelt.'],
+        ['Die Plattform läuft aus', 'Frameworks, Laufzeitumgebungen und Bibliotheken werden nicht mehr gepflegt. Sicherheit und Betrieb werden aufwendiger.'],
+      ],
+    },
+    process: {
+      eyebrow: 'Ablauf',
+      title: 'In sechs Schritten zur migrierten Applikation',
+      body: 'Jeder Schritt hat ein klares Ergebnis. So wissen Sie jederzeit, wo die Migration steht und was bereits gesichert ist.',
+      resultLabel: 'Ergebnis',
+      steps: [
+        {
+          title: 'Analyse und Geschäftskontext',
+          body: 'Wir analysieren die bestehende Applikation: Aufbau, Abhängigkeiten, Schnittstellen und Datenhaltung. Ebenso wichtig ist der Geschäftskontext. Wir wollen verstehen, welche Prozesse die Applikation trägt und welche Regeln sie abbildet, bevor wir etwas verändern.',
+          result: 'Gemeinsames Verständnis von Applikation und Geschäftskontext',
+        },
+        {
+          title: 'Testset als Sicherheitsnetz',
+          body: 'Auf dieser Grundlage erstellen wir ein ausführliches Testset. Es hält das heutige Verhalten der Applikation fest, prüft nach der Migration deren Funktion und sichert später die Weiterentwicklung ab.',
+          result: 'Ausführliches Testset, das das fachliche Verhalten belegt',
+        },
+        {
+          title: 'Mocks der Umsysteme',
+          body: 'Die umliegenden Systeme bilden wir als Mocks nach. Damit werden Systemintegrationstests möglich, und bei jedem Migrationsschritt lässt sich messen, ob er erfolgreich war und die Applikation funktionsfähig bleibt.',
+          result: 'Systemintegrationstests gegen gemockte Umsysteme',
+        },
+        {
+          title: 'Migration in messbaren Schritten',
+          body: 'Die eigentliche Migration erfolgt in überschaubaren Etappen. Nach jeder Etappe laufen das Testset und die Systemintegrationstests. Der Fortschritt ist damit keine Einschätzung, sondern ein Messwert.',
+          result: 'Migrierte Applikation, Schritt für Schritt nachgewiesen',
+        },
+        {
+          title: 'Übergabe',
+          body: 'Zum Abschluss erhalten Sie eine ausführliche Architekturdokumentation der migrierten Applikation, den lauffähigen Code und die Tests. Damit haben Sie alles in der Hand, um die Applikation zu betreiben und weiterzuentwickeln.',
+          result: 'Architekturdokumentation, lauffähiger Code und Tests',
+        },
+        {
+          title: 'Rückintegration und weitere Arbeiten',
+          body: 'Die Rückintegration in Ihre Systemlandschaft und weitere Arbeiten übernehmen wir bei Bedarf in Regie, also nach Aufwand und in dem Umfang, den Sie bestimmen.',
+          result: 'Unterstützung nach Bedarf, verrechnet nach Aufwand',
+        },
+      ],
+    },
+    deliverables: {
+      eyebrow: 'Lieferumfang',
+      title: 'Was Sie am Ende erhalten',
+      items: [
+        ['Architekturdokumentation', 'Eine ausführliche Dokumentation der migrierten Applikation. Sie dient als Grundlage für Betrieb und Weiterentwicklung.'],
+        ['Lauffähiger Code', 'Der Quellcode der migrierten Applikation, lauffähig und bereit für die Übernahme durch Ihr Team.'],
+        ['Tests', 'Das ausführliche Testset, mit dem sich die Funktion der Applikation jederzeit überprüfen lässt, auch bei künftigen Änderungen.'],
+      ],
+    },
+    benefits: {
+      eyebrow: 'Ihr Nutzen',
+      title: 'Warum dieses Vorgehen trägt',
+      items: [
+        ['Messbar statt gefühlt', 'Tests und Mocks machen den Stand der Migration nach jedem Schritt überprüfbar.'],
+        ['Kein Sprung ins Ungewisse', 'Die Applikation wird in Etappen migriert. Jede Etappe ist abgesichert, bevor die nächste beginnt.'],
+        ['Alles in Ihrer Hand', 'Dokumentation, Code und Tests gehören Ihnen. Sie entscheiden frei, wie es danach weitergeht.'],
+      ],
+    },
+  },
   cases: {
     eyebrow: 'Referenzen',
     title: 'Ausgewählte Mandate',
-    body: 'Ein Auszug aus den letzten Jahren — aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
+    body: 'Ein Auszug aus den letzten Jahren, aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
     items: [
       {
         kicker: 'SaaS · Medienbranche',
         title: 'CI/CD-Automatisierung für eine Abo-Plattform',
-        body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments — gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien. Dazu Wartung und Modernisierung eines selbst gehosteten GIS-Systems inklusive Rendering eigener Karten-Layer.',
+        body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments, gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien. Dazu Wartung und Modernisierung eines selbst gehosteten GIS-Systems inklusive Rendering eigener Karten-Layer.',
         chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
       },
       {
         kicker: 'Bundesbehörde · Gesundheitswesen',
         title: 'CI/CD-Infrastruktur auf GitHub-Basis',
-        body: 'Konzeption, Beratung, Einführung und Support einer CI/CD-Infrastruktur auf Basis von GitHub und GitHub Actions — vom Konzept bis zum laufenden Betrieb.',
+        body: 'Konzeption, Beratung, Einführung und Support einer CI/CD-Infrastruktur auf Basis von GitHub und GitHub Actions, vom Konzept bis zum laufenden Betrieb.',
         chips: ['GitHub', 'GitHub Actions', 'Konzeption', 'Support'],
       },
       {
@@ -156,7 +249,9 @@ const de = {
   footer: {
     impressum: 'Plaintext GmbH · CHE-488.786.867',
     imprintLabel: 'Impressum',
-    imprintHref: 'impressum/',
+    claim: 'Software-Architektur, CI/CD und Legacy-Migration aus Trimstein bei Bern.',
+    pagesTitle: 'Seiten',
+    contactTitle: 'Kontakt',
   },
   imprint: {
     title: 'Impressum',
@@ -219,6 +314,8 @@ const en: typeof de = {
   nav: {
     projectmind: 'ProjectMind',
     services: 'Services',
+    legacy: 'Legacy migration',
+    menu: 'Menu',
     cases: 'Engagements',
     tech: 'Tech',
     team: 'Team',
@@ -284,7 +381,9 @@ const en: typeof de = {
         chips: ['GitHub Actions', 'ArgoCD', 'Jenkins', 'Tekton'],
       },
       {
+        kicker: 'Product',
         title: 'Legacy modernisation',
+        link: 'View the product: legacy application migration',
         body: 'Renovating old system landscapes incl. containerisation, step by step into the modern world. Cloud, on-prem or hybrid.',
         chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
       },
@@ -295,21 +394,102 @@ const en: typeof de = {
       },
     ],
   },
+  legacy: {
+    meta: {
+      title: 'Legacy application migration · Plaintext GmbH',
+      description:
+        'We migrate ageing applications in measurable steps: analysis, test suite, mocks of surrounding systems, migration and handover with architecture documentation, running code and tests.',
+    },
+    hero: {
+      eyebrow: 'Product · Legacy migration',
+      title: 'Legacy application migration',
+      body: 'Your application has served its purpose for years, yet its technology, operation and further development are increasingly becoming a risk. Acting on your behalf, Plaintext GmbH moves it onto a current foundation, in traceable steps whose success can be measured.',
+      primary: 'Arrange a conversation',
+      secondary: 'See the process',
+      facts: ['Analysis before change', 'Tests as a safety net', 'Measurable steps', 'Documented handover'],
+    },
+    situation: {
+      eyebrow: 'Starting point',
+      title: 'When proven software becomes a risk',
+      body: 'Legacy applications often carry core business processes. That is exactly what makes replacing them delicate: replacing everything at once puts at risk what works today. We take the opposite approach and secure what exists first.',
+      items: [
+        ['Knowledge is scattered', 'Business rules live in the code, in interfaces and in the heads of a few people. Documentation is missing or out of date.'],
+        ['Changes are risky', 'Without reliable tests, the consequences of a change are hard to assess. Further development slows down accordingly.'],
+        ['The platform is reaching end of life', 'Frameworks, runtimes and libraries are no longer maintained. Security and operations become more costly.'],
+      ],
+    },
+    process: {
+      eyebrow: 'Process',
+      title: 'Six steps to the migrated application',
+      body: 'Every step has a clear outcome. You know at all times where the migration stands and what has already been secured.',
+      resultLabel: 'Outcome',
+      steps: [
+        {
+          title: 'Analysis and business context',
+          body: 'We analyse the existing application: structure, dependencies, interfaces and data storage. The business context matters just as much. We want to understand which processes the application supports and which rules it implements before we change anything.',
+          result: 'A shared understanding of the application and its business context',
+        },
+        {
+          title: 'A test suite as a safety net',
+          body: 'On that basis we build a comprehensive test suite. It captures how the application behaves today, verifies its function after the migration and safeguards further development later on.',
+          result: 'A comprehensive test suite that documents functional behaviour',
+        },
+        {
+          title: 'Mocks of surrounding systems',
+          body: 'We replicate the surrounding systems as mocks. This makes system integration tests possible, and at every migration step it can be measured whether the step succeeded and the application remains functional.',
+          result: 'System integration tests against mocked surrounding systems',
+        },
+        {
+          title: 'Migration in measurable steps',
+          body: 'The migration itself proceeds in manageable stages. After each stage, the test suite and the system integration tests are run. Progress is therefore not an estimate but a measurement.',
+          result: 'A migrated application, verified step by step',
+        },
+        {
+          title: 'Handover',
+          body: 'At the end you receive comprehensive architecture documentation of the migrated application, the running code and the tests. You have everything you need to operate and develop the application further.',
+          result: 'Architecture documentation, running code and tests',
+        },
+        {
+          title: 'Reintegration and further work',
+          body: 'Where required, we take on the reintegration into your system landscape and any further work on a time-and-materials basis, to the extent you decide.',
+          result: 'Support as needed, billed on a time-and-materials basis',
+        },
+      ],
+    },
+    deliverables: {
+      eyebrow: 'Deliverables',
+      title: 'What you receive at the end',
+      items: [
+        ['Architecture documentation', 'Comprehensive documentation of the migrated application. It serves as the basis for operation and further development.'],
+        ['Running code', 'The source code of the migrated application, running and ready to be taken over by your team.'],
+        ['Tests', 'The comprehensive test suite that lets you verify the application at any time, including after future changes.'],
+      ],
+    },
+    benefits: {
+      eyebrow: 'Your benefit',
+      title: 'Why this approach holds up',
+      items: [
+        ['Measured, not assumed', 'Tests and mocks make the state of the migration verifiable after every step.'],
+        ['No leap into the unknown', 'The application is migrated in stages. Each stage is secured before the next one begins.'],
+        ['Everything in your hands', 'Documentation, code and tests belong to you. You are free to decide how to proceed afterwards.'],
+      ],
+    },
+  },
   cases: {
     eyebrow: 'Track record',
     title: 'Selected engagements',
-    body: 'A sample from recent years — kept anonymous out of discretion. Happy to tell you more on request.',
+    body: 'A sample from recent years, kept anonymous out of discretion. Happy to tell you more on request.',
     items: [
       {
         kicker: 'SaaS · Media industry',
         title: 'CI/CD automation for a subscription platform',
-        body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments — together with the in-house team and nearshoring teams in Poland and India. Plus maintenance and modernisation of a self-hosted GIS system including rendering of custom map layers.',
+        body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments, together with the in-house team and nearshoring teams in Poland and India. Plus maintenance and modernisation of a self-hosted GIS system including rendering of custom map layers.',
         chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
       },
       {
         kicker: 'Federal agency · Healthcare',
         title: 'CI/CD infrastructure on GitHub',
-        body: 'Conception, consulting, rollout and support of a CI/CD infrastructure based on GitHub and GitHub Actions — from concept to day-to-day operations.',
+        body: 'Conception, consulting, rollout and support of a CI/CD infrastructure based on GitHub and GitHub Actions, from concept to day-to-day operations.',
         chips: ['GitHub', 'GitHub Actions', 'Conception', 'Support'],
       },
       {
@@ -365,7 +545,9 @@ const en: typeof de = {
   footer: {
     impressum: 'Plaintext GmbH · CHE-488.786.867',
     imprintLabel: 'Imprint',
-    imprintHref: 'en/imprint/',
+    claim: 'Software architecture, CI/CD and legacy migration from Trimstein near Bern.',
+    pagesTitle: 'Pages',
+    contactTitle: 'Contact',
   },
   imprint: {
     title: 'Imprint',

@@ -1,29 +1,58 @@
 ---
 import Brand from './Brand.astro';
 import type { Lang } from '../i18n/strings';
-import { t } from '../i18n/strings';
+import { t, routes } from '../i18n/strings';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
-const s = t(lang).footer;
+const d = t(lang);
+const s = d.footer;
 const base = import.meta.env.BASE_URL;
-const homeHref = lang === 'de' ? base : `${base}en/`;
-const imprintHref = `${base}${s.imprintHref}`;
+const homeHref = `${base}${routes.home[lang]}`;
+const pages = [
+  { href: `${homeHref}#services`, label: d.nav.services },
+  { href: `${base}${routes.legacy[lang]}`, label: d.nav.legacy },
+  { href: `${homeHref}#projectmind`, label: d.nav.projectmind },
+  { href: `${homeHref}#team`, label: d.nav.team },
+  { href: `${base}${routes.imprint[lang]}`, label: s.imprintLabel },
+];
 ---
 
-<footer class="bg-ink-900 text-ink-300 py-10">
-  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-5 md:gap-8 font-mono text-xs">
-    <Brand href={homeHref} size="1.1rem" invert />
+<footer class="bg-night text-white/70 border-t border-white/10">
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 py-14 grid gap-10 sm:grid-cols-2 md:grid-cols-12 text-sm">
+    <div class="sm:col-span-2 md:col-span-5">
+      <Brand href={homeHref} size="1.2rem" invert />
+      <p class="mt-4 max-w-xs leading-relaxed">{s.claim}</p>
+    </div>
 
-    <p class="md:ml-auto text-ink-500">© {new Date().getFullYear()} {s.impressum}</p>
-
-    <nav class="flex items-center gap-5" aria-label="Footer">
-      <a href={imprintHref} class="hover:text-white transition-colors">{s.imprintLabel}</a>
-      <a href="https://github.com/Plaintext-Gmbh" target="_blank" rel="noopener" class="hover:text-white transition-colors">
-        github.com/Plaintext-Gmbh
-      </a>
+    <nav class="md:col-span-3" aria-label={s.pagesTitle}>
+      <h2 class="font-mono text-xs text-white/50 mb-4">{s.pagesTitle}</h2>
+      <ul class="space-y-2.5">
+        {pages.map((p) => (
+          <li><a href={p.href} class="hover:text-white transition-colors">{p.label}</a></li>
+        ))}
+      </ul>
     </nav>
+
+    <div class="md:col-span-4">
+      <h2 class="font-mono text-xs text-white/50 mb-4">{s.contactTitle}</h2>
+      <ul class="space-y-2.5">
+        <li><a href={`mailto:${d.contact.button}`} class="hover:text-white transition-colors">{d.contact.button}</a></li>
+        <li>{d.contact.address}</li>
+        <li>
+          <a href="https://github.com/Plaintext-Gmbh" target="_blank" rel="noopener" class="hover:text-white transition-colors">
+            github.com/Plaintext-Gmbh
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <p class="max-w-6xl mx-auto px-5 sm:px-6 py-5 font-mono text-xs text-white/50">
+      © {new Date().getFullYear()} {s.impressum}
+    </p>
   </div>
 </footer>

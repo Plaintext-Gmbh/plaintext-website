@@ -4,11 +4,13 @@ import Nav from '../components/Nav.astro';
 import Imprint from '../components/Imprint.astro';
 import Footer from '../components/Footer.astro';
 
+import { t } from '../i18n/strings';
+
 const lang = 'de' as const;
 ---
 
-<Layout lang={lang}>
-  <Nav lang={lang} />
+<Layout lang={lang} page="imprint" title={`${t(lang).imprint.title} · Plaintext GmbH`}>
+  <Nav lang={lang} page="imprint" />
   <Imprint lang={lang} />
   <Footer lang={lang} />
 </Layout>
