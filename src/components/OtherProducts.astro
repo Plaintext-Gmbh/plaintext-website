@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const s = t(lang).others;
 ---
 
-<Section id="products" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>
+<Section id="products" label={s.eyebrow} title={s.title} body={s.body}>
   {s.items.map((item) => (
     <article class="panel max-w-3xl mx-auto">
       <p class="label flex justify-between gap-4"><span class="text-ink-900">{item.name}</span><span>MPL-2.0</span></p>

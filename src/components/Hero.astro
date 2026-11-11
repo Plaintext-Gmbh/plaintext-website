@@ -1,5 +1,5 @@
 ---
-// Seitenkopf: dunkle Fläche, zentriert, ohne Buttons.
+// Seitenkopf: hellgraue Fläche, zentriert, ohne Buttons.
 interface Props {
   title: string;
   title2?: string;
@@ -10,7 +10,7 @@ interface Props {
 const { title, title2, label, facts = [], body } = Astro.props;
 ---
 
-<section class="tone-dark pt-32 md:pt-44 pb-16 md:pb-24">
+<section class="tone-grey pt-32 md:pt-44 pb-16 md:pb-24">
   <div class="wrap text-center">
     <p class="label text-brand-500">{label}</p>
     <h1 class="display mt-5 text-4xl sm:text-5xl md:text-6xl max-w-4xl mx-auto">

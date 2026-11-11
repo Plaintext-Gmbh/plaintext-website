@@ -12,7 +12,7 @@ const s = t(lang).services;
 const base = import.meta.env.BASE_URL;
 ---
 
-<Section id="services" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>
+<Section id="services" label={s.eyebrow} title={s.title} body={s.body}>
   <div class="grid sm:grid-cols-2 gap-5">
     {s.items.map((item, i) => (
       <article class="panel flex flex-col">

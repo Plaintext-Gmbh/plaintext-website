@@ -11,7 +11,7 @@ const { lang } = Astro.props;
 const s = t(lang).cases;
 ---
 
-<Section id="cases" label={s.eyebrow} title={s.title} body={s.body}>
+<Section id="cases" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>
   <div class="space-y-5">
     {s.items.map((item) => (
       <article class="panel grid md:grid-cols-5 gap-x-10 gap-y-3">

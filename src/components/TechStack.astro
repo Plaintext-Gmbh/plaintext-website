@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const s = t(lang).tech;
 ---
 
-<Section id="tech" label={s.eyebrow} title={s.title} body={s.body}>
+<Section id="tech" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>
   <dl class="panel max-w-4xl mx-auto divide-y divide-ink-200 !py-2">
     {s.groups.map(([heading, tags]) => (
       <div class="py-4 grid md:grid-cols-4 gap-x-8 gap-y-1">
