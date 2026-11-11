@@ -14,20 +14,20 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
 
 <Hero title={s.title} title2={s.subtitle} label={s.eyebrow} facts={[s.kicker]} body={s.body} />
 
-<Section id="features" nr="01" label={s.featuresLabel}>
-  <dl>
+<Section id="features" label={s.featuresLabel}>
+  <dl class="grid sm:grid-cols-2 gap-5">
     {s.bullets.map(([head, body]) => (
-      <div class="border-t border-ink-200 first:border-0 pt-4 first:pt-0 pb-8 grid md:grid-cols-9 gap-x-8 gap-y-2">
-        <dt class="md:col-span-3 text-lg font-medium">{head}</dt>
-        <dd class="md:col-span-6 text-ink-700 leading-relaxed">{body}</dd>
+      <div class="panel">
+        <dt class="text-lg font-semibold tracking-tight">{head}</dt>
+        <dd class="mt-2 text-ink-500 leading-relaxed">{body}</dd>
       </div>
     ))}
   </dl>
 </Section>
 
-<Section id="install" nr="02" label={s.installLabel} tone="grey" title={s.install}>
-  <div class="max-w-3xl">
-    <div class="code-block" data-install-cmd>
+<Section id="install" label={s.installLabel} tone="grey" title={s.install}>
+  <div class="max-w-3xl mx-auto text-center">
+    <div class="code-block text-left" data-install-cmd>
       <span class="prompt">$</span>
       <code>{installCmd}</code>
       <button
@@ -41,7 +41,7 @@ const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/
       </button>
     </div>
     <p class="label mt-3">{s.installNote}</p>
-    <p class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+    <p class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
       <a href="https://github.com/Plaintext-Gmbh/projectmind" target="_blank" rel="noopener" class="link-arrow">{s.primary}</a>
       <a href="https://github.com/Plaintext-Gmbh/projectmind#quickstart" target="_blank" rel="noopener" class="link-arrow">{s.learnMore}</a>
     </p>

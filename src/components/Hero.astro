@@ -1,5 +1,5 @@
 ---
-// Seitenkopf: grosser Titel, darunter Randspalte mit Eckdaten und der Einleitungstext.
+// Seitenkopf: dunkle Fläche, zentriert, ohne Buttons.
 interface Props {
   title: string;
   title2?: string;
@@ -10,18 +10,16 @@ interface Props {
 const { title, title2, label, facts = [], body } = Astro.props;
 ---
 
-<section class="pt-28 md:pt-44 pb-14 md:pb-24">
-  <div class="wrap">
-    <h1 class="display text-[clamp(2.1rem,7.6vw,6.5rem)] max-w-6xl">
+<section class="tone-dark pt-32 md:pt-44 pb-16 md:pb-24">
+  <div class="wrap text-center">
+    <p class="label text-brand-500">{label}</p>
+    <h1 class="display mt-5 text-4xl sm:text-5xl md:text-6xl max-w-4xl mx-auto">
       <span class="block">{title}</span>
-      {title2 && <span class="block text-brand-500">{title2}</span>}
+      {title2 && <span class="block text-ink-500">{title2}</span>}
     </h1>
-    <div class="mt-10 md:mt-20 grid md:grid-cols-12 gap-x-8 gap-y-8">
-      <div class="label md:col-span-3 order-2 md:order-1">
-        <p class="text-ink-900">{label}</p>
-        {facts.length > 0 && <ul class="mt-2">{facts.map((f) => <li>{f}</li>)}</ul>}
-      </div>
-      {body && <p class="md:col-span-8 order-1 md:order-2 text-xl md:text-2xl leading-snug">{body}</p>}
-    </div>
+    {body && <p class="mt-7 text-lg md:text-xl text-ink-700 leading-relaxed max-w-2xl mx-auto">{body}</p>}
+    {facts.length > 0 && (
+      <ul class="keywords justify-center mt-10">{facts.map((f) => <li>{f}</li>)}</ul>
+    )}
   </div>
 </section>

@@ -16,7 +16,7 @@
   --color-ink-700: #2a2b3a;
   --color-ink-900: #0a0a14;
 
-  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
@@ -47,7 +47,7 @@ section[id] {
 @layer components {
   /* Seitenraster: eine Breite, ein Rand, überall gleich. */
   .wrap {
-    max-width: 80rem;
+    max-width: 68rem;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
@@ -72,10 +72,11 @@ section[id] {
 
   /* Titel: gross, eng gesetzt, mittlere Stärke. */
   .display {
-    font-weight: 500;
-    letter-spacing: -0.035em;
-    line-height: 1.04;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
     overflow-wrap: break-word;
+    text-wrap: balance;
   }
 
   /* Randspalten-Beschriftung in Mono. */
@@ -112,9 +113,26 @@ section[id] {
     --color-brand-700: var(--color-ink-100);
   }
 
+  /* Ruhige Fläche ohne Rahmen: grau auf Weiss, weiss auf Grau. */
+  .panel {
+    background: var(--color-ink-50);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+  .tone-grey .panel {
+    background: var(--color-ink-0);
+  }
+  @media (min-width: 768px) {
+    .panel {
+      padding: 2rem;
+    }
+  }
+
   .btn {
     display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
     padding: 0.5rem 0.9rem;
     font-weight: 500;
     font-size: 0.875rem;
@@ -125,7 +143,7 @@ section[id] {
     transition: background 0.15s ease;
   }
   .btn:hover {
-    background: var(--color-brand-500);
+    background: var(--color-brand-700);
   }
 
   /* Textlink mit Pfeil. */
@@ -167,7 +185,8 @@ section[id] {
     font-size: 0.85rem;
     line-height: 1.6;
     color: #ededea;
-    background: var(--color-ink-900);
+    background: #0a0a14;
+    border-radius: 0.5rem;
     padding: 0.9rem 1rem;
   }
   .code-block .prompt {
@@ -186,6 +205,7 @@ section[id] {
     flex-shrink: 0;
     padding: 0.25rem 0.6rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.35rem;
     font-family: var(--font-sans);
     font-size: 0.75rem;
     color: #ededea;

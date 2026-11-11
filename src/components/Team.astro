@@ -16,22 +16,24 @@ const people = [
 ];
 ---
 
-<Section id="team" nr="05" label={s.eyebrow} title={s.title}>
-  <div class="grid sm:grid-cols-2 gap-x-10 gap-y-12">
+<Section id="team" label={s.eyebrow} tone="grey" title={s.title}>
+  <div class="grid md:grid-cols-2 gap-5">
     {people.map((p) => (
-      <div>
+      <div class="panel flex flex-col sm:flex-row gap-6">
         <img
           src={`${base}${p.img}`}
           alt={p.name}
-          width="320"
-          height="320"
+          width="144"
+          height="144"
           loading="lazy"
-          class="w-full max-w-xs aspect-square object-cover"
+          class="w-28 h-28 sm:w-36 sm:h-36 rounded-xl object-cover flex-shrink-0"
         />
-        <p class="label mt-5">{p.role}</p>
-        <h3 class="mt-1 text-2xl font-medium tracking-tight">{p.name}</h3>
-        <p class="mt-3 text-ink-700 leading-relaxed">{p.body}</p>
-        <Keywords items={p.chips} class="mt-4" />
+        <div class="min-w-0">
+          <p class="label">{p.role}</p>
+          <h3 class="mt-1 text-xl font-semibold tracking-tight">{p.name}</h3>
+          <p class="mt-3 text-ink-500 leading-relaxed">{p.body}</p>
+          <Keywords items={p.chips} class="mt-4" />
+        </div>
       </div>
     ))}
   </div>

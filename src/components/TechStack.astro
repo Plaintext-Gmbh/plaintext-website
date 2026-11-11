@@ -10,12 +10,12 @@ const { lang } = Astro.props;
 const s = t(lang).tech;
 ---
 
-<Section id="tech" nr="04" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>
-  <dl>
+<Section id="tech" label={s.eyebrow} title={s.title} body={s.body}>
+  <dl class="panel max-w-4xl mx-auto divide-y divide-ink-200 !py-2">
     {s.groups.map(([heading, tags]) => (
-      <div class="border-t border-ink-200 py-4 grid md:grid-cols-9 gap-x-8 gap-y-1">
-        <dt class="label md:col-span-3">{heading}</dt>
-        <dd class="md:col-span-6 text-lg leading-relaxed">{tags.join(', ')}</dd>
+      <div class="py-4 grid md:grid-cols-4 gap-x-8 gap-y-1">
+        <dt class="label">{heading}</dt>
+        <dd class="md:col-span-3 leading-relaxed">{tags.join(', ')}</dd>
       </div>
     ))}
   </dl>
