@@ -90,13 +90,13 @@ const de = {
       {
         kicker: 'Schwerpunkt',
         title: 'Software- & Systemarchitektur',
-        body: 'iSAQB CPSA-A und TOGAF zertifiziert. Von Enterprise-Architektur bis Microservices, die richtige Form für Ihr Problem.',
-        chips: ['arc42', 'C4', 'DDD', 'Microservices'],
+        body: 'iSAQB CPSA-A und TOGAF zertifiziert. Architekturentscheide, Reviews und Dokumentation nach arc42 und C4, von der Enterprise-Architektur bis zum einzelnen Service, auch in grossen agilen Release-Trains nach SAFe.',
+        chips: ['arc42', 'C4', 'DDD', 'Microservices', 'SAFe'],
       },
       {
         title: 'DevOps & CI/CD',
-        body: 'Automatisierte Build-, Deployment- und Staging-Prozesse mit GitHub Actions und GitOps-Praktiken.',
-        chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
+        body: 'Eine Pipeline für alle Buildarten statt einer pro Projekt: pro Service eine kurze Konfiguration, Releases per Parameter, Deployments auf klar getrennte Stufen. Umgesetzt mit GitHub Actions, Tekton oder ArgoCD, je nach Umgebung.',
+        chips: ['GitHub Actions', 'ArgoCD', 'Tekton', 'Nexus', 'SonarQube'],
       },
       {
         kicker: 'Produkt',
@@ -187,8 +187,8 @@ const de = {
         {
           kicker: 'SaaS · Medienbranche',
           title: 'CI/CD-Automatisierung für eine Abo-Plattform',
-          body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments, gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien.',
-          chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD'],
+          body: 'Build und Deployment aller Services laufen über eine einzige, generische Pipeline, die als gemeinsame Bibliothek gepflegt wird. Pro Service genügt eine Konfiguration von wenigen Zeilen: Java-Version, Buildart, Zielstufe. Releases werden per Parameter ausgelöst, die Versionen automatisch berechnet, die Container-Images in ein eigenes Repository publiziert und projektweise auf die Stufen ausgerollt. Umgesetzt gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien, inklusive Einführung von Cloudflare.',
+          chips: ['Docker', 'Docker Compose', 'Nexus', 'SonarQube', 'Cloudflare', 'CI/CD'],
         },
       ],
     },
@@ -198,6 +198,12 @@ const de = {
     title: 'Ausgewählte Mandate',
     body: 'Ein Auszug aus den letzten Jahren, aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
     items: [
+      {
+        kicker: 'SaaS · Medienbranche',
+        title: 'Login- und Abo-System auf Basis von Keycloak',
+        body: 'Zentrales Login für die Paywall-Webanwendung und die Mobile-Apps eines Abonnement-Angebots. Keycloak läuft als Blue-Green-Installation hinter NGINX, mit repliziertem PostgreSQL und einer Failover-Instanz. Jeder Geschäftspartner erhält einen eigenen Realm. Ein Import-Service auf Basis von Spring Boot übernimmt Daten per SFTP, ein Reporting-Service liefert die Auswertungen. Alle Container protokollieren zentral nach Graylog.',
+        chips: ['Keycloak', 'PostgreSQL', 'NGINX', 'Spring Boot', 'Graylog', 'Blue-Green'],
+      },
       {
         kicker: 'Bundesbehörde · Gesundheitswesen',
         title: 'CI/CD-Infrastruktur auf GitHub-Basis',
@@ -223,11 +229,12 @@ const de = {
     title: 'Womit wir arbeiten',
     body: 'Ein Auszug. Wir lernen weiter, wenn das Problem es verlangt.',
     groups: [
-      ['Architektur', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven']],
-      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bash', 'Python']],
-      ['Plattform', ['Docker', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot']],
+      ['Architektur', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven', 'SAFe']],
+      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bitbucket', 'Nexus', 'Bash', 'Python']],
+      ['Plattform', ['Docker', 'Docker Compose', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot', 'PostgreSQL', 'NGINX']],
+      ['Betrieb & Logging', ['Graylog', 'Portainer', 'Cloudflare']],
       ['Code-Qualität', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code Review', 'Pair Programming']],
-      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2']],
+      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2', 'LDAP / Active Directory', 'SFTP']],
       ['AI & Automation', ['MCP', 'LLM-Tooling', 'Local LLMs', 'AI Agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
     ],
   },
@@ -393,13 +400,13 @@ const en: typeof de = {
       {
         kicker: 'Focus',
         title: 'Software & systems architecture',
-        body: 'iSAQB CPSA-A and TOGAF certified. From enterprise architecture to microservices, the right shape for your problem.',
-        chips: ['arc42', 'C4', 'DDD', 'Microservices'],
+        body: 'iSAQB CPSA-A and TOGAF certified. Architecture decisions, reviews and documentation with arc42 and C4, from enterprise architecture down to the individual service, including large agile release trains based on SAFe.',
+        chips: ['arc42', 'C4', 'DDD', 'Microservices', 'SAFe'],
       },
       {
         title: 'DevOps & CI/CD',
-        body: 'Automated build, deployment and staging pipelines with GitHub Actions and GitOps practices.',
-        chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
+        body: 'One pipeline for every build type instead of one per project: a short configuration per service, releases triggered by parameter, deployments to clearly separated stages. Built with GitHub Actions, Tekton or ArgoCD, depending on the environment.',
+        chips: ['GitHub Actions', 'ArgoCD', 'Tekton', 'Nexus', 'SonarQube'],
       },
       {
         kicker: 'Product',
@@ -490,8 +497,8 @@ const en: typeof de = {
         {
           kicker: 'SaaS · Media industry',
           title: 'CI/CD automation for a subscription platform',
-          body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments, together with the in-house team and nearshoring teams in Poland and India.',
-          chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD'],
+          body: 'Build and deployment of every service run through a single generic pipeline, maintained as a shared library. Each service needs a configuration of just a few lines: Java version, build type, target stage. Releases are triggered by parameter, versions are calculated automatically, container images are published to a private repository and rolled out to the stages project by project. Delivered together with the in-house team and nearshoring teams in Poland and India, including the introduction of Cloudflare.',
+          chips: ['Docker', 'Docker Compose', 'Nexus', 'SonarQube', 'Cloudflare', 'CI/CD'],
         },
       ],
     },
@@ -501,6 +508,12 @@ const en: typeof de = {
     title: 'Selected engagements',
     body: 'A sample from recent years, kept anonymous out of discretion. Happy to tell you more on request.',
     items: [
+      {
+        kicker: 'SaaS · Media industry',
+        title: 'Login and subscription system based on Keycloak',
+        body: 'Central login for the paywall web application and the mobile apps of a subscription offering. Keycloak runs as a blue-green installation behind NGINX, with replicated PostgreSQL and a failover instance. Each business partner gets its own realm. An import service built on Spring Boot takes in data via SFTP, a reporting service delivers the evaluations. All containers log centrally to Graylog.',
+        chips: ['Keycloak', 'PostgreSQL', 'NGINX', 'Spring Boot', 'Graylog', 'Blue-green'],
+      },
       {
         kicker: 'Federal agency · Healthcare',
         title: 'CI/CD infrastructure on GitHub',
@@ -526,11 +539,12 @@ const en: typeof de = {
     title: 'What we work with',
     body: 'A snapshot. We keep learning whatever the problem demands.',
     groups: [
-      ['Architecture', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven']],
-      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bash', 'Python']],
-      ['Platform', ['Docker', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot']],
+      ['Architecture', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven', 'SAFe']],
+      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bitbucket', 'Nexus', 'Bash', 'Python']],
+      ['Platform', ['Docker', 'Docker Compose', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot', 'PostgreSQL', 'NGINX']],
+      ['Operations & logging', ['Graylog', 'Portainer', 'Cloudflare']],
       ['Code quality', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code review', 'Pair programming']],
-      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2']],
+      ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2', 'LDAP / Active Directory', 'SFTP']],
       ['AI & automation', ['MCP', 'LLM tooling', 'Local LLMs', 'AI agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
     ],
   },
