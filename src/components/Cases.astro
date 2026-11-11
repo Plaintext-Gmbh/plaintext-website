@@ -1,0 +1,27 @@
+---
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+import Section from './Section.astro';
+import Keywords from './Keywords.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).cases;
+---
+
+<Section id="cases" nr="02" label={s.eyebrow} title={s.title} body={s.body}>
+  <ul>
+    {s.items.map((item) => (
+      <li class="border-t border-ink-200 pt-4 pb-10 grid md:grid-cols-9 gap-x-8 gap-y-3">
+        <p class="label md:col-span-3">{item.kicker}</p>
+        <div class="md:col-span-6">
+          <h3 class="text-2xl font-medium tracking-tight">{item.title}</h3>
+          <p class="mt-3 text-ink-700 leading-relaxed">{item.body}</p>
+          <Keywords items={item.chips} class="mt-4" />
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>

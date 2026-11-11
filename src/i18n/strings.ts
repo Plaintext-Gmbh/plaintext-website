@@ -4,6 +4,7 @@ export type Lang = 'de' | 'en';
 export const routes = {
   home: { de: '', en: 'en/' },
   legacy: { de: 'legacy-migration/', en: 'en/legacy-migration/' },
+  projectmind: { de: 'projectmind/', en: 'en/projectmind/' },
   imprint: { de: 'impressum/', en: 'en/imprint/' },
 } as const;
 export type Page = keyof typeof routes;
@@ -31,11 +32,16 @@ const de = {
     title1: 'Software, die hält.',
     title2: 'Code, der spricht.',
     body: 'Wir entwerfen, bauen und modernisieren Software-Architekturen für Teams, die nicht in einem Jahr von vorn anfangen wollen. Und wir bauen das Werkzeug, mit dem AI-Coding-Agenten Ihre Codebasis lesen lernen.',
-    primary: 'Was wir machen',
-    secondary: 'ProjectMind ansehen',
     facts: ['iSAQB CPSA-A', 'TOGAF', 'Java · Spring · Rust', 'Trimstein bei Bern'],
   },
   pm: {
+    meta: {
+      title: 'ProjectMind · Architektur-Browser für AI-Coding-Agenten · Plaintext GmbH',
+      description:
+        'ProjectMind ist ein read-only Architektur-Browser, der über das Model Context Protocol mit Coding-Agenten wie Claude Code zusammenspielt. Open Source unter MPL-2.0.',
+    },
+    featuresLabel: 'Funktionen',
+    installLabel: 'Installation',
     eyebrow: 'Unser Produkt',
     kicker: 'Open Source · MPL-2.0',
     title: 'ProjectMind',
@@ -81,18 +87,22 @@ const de = {
       },
       {
         title: 'DevOps & CI/CD',
-        body: 'Automatisierte Build-, Deployment- und Staging-Prozesse mit GitHub Actions, Jenkins und GitOps-Praktiken.',
-        chips: ['GitHub Actions', 'ArgoCD', 'Jenkins', 'Tekton'],
+        body: 'Automatisierte Build-, Deployment- und Staging-Prozesse mit GitHub Actions und GitOps-Praktiken.',
+        chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
       },
       {
         kicker: 'Produkt',
         title: 'Legacy-Modernisierung',
         link: 'Zum Produkt: Migration von Legacy-Applikationen',
+        page: 'legacy',
         body: 'Renovation alter Systemlandschaften inkl. Containerisierung, Schritt für Schritt in die Moderne. Cloud, On-Prem oder hybrid.',
         chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
       },
       {
+        kicker: 'Produkt',
         title: 'AI-Unterstützung',
+        link: 'Zum Produkt: ProjectMind',
+        page: 'projectmind',
         body: 'Wir setzen lokale und cloudbasierte AI-Dienste ein, wo sie echten Mehrwert bringen: Code-Reviews, Doku, Routine. Mit ProjectMind sehen Sie, was die Agenten tun.',
         chips: ['MCP', 'Claude Code', 'Codex', 'Local LLMs'],
       },
@@ -108,13 +118,10 @@ const de = {
       eyebrow: 'Produkt · Legacy-Migration',
       title: 'Migration von Legacy-Applikationen',
       body: 'Ihre Applikation erfüllt ihren Zweck seit Jahren, doch Technologie, Betrieb und Weiterentwicklung werden zunehmend zum Risiko. Die Plaintext GmbH überführt sie in Ihrem Auftrag auf eine zeitgemässe Basis: in nachvollziehbaren Schritten, deren Erfolg sich messen lässt.',
-      primary: 'Gespräch vereinbaren',
-      secondary: 'Ablauf ansehen',
-      facts: ['Analyse vor Umbau', 'Tests als Sicherheitsnetz', 'Messbare Schritte', 'Dokumentierte Übergabe'],
     },
     situation: {
       eyebrow: 'Ausgangslage',
-      title: 'Wenn bewährte Software zum Risiko wird',
+      title: 'Die Applikation läuft. Aber niemand fasst sie mehr gern an.',
       body: 'Legacy-Applikationen tragen oft zentrale Geschäftsprozesse. Gerade deshalb ist ihre Ablösung heikel: Wer alles auf einmal ersetzt, gefährdet, was heute funktioniert. Wir gehen umgekehrt vor und sichern zuerst das Bestehende ab.',
       items: [
         ['Das Wissen ist verstreut', 'Fachliche Regeln stecken im Code, in Schnittstellen und in den Köpfen weniger Personen. Die Dokumentation fehlt oder ist veraltet.'],
@@ -124,8 +131,7 @@ const de = {
     },
     process: {
       eyebrow: 'Ablauf',
-      title: 'In sechs Schritten zur migrierten Applikation',
-      body: 'Jeder Schritt hat ein klares Ergebnis. So wissen Sie jederzeit, wo die Migration steht und was bereits gesichert ist.',
+      title: 'Sechs Schritte, jeder mit einem prüfbaren Ergebnis',
       resultLabel: 'Ergebnis',
       steps: [
         {
@@ -169,14 +175,12 @@ const de = {
         ['Tests', 'Das ausführliche Testset, mit dem sich die Funktion der Applikation jederzeit überprüfen lässt, auch bei künftigen Änderungen.'],
       ],
     },
-    benefits: {
-      eyebrow: 'Ihr Nutzen',
-      title: 'Warum dieses Vorgehen trägt',
-      items: [
-        ['Messbar statt gefühlt', 'Tests und Mocks machen den Stand der Migration nach jedem Schritt überprüfbar.'],
-        ['Kein Sprung ins Ungewisse', 'Die Applikation wird in Etappen migriert. Jede Etappe ist abgesichert, bevor die nächste beginnt.'],
-        ['Alles in Ihrer Hand', 'Dokumentation, Code und Tests gehören Ihnen. Sie entscheiden frei, wie es danach weitergeht.'],
-      ],
+    reference: {
+      label: 'Referenz',
+      kicker: 'SaaS · Medienbranche',
+      title: 'CI/CD-Automatisierung für eine Abo-Plattform',
+      body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments, gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien. Dazu Wartung und Modernisierung eines selbst gehosteten GIS-Systems inklusive Rendering eigener Karten-Layer.',
+      chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
     },
   },
   cases: {
@@ -184,12 +188,6 @@ const de = {
     title: 'Ausgewählte Mandate',
     body: 'Ein Auszug aus den letzten Jahren, aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
     items: [
-      {
-        kicker: 'SaaS · Medienbranche',
-        title: 'CI/CD-Automatisierung für eine Abo-Plattform',
-        body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments, gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien. Dazu Wartung und Modernisierung eines selbst gehosteten GIS-Systems inklusive Rendering eigener Karten-Layer.',
-        chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
-      },
       {
         kicker: 'Bundesbehörde · Gesundheitswesen',
         title: 'CI/CD-Infrastruktur auf GitHub-Basis',
@@ -215,12 +213,12 @@ const de = {
     title: 'Womit wir arbeiten',
     body: 'Ein Auszug. Wir lernen weiter, wenn das Problem es verlangt.',
     groups: [
-      ['Architektur', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven', 'Event-Storming']],
-      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Jenkins', 'Bash', 'Python']],
+      ['Architektur', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven']],
+      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bash', 'Python']],
       ['Plattform', ['Docker', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot']],
       ['Code-Qualität', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code Review', 'Pair Programming']],
       ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2']],
-      ['AI & Automation', ['MCP', 'LLM-Tooling', 'Local LLMs', 'AI Agents', 'ChatOps']],
+      ['AI & Automation', ['MCP', 'LLM-Tooling', 'Local LLMs', 'AI Agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
     ],
   },
   team: {
@@ -327,11 +325,16 @@ const en: typeof de = {
     title1: 'Software that lasts.',
     title2: 'Code that speaks.',
     body: 'We design, build and modernise software architectures for teams that don\'t want to start over in a year. And we build the tool that lets AI coding agents read your codebase.',
-    primary: 'What we do',
-    secondary: 'See ProjectMind',
     facts: ['iSAQB CPSA-A', 'TOGAF', 'Java · Spring · Rust', 'Trimstein near Bern'],
   },
   pm: {
+    meta: {
+      title: 'ProjectMind · Architecture browser for AI coding agents · Plaintext GmbH',
+      description:
+        'ProjectMind is a read-only architecture browser that pairs with coding agents such as Claude Code via the Model Context Protocol. Open source under MPL-2.0.',
+    },
+    featuresLabel: 'Features',
+    installLabel: 'Installation',
     eyebrow: 'Our product',
     kicker: 'Open source · MPL-2.0',
     title: 'ProjectMind',
@@ -377,18 +380,22 @@ const en: typeof de = {
       },
       {
         title: 'DevOps & CI/CD',
-        body: 'Automated build, deployment and staging pipelines with GitHub Actions, Jenkins and GitOps practices.',
-        chips: ['GitHub Actions', 'ArgoCD', 'Jenkins', 'Tekton'],
+        body: 'Automated build, deployment and staging pipelines with GitHub Actions and GitOps practices.',
+        chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
       },
       {
         kicker: 'Product',
         title: 'Legacy modernisation',
         link: 'View the product: legacy application migration',
+        page: 'legacy',
         body: 'Renovating old system landscapes incl. containerisation, step by step into the modern world. Cloud, on-prem or hybrid.',
         chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
       },
       {
+        kicker: 'Product',
         title: 'AI assistance',
+        link: 'View the product: ProjectMind',
+        page: 'projectmind',
         body: 'We bring in local and cloud-based AI services where they pull their weight: code reviews, docs, routine work. With ProjectMind, you see what the agents are doing.',
         chips: ['MCP', 'Claude Code', 'Codex', 'Local LLMs'],
       },
@@ -404,13 +411,10 @@ const en: typeof de = {
       eyebrow: 'Product · Legacy migration',
       title: 'Legacy application migration',
       body: 'Your application has served its purpose for years, yet its technology, operation and further development are increasingly becoming a risk. Acting on your behalf, Plaintext GmbH moves it onto a current foundation, in traceable steps whose success can be measured.',
-      primary: 'Arrange a conversation',
-      secondary: 'See the process',
-      facts: ['Analysis before change', 'Tests as a safety net', 'Measurable steps', 'Documented handover'],
     },
     situation: {
       eyebrow: 'Starting point',
-      title: 'When proven software becomes a risk',
+      title: 'The application runs. But nobody likes to touch it any more.',
       body: 'Legacy applications often carry core business processes. That is exactly what makes replacing them delicate: replacing everything at once puts at risk what works today. We take the opposite approach and secure what exists first.',
       items: [
         ['Knowledge is scattered', 'Business rules live in the code, in interfaces and in the heads of a few people. Documentation is missing or out of date.'],
@@ -420,8 +424,7 @@ const en: typeof de = {
     },
     process: {
       eyebrow: 'Process',
-      title: 'Six steps to the migrated application',
-      body: 'Every step has a clear outcome. You know at all times where the migration stands and what has already been secured.',
+      title: 'Six steps, each with a verifiable outcome',
       resultLabel: 'Outcome',
       steps: [
         {
@@ -465,14 +468,12 @@ const en: typeof de = {
         ['Tests', 'The comprehensive test suite that lets you verify the application at any time, including after future changes.'],
       ],
     },
-    benefits: {
-      eyebrow: 'Your benefit',
-      title: 'Why this approach holds up',
-      items: [
-        ['Measured, not assumed', 'Tests and mocks make the state of the migration verifiable after every step.'],
-        ['No leap into the unknown', 'The application is migrated in stages. Each stage is secured before the next one begins.'],
-        ['Everything in your hands', 'Documentation, code and tests belong to you. You are free to decide how to proceed afterwards.'],
-      ],
+    reference: {
+      label: 'Reference',
+      kicker: 'SaaS · Media industry',
+      title: 'CI/CD automation for a subscription platform',
+      body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments, together with the in-house team and nearshoring teams in Poland and India. Plus maintenance and modernisation of a self-hosted GIS system including rendering of custom map layers.',
+      chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
     },
   },
   cases: {
@@ -480,12 +481,6 @@ const en: typeof de = {
     title: 'Selected engagements',
     body: 'A sample from recent years, kept anonymous out of discretion. Happy to tell you more on request.',
     items: [
-      {
-        kicker: 'SaaS · Media industry',
-        title: 'CI/CD automation for a subscription platform',
-        body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments, together with the in-house team and nearshoring teams in Poland and India. Plus maintenance and modernisation of a self-hosted GIS system including rendering of custom map layers.',
-        chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD', 'GIS'],
-      },
       {
         kicker: 'Federal agency · Healthcare',
         title: 'CI/CD infrastructure on GitHub',
@@ -511,12 +506,12 @@ const en: typeof de = {
     title: 'What we work with',
     body: 'A snapshot. We keep learning whatever the problem demands.',
     groups: [
-      ['Architecture', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven', 'Event-Storming']],
-      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Jenkins', 'Bash', 'Python']],
+      ['Architecture', ['iSAQB', 'TOGAF', 'arc42', 'C4', 'Domain-Driven']],
+      ['GitOps & CI/CD', ['GitHub Actions', 'ArgoCD', 'Tekton', 'Bash', 'Python']],
       ['Platform', ['Docker', 'Kubernetes', 'OpenShift', 'Helm', 'Vault', 'Spring Boot']],
       ['Code quality', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code review', 'Pair programming']],
       ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2']],
-      ['AI & automation', ['MCP', 'LLM tooling', 'Local LLMs', 'AI agents', 'ChatOps']],
+      ['AI & automation', ['MCP', 'LLM tooling', 'Local LLMs', 'AI agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
     ],
   },
   team: {

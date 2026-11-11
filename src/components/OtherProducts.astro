@@ -1,8 +1,7 @@
 ---
 import type { Lang } from '../i18n/strings';
 import { t } from '../i18n/strings';
-import SectionHeader from './SectionHeader.astro';
-import GitHubIcon from './GitHubIcon.astro';
+import Section from './Section.astro';
 
 interface Props {
   lang: Lang;
@@ -11,36 +10,16 @@ const { lang } = Astro.props;
 const s = t(lang).others;
 ---
 
-<section id="products" class="py-20 md:py-28 ">
-  <div class="max-w-6xl mx-auto px-5 sm:px-6">
-    <div class="grid md:grid-cols-12 gap-10 lg:gap-16 items-start">
-      <div class="md:col-span-5">
-        <SectionHeader eyebrow={s.eyebrow} title={s.title} body={s.body} class="mb-0" />
+<Section id="products" nr="03" label={s.eyebrow} title={s.title} body={s.body}>
+  {s.items.map((item) => (
+    <article class="border-t border-ink-200 pt-4 grid md:grid-cols-9 gap-x-8 gap-y-3">
+      <p class="label md:col-span-3">{item.name}<br />MPL-2.0</p>
+      <div class="md:col-span-6">
+        <p class="text-ink-700 leading-relaxed">{item.body}</p>
+        <p class="mt-5">
+          <a href={item.link} target="_blank" rel="noopener" class="link-arrow">{item.linkLabel}</a>
+        </p>
       </div>
-
-      <div class="md:col-span-7 space-y-5">
-        {s.items.map((item, i) => (
-          <article class="card reveal" style={`transition-delay: ${i * 60}ms;`}>
-            <div class="flex items-center gap-3 mb-3">
-              <h3 class="font-mono text-lg font-semibold tracking-tight">{item.name}</h3>
-              <span class="chip ml-auto">MPL-2.0</span>
-            </div>
-            <p class="text-ink-500 leading-relaxed">{item.body}</p>
-            {item.link && (
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener"
-                class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand-500 hover:text-brand-700 transition-colors"
-              >
-                <GitHubIcon size={14} />
-                {item.linkLabel}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
-              </a>
-            )}
-          </article>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+    </article>
+  ))}
+</Section>

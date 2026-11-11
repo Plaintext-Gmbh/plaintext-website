@@ -1,0 +1,25 @@
+---
+// Abschnitt im Seitenraster: Beschriftung in der Randspalte, Inhalt in neun Spalten.
+interface Props {
+  id: string;
+  nr: string;
+  label: string;
+  title?: string;
+  body?: string;
+  tone?: 'grey' | 'blue';
+}
+const { id, nr, label, title, body, tone } = Astro.props;
+---
+
+<section id={id} class={tone && `tone-${tone}`}>
+  <div class="wrap">
+    <div class="border-t border-ink-900 pt-5 pb-16 md:pb-28 grid md:grid-cols-12 gap-x-8 gap-y-8">
+      <p class="label md:col-span-3"><span class="text-ink-900">{nr}</span>&ensp;{label}</p>
+      <div class="md:col-span-9 md:pt-10 min-w-0">
+        {title && <h2 class="display text-3xl sm:text-4xl md:text-5xl max-w-3xl">{title}</h2>}
+        {body && <p class="mt-5 text-lg text-ink-700 leading-relaxed max-w-2xl">{body}</p>}
+        <div class={title ? 'mt-10 md:mt-14' : ''}><slot /></div>
+      </div>
+    </div>
+  </div>
+</section>

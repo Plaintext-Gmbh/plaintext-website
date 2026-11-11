@@ -19,53 +19,52 @@ const links = [
   { href: `${homeHref}#services`, label: s.services },
   { href: `${base}${routes.legacy[lang]}`, label: s.legacy, current: page === 'legacy' },
   { href: `${homeHref}#cases`, label: s.cases },
-  { href: `${homeHref}#projectmind`, label: s.projectmind },
   { href: `${homeHref}#tech`, label: s.tech },
   { href: `${homeHref}#team`, label: s.team },
 ];
 ---
 
-<nav class="fixed inset-x-0 top-0 z-50 bg-[#fcfbf8]/90 backdrop-blur border-b border-ink-100" aria-label={s.menu}>
-  <div class="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center gap-6">
+<nav class="fixed inset-x-0 top-0 z-50 bg-white border-b border-ink-900" aria-label={s.menu}>
+  <div class="wrap h-14 flex items-center gap-6">
     <Brand href={homeHref} />
 
-    <ul class="hidden lg:flex items-center gap-6 ml-auto text-sm text-ink-700">
+    <ul class="hidden md:flex items-center gap-7 ml-auto text-sm">
       {links.map((l) => (
         <li>
           <a
             href={l.href}
             aria-current={l.current ? 'page' : undefined}
-            class={`hover:text-brand-500 transition-colors ${l.current ? 'text-brand-500 font-medium' : ''}`}
+            class={`hover:text-brand-500 ${l.current ? 'text-brand-500' : ''}`}
           >{l.label}</a>
         </li>
       ))}
     </ul>
 
-    <div class="flex items-center gap-3 sm:gap-4 ml-auto lg:ml-0">
+    <div class="flex items-center gap-3 sm:gap-4 ml-auto md:ml-0">
       <a
         href={otherHref}
         hreflang={otherLang}
         title={otherLang === 'de' ? 'Auf Deutsch' : 'In English'}
-        class="font-mono text-xs uppercase tracking-wider text-ink-500 hover:text-ink-900 transition-colors p-2"
+        class="font-mono text-xs uppercase text-ink-500 hover:text-ink-900 p-2"
       >
         {otherLang}
       </a>
-      <a href={`${homeHref}#contact`} class="btn btn-primary btn-sm hidden sm:inline-flex">{s.cta}</a>
+      <a href={`${homeHref}#contact`} class="btn hidden sm:inline-flex">{s.cta}</a>
 
       <!-- Mobiles Menü ohne JavaScript: details/summary. -->
-      <details class="lg:hidden" data-mobile-menu>
+      <details class="md:hidden" data-mobile-menu>
         <summary class="list-none [&::-webkit-details-marker]:hidden cursor-pointer p-2 -mr-2 text-ink-900" aria-label={s.menu}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16" />
           </svg>
         </summary>
-        <ul class="absolute inset-x-0 top-16 bg-[#fcfbf8] border-b border-ink-100 shadow-lg px-5 sm:px-6 py-3 text-base text-ink-900">
+        <ul class="absolute inset-x-0 top-14 bg-white border-y border-ink-900 px-5 sm:px-8 py-2 text-lg">
           {links.map((l) => (
-            <li class="border-b border-ink-100 last:border-0">
+            <li class="border-b border-ink-200">
               <a href={l.href} aria-current={l.current ? 'page' : undefined} class="block py-3">{l.label}</a>
             </li>
           ))}
-          <li><a href={`${homeHref}#contact`} class="block py-3 font-medium text-brand-500">{s.cta}</a></li>
+          <li><a href={`${homeHref}#contact`} class="block py-3 text-brand-500">{s.cta}</a></li>
         </ul>
       </details>
     </div>

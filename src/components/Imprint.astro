@@ -1,48 +1,28 @@
 ---
 import type { Lang } from '../i18n/strings';
 import { t } from '../i18n/strings';
+import Hero from './Hero.astro';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const s = t(lang).imprint;
-const base = import.meta.env.BASE_URL;
-const homeHref = lang === 'de' ? base : `${base}en/`;
 ---
 
-<main class="pt-32 pb-24 min-h-[60vh]">
-  <article class="max-w-3xl mx-auto px-5 sm:px-6">
-    <a href={homeHref} class="inline-block font-mono text-xs text-brand-500 hover:text-brand-700 transition-colors mb-8">
-      {s.backLabel}
-    </a>
+<Hero title={s.title} label={s.company} facts={[...s.addressLines, s.uid]} />
 
-    <h1 class="text-4xl sm:text-5xl display mb-10">{s.title}</h1>
-
-    <div class="card mb-12">
-      <p class="eyebrow mb-3">{s.company}</p>
-      <address class="not-italic leading-relaxed mb-4">
-        {s.addressLines.map((line) => <div>{line}</div>)}
-      </address>
-      <dl class="text-sm space-y-1">
-        <div class="flex gap-2">
-          <dt class="text-ink-500">E-Mail</dt>
-          <dd><a class="text-brand-500 hover:text-brand-700 transition-colors" href={`mailto:${s.email}`}>{s.email}</a></dd>
-        </div>
-        <div class="flex gap-2">
-          <dt class="text-ink-500">UID / MWST</dt>
-          <dd class="font-mono">{s.uid}</dd>
-        </div>
-      </dl>
-    </div>
-
-    {s.sections.map((section) => (
-      <section class="mb-10">
-        <h2 class="text-2xl font-semibold tracking-tight mb-4">{section.heading}</h2>
-        <div class="space-y-4 text-ink-700 leading-relaxed">
-          {section.body.map((p) => <p>{p}</p>)}
-        </div>
-      </section>
-    ))}
-  </article>
-</main>
+<div class="wrap pb-16 md:pb-28">
+  <p class="border-t border-ink-900 pt-5 grid md:grid-cols-12 gap-x-8">
+    <span class="label md:col-span-3">E-Mail</span>
+    <a class="md:col-span-9 text-brand-500 hover:text-brand-700 underline underline-offset-4" href={`mailto:${s.email}`}>{s.email}</a>
+  </p>
+  {s.sections.map((section) => (
+    <section class="mt-12 border-t border-ink-200 pt-5 grid md:grid-cols-12 gap-x-8 gap-y-4">
+      <h2 class="md:col-span-3 text-lg font-medium">{section.heading}</h2>
+      <div class="md:col-span-8 space-y-4 text-ink-700 leading-relaxed">
+        {section.body.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+  ))}
+</div>

@@ -1,33 +1,27 @@
 ---
-import type { Lang } from '../i18n/strings';
-import { t } from '../i18n/strings';
-import Keywords from './Keywords.astro';
-
+// Seitenkopf: grosser Titel, darunter Randspalte mit Eckdaten und der Einleitungstext.
 interface Props {
-  lang: Lang;
+  title: string;
+  title2?: string;
+  label: string;
+  facts?: readonly string[];
+  body?: string;
 }
-const { lang } = Astro.props;
-const s = t(lang).hero;
+const { title, title2, label, facts = [], body } = Astro.props;
 ---
 
-<section class="pt-32 pb-16 md:pt-44 md:pb-24">
-  <div class="max-w-6xl mx-auto px-5 sm:px-6">
-    <div class="max-w-3xl reveal">
-      <p class="eyebrow mb-6">{s.eyebrow}</p>
-      <h1 class="text-[2.6rem] sm:text-6xl md:text-7xl display !leading-[1.05]">
-        <span class="block">{s.title1}</span>
-        <span class="block text-brand-700">{s.title2}</span>
-      </h1>
-      <p class="mt-7 text-lg md:text-xl text-ink-500 leading-relaxed max-w-2xl">{s.body}</p>
-      <div class="mt-10 flex flex-wrap gap-3">
-        <a href="#services" class="btn btn-primary">
-          {s.primary}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#projectmind" class="btn btn-secondary">{s.secondary}</a>
+<section class="pt-28 md:pt-44 pb-14 md:pb-24">
+  <div class="wrap">
+    <h1 class="display text-[clamp(2.1rem,7.6vw,6.5rem)] max-w-6xl">
+      <span class="block">{title}</span>
+      {title2 && <span class="block text-brand-500">{title2}</span>}
+    </h1>
+    <div class="mt-10 md:mt-20 grid md:grid-cols-12 gap-x-8 gap-y-8">
+      <div class="label md:col-span-3 order-2 md:order-1">
+        <p class="text-ink-900">{label}</p>
+        {facts.length > 0 && <ul class="mt-2">{facts.map((f) => <li>{f}</li>)}</ul>}
       </div>
+      {body && <p class="md:col-span-8 order-1 md:order-2 text-xl md:text-2xl leading-snug">{body}</p>}
     </div>
-
-    <Keywords items={s.facts} class="mt-14 pt-6 border-t border-ink-200 reveal" />
   </div>
 </section>
