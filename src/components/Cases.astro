@@ -10,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 const s = t(lang).cases;
 // Die GIS-Referenz der Legacy-Seite steht auch hier, ohne den Text zu duplizieren.
-const items = [t(lang).legacy.reference, ...s.items];
+const items = [t(lang).legacy.reference.items[0], ...s.items];
 ---
 
 <Section id="cases" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>

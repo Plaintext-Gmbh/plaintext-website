@@ -52,14 +52,18 @@ const s = t(lang).legacy;
 </Section>
 
 <Section id="reference" label={s.reference.label} tone="grey">
-  <article class="panel grid md:grid-cols-5 gap-x-10 gap-y-3">
-    <div class="md:col-span-2">
-      <p class="label">{s.reference.kicker}</p>
-      <h3 class="mt-2 text-xl font-semibold tracking-tight">{s.reference.title}</h3>
-    </div>
-    <div class="md:col-span-3">
-      <p class="text-ink-500 leading-relaxed">{s.reference.body}</p>
-      <Keywords items={s.reference.chips} class="mt-4" />
-    </div>
-  </article>
+  <div class="space-y-5">
+    {s.reference.items.map((item) => (
+      <article class="panel grid md:grid-cols-5 gap-x-10 gap-y-3">
+        <div class="md:col-span-2">
+          <p class="label">{item.kicker}</p>
+          <h3 class="mt-2 text-xl font-semibold tracking-tight">{item.title}</h3>
+        </div>
+        <div class="md:col-span-3">
+          <p class="text-ink-500 leading-relaxed">{item.body}</p>
+          <Keywords items={item.chips} class="mt-4" />
+        </div>
+      </article>
+    ))}
+  </div>
 </Section>

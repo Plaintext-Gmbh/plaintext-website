@@ -176,11 +176,21 @@ const de = {
       ],
     },
     reference: {
-      label: 'Referenz',
-      kicker: 'SaaS · Medienbranche',
-      title: 'Migration einer GIS-Anwendung inklusive eigener Kachel-Renderjobs',
-      body: 'Eine in die Jahre gekommene GIS-Webanwendung wurde auf eine neue technische Basis gebracht, inklusive der eigenen Renderjobs für Kartenkacheln auf Basis von OpenStreetMap und der politischen Gemeinden der Schweiz. Die Anwendung läuft neu in Docker-Containern, Build und Deployment erfolgen über eine CI/CD-Pipeline. Zum Auftrag gehörte auch die Migration zu einem neuen Cloud-Provider.',
-      chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud-Migration'],
+      label: 'Referenzen',
+      items: [
+        {
+          kicker: 'SaaS · Medienbranche',
+          title: 'Migration einer GIS-Anwendung inklusive eigener Kachel-Renderjobs',
+          body: 'Eine in die Jahre gekommene GIS-Webanwendung wurde auf eine neue technische Basis gebracht, inklusive der eigenen Renderjobs für Kartenkacheln auf Basis von OpenStreetMap und der politischen Gemeinden der Schweiz. Die Anwendung läuft neu in Docker-Containern, Build und Deployment erfolgen über eine CI/CD-Pipeline. Zum Auftrag gehörte auch die Migration zu einem neuen Cloud-Provider.',
+          chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud-Migration'],
+        },
+        {
+          kicker: 'SaaS · Medienbranche',
+          title: 'CI/CD-Automatisierung für eine Abo-Plattform',
+          body: 'Komplette Build- und Deploy-Automatisierung: Dockerisierung aller Services, Keycloak-basiertes Abonnement-System, Einführung von Cloudflare und vollautomatisierte Deployments, gemeinsam mit dem internen Team und Nearshoring-Teams in Polen und Indien.',
+          chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD'],
+        },
+      ],
     },
   },
   cases: {
@@ -469,11 +479,21 @@ const en: typeof de = {
       ],
     },
     reference: {
-      label: 'Reference',
-      kicker: 'SaaS · Media industry',
-      title: 'Migrating a GIS application including its own tile rendering jobs',
-      body: 'An ageing GIS web application was moved onto a new technical foundation, including its own rendering jobs for map tiles based on OpenStreetMap and the political municipalities of Switzerland. The application now runs in Docker containers, with build and deployment handled by a CI/CD pipeline. The engagement also included the migration to a new cloud provider.',
-      chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud migration'],
+      label: 'References',
+      items: [
+        {
+          kicker: 'SaaS · Media industry',
+          title: 'Migrating a GIS application including its own tile rendering jobs',
+          body: 'An ageing GIS web application was moved onto a new technical foundation, including its own rendering jobs for map tiles based on OpenStreetMap and the political municipalities of Switzerland. The application now runs in Docker containers, with build and deployment handled by a CI/CD pipeline. The engagement also included the migration to a new cloud provider.',
+          chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud migration'],
+        },
+        {
+          kicker: 'SaaS · Media industry',
+          title: 'CI/CD automation for a subscription platform',
+          body: 'End-to-end build and deploy automation: dockerising every service, a Keycloak-based subscription system, introducing Cloudflare and fully automated deployments, together with the in-house team and nearshoring teams in Poland and India.',
+          chips: ['Docker', 'Keycloak', 'Cloudflare', 'CI/CD'],
+        },
+      ],
     },
   },
   cases: {
