@@ -70,8 +70,8 @@ const de = {
       {
         name: 'plaintext-root',
         body: 'Unser Anwendungs-Framework: Multi-Tenancy, Security, Menü-System, Admin-Module, Discovery. Die Basis, auf der unsere Kunden-Anwendungen seit Jahren laufen, und die wir als Open Source unter MPL 2.0 bereitstellen.',
-        link: 'https://github.com/Plaintext-Gmbh/plaintext-root',
-        linkLabel: 'github.com/Plaintext-Gmbh/plaintext-root',
+        link: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2',
+        linkLabel: 'Zum Repository auf GitHub',
       },
     ],
   },
@@ -394,8 +394,8 @@ const en: typeof de = {
       {
         name: 'plaintext-root',
         body: 'Our application framework: multi-tenancy, security, menu system, admin modules, discovery. The foundation our customer apps have been running on for years, released as open source under MPL 2.0.',
-        link: 'https://github.com/Plaintext-Gmbh/plaintext-root',
-        linkLabel: 'github.com/Plaintext-Gmbh/plaintext-root',
+        link: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2',
+        linkLabel: 'View the repository on GitHub',
       },
     ],
   },
