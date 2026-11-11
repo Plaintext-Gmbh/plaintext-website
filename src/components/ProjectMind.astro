@@ -1,0 +1,68 @@
+---
+import type { Lang } from '../i18n/strings';
+import { t } from '../i18n/strings';
+import Hero from './Hero.astro';
+import Section from './Section.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).pm;
+const installCmd = 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/projectmind/master/scripts/install.sh | sh';
+---
+
+<Hero title={s.title} title2={s.subtitle} label={s.eyebrow} facts={[s.kicker]} body={s.body} />
+
+<Section id="features" label={s.featuresLabel}>
+  <dl class="grid sm:grid-cols-2 gap-5">
+    {s.bullets.map(([head, body]) => (
+      <div class="panel">
+        <dt class="text-lg font-semibold tracking-tight">{head}</dt>
+        <dd class="mt-2 text-ink-500 leading-relaxed">{body}</dd>
+      </div>
+    ))}
+  </dl>
+</Section>
+
+<Section id="install" label={s.installLabel} tone="grey" title={s.install}>
+  <div class="max-w-3xl mx-auto text-center">
+    <div class="code-block text-left" data-install-cmd>
+      <span class="prompt">$</span>
+      <code>{installCmd}</code>
+      <button
+        type="button"
+        class="copy-btn"
+        data-copy-target="install-cmd"
+        data-default-label={s.secondary}
+        data-copied-label={s.copied}
+      >
+        {s.secondary}
+      </button>
+    </div>
+    <p class="label mt-3">{s.installNote}</p>
+    <p class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
+      <a href="https://github.com/Plaintext-Gmbh/projectmind" target="_blank" rel="noopener" class="link-arrow">{s.primary}</a>
+      <a href="https://github.com/Plaintext-Gmbh/projectmind#quickstart" target="_blank" rel="noopener" class="link-arrow">{s.learnMore}</a>
+    </p>
+  </div>
+</Section>
+
+<script is:inline>
+  // Click-to-copy for the install command.
+  document.querySelectorAll('[data-copy-target="install-cmd"]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const block = btn.closest('[data-install-cmd]');
+      const code = block?.querySelector('code')?.textContent ?? '';
+      try {
+        await navigator.clipboard.writeText(code);
+        const copied = btn.getAttribute('data-copied-label') ?? 'copied';
+        const def = btn.getAttribute('data-default-label') ?? 'copy';
+        btn.textContent = copied;
+        setTimeout(() => { btn.textContent = def; }, 1600);
+      } catch {
+        // Clipboard blocked, silent.
+      }
+    });
+  });
+</script>

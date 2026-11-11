@@ -1,48 +1,30 @@
 ---
 import type { Lang } from '../i18n/strings';
 import { t } from '../i18n/strings';
+import Hero from './Hero.astro';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const s = t(lang).imprint;
-const base = import.meta.env.BASE_URL;
-const homeHref = lang === 'de' ? base : `${base}en/`;
 ---
 
-<main class="pt-32 pb-24 min-h-[60vh]">
-  <article class="max-w-3xl mx-auto px-6">
-    <a href={homeHref} class="inline-block font-mono text-xs text-brand-500 hover:text-brand-700 transition-colors mb-8">
-      {s.backLabel}
-    </a>
+<Hero title={s.title} label={s.company} facts={[...s.addressLines, s.uid]} />
 
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-10">{s.title}</h1>
-
-    <div class="card mb-12">
-      <p class="eyebrow mb-3">{s.company}</p>
-      <address class="not-italic leading-relaxed mb-4">
-        {s.addressLines.map((line) => <div>{line}</div>)}
-      </address>
-      <dl class="text-sm space-y-1">
-        <div class="flex gap-2">
-          <dt class="text-ink-500">E-Mail</dt>
-          <dd><a class="text-brand-500 hover:text-brand-700 transition-colors" href={`mailto:${s.email}`}>{s.email}</a></dd>
-        </div>
-        <div class="flex gap-2">
-          <dt class="text-ink-500">UID / MWST</dt>
-          <dd class="font-mono">{s.uid}</dd>
-        </div>
-      </dl>
-    </div>
-
+<div class="wrap py-16 md:py-24">
+  <div class="max-w-3xl mx-auto">
+    <p class="panel flex flex-wrap gap-x-4 gap-y-1">
+      <span class="label">E-Mail</span>
+      <a class="link-arrow" href={`mailto:${s.email}`}>{s.email}</a>
+    </p>
     {s.sections.map((section) => (
-      <section class="mb-10">
-        <h2 class="text-2xl font-bold tracking-tight mb-4">{section.heading}</h2>
+      <section class="mt-12">
+        <h2 class="text-2xl font-semibold tracking-tight mb-4">{section.heading}</h2>
         <div class="space-y-4 text-ink-700 leading-relaxed">
           {section.body.map((p) => <p>{p}</p>)}
         </div>
       </section>
     ))}
-  </article>
-</main>
+  </div>
+</div>

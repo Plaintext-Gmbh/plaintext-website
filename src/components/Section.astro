@@ -1,0 +1,22 @@
+---
+// Abschnitt: zentrierter Kopf (Beschriftung, Titel, Einleitung), darunter der Inhalt.
+interface Props {
+  id: string;
+  label: string;
+  title?: string;
+  body?: string;
+  tone?: 'grey';
+}
+const { id, label, title, body, tone } = Astro.props;
+---
+
+<section id={id} class={tone && `tone-${tone}`}>
+  <div class="wrap py-16 md:py-24">
+    <header class="max-w-2xl mx-auto text-center mb-10 md:mb-14">
+      <p class="label text-brand-500">{label}</p>
+      {title && <h2 class="display mt-3 text-3xl md:text-4xl">{title}</h2>}
+      {body && <p class="mt-4 text-lg text-ink-500 leading-relaxed">{body}</p>}
+    </header>
+    <slot />
+  </div>
+</section>

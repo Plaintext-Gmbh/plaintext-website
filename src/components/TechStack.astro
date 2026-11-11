@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '../i18n/strings';
 import { t } from '../i18n/strings';
-import SectionHeader from './SectionHeader.astro';
+import Section from './Section.astro';
 
 interface Props {
   lang: Lang;
@@ -10,19 +10,13 @@ const { lang } = Astro.props;
 const s = t(lang).tech;
 ---
 
-<section id="tech" class="py-20 md:py-28 bg-ink-50">
-  <div class="max-w-6xl mx-auto px-6">
-    <SectionHeader eyebrow={s.eyebrow} title={s.title} body={s.body} />
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
-      {s.groups.map(([heading, tags], i) => (
-        <div class="reveal border-t border-ink-200 pt-4" style={`transition-delay: ${i * 60}ms;`}>
-          <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-ink-500 mb-4">{heading}</h3>
-          <div class="flex flex-wrap gap-2">
-            {tags.map((tag) => <span class="chip">{tag}</span>)}
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+<Section id="tech" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>
+  <dl class="panel max-w-4xl mx-auto divide-y divide-ink-200 !py-2">
+    {s.groups.map(([heading, tags]) => (
+      <div class="py-4 grid md:grid-cols-4 gap-x-8 gap-y-1">
+        <dt class="label">{heading}</dt>
+        <dd class="md:col-span-3 leading-relaxed">{tags.join(', ')}</dd>
+      </div>
+    ))}
+  </dl>
+</Section>
