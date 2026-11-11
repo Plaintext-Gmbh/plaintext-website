@@ -236,6 +236,7 @@ const de = {
       ['Code-Qualität', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code Review', 'Pair Programming']],
       ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2', 'LDAP / Active Directory', 'SFTP']],
       ['AI & Automation', ['MCP', 'LLM-Tooling', 'Local LLMs', 'AI Agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
+      ['Open Source', ['OpenClaw', 'Hermes', 'MemPalace']],
     ],
   },
   team: {
@@ -546,6 +547,7 @@ const en: typeof de = {
       ['Code quality', ['SonarQube', 'OWASP', 'Snyk', 'Trivy', 'DefectDojo', 'Code review', 'Pair programming']],
       ['Integration', ['REST', 'RabbitMQ', 'Keycloak', 'OAuth2', 'LDAP / Active Directory', 'SFTP']],
       ['AI & automation', ['MCP', 'LLM tooling', 'Local LLMs', 'AI agents', 'ChatOps', 'herdr', 'Kimi', 'Claude', 'DeepSeek', 'GLM', 'Nemotron', 'agy']],
+      ['Open Source', ['OpenClaw', 'Hermes', 'MemPalace']],
     ],
   },
   team: {
