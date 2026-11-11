@@ -91,7 +91,7 @@ const de = {
       {
         kicker: 'Schwerpunkt',
         title: 'Software- & Systemarchitektur',
-        body: 'iSAQB CPSA-A und TOGAF zertifiziert. Architekturentscheide, Reviews und Dokumentation nach arc42 und C4, von der Enterprise-Architektur bis zum einzelnen Service, auch in grossen agilen Release-Trains nach SAFe.',
+        body: 'iSAQB CPSA-A und TOGAF zertifiziert. Architekturentscheide, Reviews und Dokumentation nach arc42 und C4, von der Enterprise-Architektur bis zum einzelnen Service, auch in grossen agilen Release-Trains nach SAFe. Mit unserem Inventar-Werkzeug inventarisieren wir Codebasen und erheben Daten als Grundlage für fundierte Architekturentscheide.',
         chips: ['arc42', 'C4', 'DDD', 'Microservices', 'SAFe'],
       },
       {
@@ -415,7 +415,7 @@ const en: typeof de = {
       {
         kicker: 'Focus',
         title: 'Software & systems architecture',
-        body: 'iSAQB CPSA-A and TOGAF certified. Architecture decisions, reviews and documentation with arc42 and C4, from enterprise architecture down to the individual service, including large agile release trains based on SAFe.',
+        body: 'iSAQB CPSA-A and TOGAF certified. Architecture decisions, reviews and documentation with arc42 and C4, from enterprise architecture down to the individual service, including large agile release trains based on SAFe. With our inventory tool we take stock of codebases and collect the data that well-founded architecture decisions need.',
         chips: ['arc42', 'C4', 'DDD', 'Microservices', 'SAFe'],
       },
       {

@@ -17,6 +17,7 @@ const de = {
     title: 'Schwerpunkte',
     items: [
       ['Architektur', 'Gesamtarchitekturen über Applikation, Daten und Technologie. Aufbau von Microservice-Architekturen und Container-Plattformen mit Kubernetes, OpenShift und Docker.'],
+      ['Inventar', 'Inventarisierung von Codebasen und Applikationslandschaften mit einem eigenen Inventar-Werkzeug. Die erhobenen Daten dienen als Entscheidungsgrundlage und ermöglichen fundierte Architekturentscheide.'],
       ['DevOps', 'Architektur und Umsetzung generischer Build- und Deployment-Pipelines mit Jenkins und GitHub Actions. Einführung von Containerlösungen nach GitOps. Automatisierung mit Terraform für AWS und MongoDB Atlas.'],
       ['Security & IAM', 'Secret Management mit HashiCorp Vault. Konzeption und Umsetzung von IAM-Lösungen mit Failover und Importschnittstellen. Secure Coding.'],
       ['Methodik', 'Praxis in agilen Teams nach Scrum und SAFe, als Systemarchitekt, Product Owner, Teamleiter und technischer Projektleiter.'],
@@ -134,6 +135,7 @@ const en: typeof de = {
     title: 'Focus areas',
     items: [
       ['Architecture', 'Overall architectures across application, data and technology. Building microservice architectures and container platforms with Kubernetes, OpenShift and Docker.'],
+      ['Inventory', 'Taking inventory of codebases and application landscapes with a purpose-built inventory tool. The collected data serves as a basis for decisions and enables well-founded architecture decisions.'],
       ['DevOps', 'Architecture and implementation of generic build and deployment pipelines with Jenkins and GitHub Actions. Introducing GitOps-based container solutions. Automation with Terraform for AWS and MongoDB Atlas.'],
       ['Security & IAM', 'Secret management with HashiCorp Vault. Design and implementation of IAM solutions with failover and import interfaces. Secure coding.'],
       ['Ways of working', 'Hands-on experience in agile teams with Scrum and SAFe, as systems architect, product owner, team lead and technical project lead.'],
