@@ -32,7 +32,7 @@ const de = {
         role: 'Senior Architekt und Geschäftsführer',
         org: 'Plaintext GmbH',
         points: [
-          '2024 bis 2025: Mandat beim Bundesamt für Informatik und Telekommunikation (BIT), Core-IT, als stellvertretender Systemarchitekt nach SAFe. Verantwortlich für die Applikationslandschaft der Eidgenössischen Steuerverwaltung.',
+          '2024 bis 2026: Mandat beim Bundesamt für Informatik und Telekommunikation (BIT), Core-IT, als stellvertretender Systemarchitekt nach SAFe. Verantwortlich für die Applikationslandschaft der Eidgenössischen Steuerverwaltung.',
           'Architektur und Umsetzung einer generischen Build- und Deployment-Lösung auf Basis von GitHub Actions mit Azure als Zielplattform, dazu Beratung in GitOps-Fragen.',
           'Konzept und Umsetzung einer IAM-Lösung mit Failover und Importschnittstelle aus einem Abonnementverwaltungssystem.',
           'Einführung einer Docker-Containerlösung nach GitOps und einer Loganalyse mit Graylog.',
@@ -150,7 +150,7 @@ const en: typeof de = {
         role: 'Senior architect and managing director',
         org: 'Plaintext GmbH',
         points: [
-          '2024 to 2025: engagement at the Federal Office of Information Technology, Systems and Telecommunication (FOITT), Core-IT, as deputy systems architect in a SAFe setting. Responsible for the application landscape of the Federal Tax Administration.',
+          '2024 to 2026: engagement at the Federal Office of Information Technology, Systems and Telecommunication (FOITT), Core-IT, as deputy systems architect in a SAFe setting. Responsible for the application landscape of the Federal Tax Administration.',
           'Architecture and implementation of a generic build and deployment solution based on GitHub Actions with Azure as the target platform, plus consulting on GitOps.',
           'Design and implementation of an IAM solution with failover and an import interface from a subscription management system.',
           'Introduction of a GitOps-based Docker container solution and of log analysis with Graylog.',
