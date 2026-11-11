@@ -18,7 +18,7 @@ const de = {
   },
   nav: {
     projectmind: 'ProjectMind',
-    services: 'Leistungen',
+    services: 'Angebot',
     legacy: 'Legacy-Migration',
     menu: 'Menü',
     cases: 'Referenzen',
@@ -75,10 +75,18 @@ const de = {
     ],
   },
   services: {
-    eyebrow: 'Leistungen',
+    eyebrow: 'Angebot',
     title: 'Was wir mitbringen',
     body: 'Bedarfsgerechte Beratung und Mitarbeit in Projekt- und Produktteams. Wissen bleibt bei Ihrem Team. Es fliesst nicht ab.',
     items: [
+      {
+        kicker: 'Produkt',
+        title: 'Legacy-Modernisierung',
+        link: 'Zum Produkt: Migration von Legacy-Applikationen',
+        page: 'legacy',
+        body: 'Renovation alter Systemlandschaften inkl. Containerisierung, Schritt für Schritt in die Moderne. Cloud, On-Prem oder hybrid.',
+        chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
+      },
       {
         kicker: 'Schwerpunkt',
         title: 'Software- & Systemarchitektur',
@@ -89,14 +97,6 @@ const de = {
         title: 'DevOps & CI/CD',
         body: 'Automatisierte Build-, Deployment- und Staging-Prozesse mit GitHub Actions und GitOps-Praktiken.',
         chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
-      },
-      {
-        kicker: 'Produkt',
-        title: 'Legacy-Modernisierung',
-        link: 'Zum Produkt: Migration von Legacy-Applikationen',
-        page: 'legacy',
-        body: 'Renovation alter Systemlandschaften inkl. Containerisierung, Schritt für Schritt in die Moderne. Cloud, On-Prem oder hybrid.',
-        chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
       },
       {
         kicker: 'Produkt',
@@ -126,7 +126,7 @@ const de = {
       items: [
         ['Das Wissen ist verstreut', 'Fachliche Regeln stecken im Code, in Schnittstellen und in den Köpfen weniger Personen. Die Dokumentation fehlt oder ist veraltet.'],
         ['Änderungen sind riskant', 'Ohne verlässliche Tests lässt sich kaum abschätzen, welche Folgen ein Eingriff hat. Entsprechend zurückhaltend wird weiterentwickelt.'],
-        ['Die Plattform läuft aus', 'Frameworks, Laufzeitumgebungen und Bibliotheken werden nicht mehr gepflegt. Sicherheit und Betrieb werden aufwendiger.'],
+        ['Die Plattform oder der Techstack läuft aus', 'Frameworks, Laufzeitumgebungen und Bibliotheken werden nicht mehr gepflegt. Sicherheit und Betrieb werden aufwendiger.'],
       ],
     },
     process: {
@@ -373,6 +373,14 @@ const en: typeof de = {
     body: 'Right-sized advisory and embedded work in project and product teams. Knowledge stays with your team. It doesn\'t walk out.',
     items: [
       {
+        kicker: 'Product',
+        title: 'Legacy modernisation',
+        link: 'View the product: legacy application migration',
+        page: 'legacy',
+        body: 'Renovating old system landscapes incl. containerisation, step by step into the modern world. Cloud, on-prem or hybrid.',
+        chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
+      },
+      {
         kicker: 'Focus',
         title: 'Software & systems architecture',
         body: 'iSAQB CPSA-A and TOGAF certified. From enterprise architecture to microservices, the right shape for your problem.',
@@ -382,14 +390,6 @@ const en: typeof de = {
         title: 'DevOps & CI/CD',
         body: 'Automated build, deployment and staging pipelines with GitHub Actions and GitOps practices.',
         chips: ['GitHub Actions', 'ArgoCD', 'Tekton'],
-      },
-      {
-        kicker: 'Product',
-        title: 'Legacy modernisation',
-        link: 'View the product: legacy application migration',
-        page: 'legacy',
-        body: 'Renovating old system landscapes incl. containerisation, step by step into the modern world. Cloud, on-prem or hybrid.',
-        chips: ['Docker', 'Kubernetes', 'OpenShift', 'Azure', 'AWS', 'On-Prem'],
       },
       {
         kicker: 'Product',
@@ -419,7 +419,7 @@ const en: typeof de = {
       items: [
         ['Knowledge is scattered', 'Business rules live in the code, in interfaces and in the heads of a few people. Documentation is missing or out of date.'],
         ['Changes are risky', 'Without reliable tests, the consequences of a change are hard to assess. Further development slows down accordingly.'],
-        ['The platform is reaching end of life', 'Frameworks, runtimes and libraries are no longer maintained. Security and operations become more costly.'],
+        ['The platform or tech stack is reaching end of life', 'Frameworks, runtimes and libraries are no longer maintained. Security and operations become more costly.'],
       ],
     },
     process: {
