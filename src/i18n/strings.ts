@@ -178,9 +178,9 @@ const de = {
     reference: {
       label: 'Referenz',
       kicker: 'SaaS · Medienbranche',
-      title: 'Migration einer GIS-Webanwendung auf eine neue Basis',
-      body: 'Eine in die Jahre gekommene GIS-Webanwendung wurde auf eine neue technische Basis gebracht: Betrieb in Docker-Containern und eine CI/CD-Pipeline für Build und Deployment. Zum Auftrag gehörte auch die Migration zu einem neuen Cloud-Provider.',
-      chips: ['GIS', 'Docker', 'CI/CD', 'Cloud-Migration'],
+      title: 'Migration einer GIS-Anwendung inklusive eigener Kachel-Renderjobs',
+      body: 'Eine in die Jahre gekommene GIS-Webanwendung wurde auf eine neue technische Basis gebracht, inklusive der eigenen Renderjobs für Kartenkacheln auf Basis von OpenStreetMap und der politischen Gemeinden der Schweiz. Die Anwendung läuft neu in Docker-Containern, Build und Deployment erfolgen über eine CI/CD-Pipeline. Zum Auftrag gehörte auch die Migration zu einem neuen Cloud-Provider.',
+      chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud-Migration'],
     },
   },
   cases: {
@@ -471,9 +471,9 @@ const en: typeof de = {
     reference: {
       label: 'Reference',
       kicker: 'SaaS · Media industry',
-      title: 'Migrating a GIS web application to a new foundation',
-      body: 'An ageing GIS web application was moved onto a new technical foundation: running in Docker containers, with a CI/CD pipeline for build and deployment. The engagement also included the migration to a new cloud provider.',
-      chips: ['GIS', 'Docker', 'CI/CD', 'Cloud migration'],
+      title: 'Migrating a GIS application including its own tile rendering jobs',
+      body: 'An ageing GIS web application was moved onto a new technical foundation, including its own rendering jobs for map tiles based on OpenStreetMap and the political municipalities of Switzerland. The application now runs in Docker containers, with build and deployment handled by a CI/CD pipeline. The engagement also included the migration to a new cloud provider.',
+      chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud migration'],
     },
   },
   cases: {
