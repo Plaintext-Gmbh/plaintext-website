@@ -7,8 +7,7 @@ export const demoFacts = {
   rootRepo: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2',
   rootDocs: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2/blob/master/docs/GETTING_STARTED.md',
   packages: 'https://github.com/orgs/Plaintext-Gmbh/packages?repo_name=plaintext-mvn',
-  startCmd: 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/plaintext-demo/main/start.sh | sh',
-  startOptions: 'curl -fsSL … | sh -s -- --port 8081 --reset --no-browser',
+  startCmd: 'curl -fsSL https://plaintext.ch/demo.sh | sh',
   dependency: `<repository>
   <id>plaintext</id>
   <url>https://maven.pkg.github.com/Plaintext-Gmbh/plaintext-mvn</url>
@@ -47,7 +46,8 @@ const en = {
       head: 'On your machine',
       body: 'One command downloads the demo, starts it and opens the login page in your browser. It runs on http://localhost:8080. The database is an H2 file next to the jar, so nothing else has to be installed.',
       note: 'Requires Java 25 or newer · macOS · Linux',
-      options: 'Options: another port, a fresh database, no browser.',
+      copy: 'Copy',
+      copied: 'copied ✓',
       link: 'View the repository on GitHub',
     },
   },
@@ -118,7 +118,8 @@ const de: typeof en = {
       head: 'Auf Ihrem Rechner',
       body: 'Ein Befehl lädt die Demo herunter, startet sie und öffnet die Login-Seite im Browser. Sie läuft auf http://localhost:8080. Die Datenbank ist eine H2-Datei neben dem Jar, es muss nichts weiter installiert werden.',
       note: 'Benötigt Java 25 oder neuer · macOS · Linux',
-      options: 'Optionen: anderer Port, frische Datenbank, ohne Browser.',
+      copy: 'Kopieren',
+      copied: 'kopiert ✓',
       link: 'Zum Repository auf GitHub',
     },
   },

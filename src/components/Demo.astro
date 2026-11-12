@@ -3,6 +3,7 @@ import type { Lang } from '../i18n/strings';
 import { demo, demoFacts as f } from '../i18n/demo';
 import Hero from './Hero.astro';
 import Section from './Section.astro';
+import CopyCommand from './CopyCommand.astro';
 
 interface Props {
   lang: Lang;
@@ -15,7 +16,7 @@ const ext = { target: '_blank', rel: 'noopener' };
 <Hero title={s.hero.title} title2={s.hero.subtitle} label={s.hero.label} facts={s.hero.facts} body={s.hero.body} />
 
 <Section id="try" label={s.try.label} title={s.try.title}>
-  <div class="grid md:grid-cols-2 gap-5">
+  <div class="grid lg:grid-cols-[2fr_3fr] gap-5">
     <div class="panel">
       <h3 class="text-lg font-semibold tracking-tight">{s.try.online.head}</h3>
       <p class="mt-2 text-ink-500 leading-relaxed">{s.try.online.body}</p>
@@ -24,10 +25,8 @@ const ext = { target: '_blank', rel: 'noopener' };
     <div class="panel min-w-0">
       <h3 class="text-lg font-semibold tracking-tight">{s.try.local.head}</h3>
       <p class="mt-2 text-ink-500 leading-relaxed">{s.try.local.body}</p>
-      <div class="code-block mt-5"><span class="prompt">$</span><code>{f.startCmd}</code></div>
+      <div class="mt-5"><CopyCommand cmd={f.startCmd} label={s.try.local.copy} copied={s.try.local.copied} /></div>
       <p class="label mt-3">{s.try.local.note}</p>
-      <p class="mt-5 text-sm text-ink-500">{s.try.local.options}</p>
-      <div class="code-block mt-2"><span class="prompt">$</span><code>{f.startOptions}</code></div>
       <p class="mt-5"><a href={f.repo} {...ext} class="link-arrow text-sm">{s.try.local.link}</a></p>
     </div>
   </div>
