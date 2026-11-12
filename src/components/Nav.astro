@@ -18,6 +18,7 @@ const otherHref = `${base}${routes[page][otherLang]}`;
 const links = [
   { href: `${homeHref}#services`, label: s.services },
   { href: `${base}${routes.legacy[lang]}`, label: s.legacy, current: page === 'legacy' },
+  { href: `${base}${routes.demo[lang]}`, label: s.demo, current: page === 'demo' },
   { href: `${homeHref}#cases`, label: s.cases },
   { href: `${homeHref}#tech`, label: s.tech },
   { href: `${homeHref}#team`, label: s.team },
@@ -28,7 +29,7 @@ const links = [
   <div class="wrap h-16 flex items-center gap-6">
     <Brand href={homeHref} />
 
-    <ul class="hidden md:flex items-center gap-7 ml-auto text-sm">
+    <ul class="hidden md:flex items-center gap-4 lg:gap-7 ml-auto text-sm whitespace-nowrap">
       {links.map((l) => (
         <li>
           <a
@@ -49,7 +50,7 @@ const links = [
       >
         {otherLang}
       </a>
-      <a href={`${homeHref}#contact`} class="btn hidden sm:inline-flex">{s.cta}</a>
+      <a href={`${homeHref}#contact`} class="btn hidden sm:inline-flex md:hidden lg:inline-flex">{s.cta}</a>
 
       <!-- Mobiles Menü ohne JavaScript: details/summary. -->
       <details class="md:hidden" data-mobile-menu>
