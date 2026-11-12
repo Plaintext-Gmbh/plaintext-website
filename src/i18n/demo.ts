@@ -6,12 +6,18 @@ export const demoFacts = {
   repo: 'https://github.com/Plaintext-Gmbh/plaintext-demo',
   rootRepo: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2',
   rootDocs: 'https://github.com/Plaintext-Gmbh/plaintext-root-v2/blob/master/docs/GETTING_STARTED.md',
-  packages: 'https://github.com/orgs/Plaintext-Gmbh/packages?repo_name=plaintext-root-v2',
+  packages: 'https://github.com/orgs/Plaintext-Gmbh/packages?repo_name=plaintext-mvn',
   startCmd: 'curl -fsSL https://raw.githubusercontent.com/Plaintext-Gmbh/plaintext-demo/main/start.sh | sh',
-  dependency: `<dependency>
+  startOptions: 'curl -fsSL … | sh -s -- --port 8081 --reset --no-browser',
+  dependency: `<repository>
+  <id>plaintext</id>
+  <url>https://maven.pkg.github.com/Plaintext-Gmbh/plaintext-mvn</url>
+</repository>
+
+<dependency>
   <groupId>ch.plaintext.v2</groupId>
   <artifactId>plaintext-root-webapp</artifactId>
-  <version>\${plaintext-root.version}</version>
+  <version>3.19.0</version>
 </dependency>`,
 };
 
@@ -34,28 +40,29 @@ const en = {
     title: 'Two ways to start',
     online: {
       head: 'Online',
-      body: 'One shared instance, no installation. The data is reset regularly, so feel free to change things.',
+      body: 'One shared instance, no installation. The data is reset every night, so feel free to change things.',
       link: 'Open demo.plaintext.ch',
     },
     local: {
       head: 'On your machine',
-      body: 'One command downloads the demo, starts it and opens the login page in your browser. The database is an H2 file next to the jar, so nothing else has to be installed.',
+      body: 'One command downloads the demo, starts it and opens the login page in your browser. It runs on http://localhost:8080. The database is an H2 file next to the jar, so nothing else has to be installed.',
       note: 'Requires Java 25 or newer · macOS · Linux',
+      options: 'Options: another port, a fresh database, no browser.',
       link: 'View the repository on GitHub',
     },
   },
   login: {
     label: 'Sign in',
     title: 'Four users, two tenants',
-    body: 'The demo ships with its own sign-in server (an OAuth mock module), so no account is needed. The user name is also the password.',
+    body: 'The demo ships with its own OAuth2/OIDC sign-in server, so no account is needed. The user name is also the password. The interface is in English; German can be chosen in the user settings.',
     cols: ['User', 'Password', 'Role', 'Tenant', 'What you see'],
     users: [
-      ['root', 'root', 'Root', 'default', 'Everything, including the platform administration across tenants.'],
+      ['root', 'root', 'All roles', 'default and extra', 'Everything, including the platform administration. Can switch between the two tenants.'],
       ['admin', 'admin', 'Admin', 'default', 'The administration pages of the tenant: settings, users, roles.'],
       ['user', 'user', 'User', 'default', 'The application pages without administration.'],
-      ['extra', 'extra', 'User', 'extra', 'The same pages with the data of the second tenant.'],
+      ['extra', 'extra', 'Admin', 'extra', 'The same pages with the data of the second tenant. Its records carry the prefix EX-.'],
     ],
-    note: 'Sign in as user and as extra to see tenant separation: same pages, different data.',
+    note: 'Sign in as admin and as extra to see tenant separation: same pages, different data.',
   },
   shows: {
     label: 'What it shows',
@@ -73,7 +80,7 @@ const en = {
     body: 'plaintext-demo is an ordinary plaintext-root application. To build your own, add the application shell as a Maven dependency and write your pages and modules on top. Security, tenants, menus and the admin modules come with it.',
     steps: [
       'Read the code of plaintext-demo: it is the smallest complete example, including its own modules.',
-      'Add the GitHub Packages repository of Plaintext GmbH and the dependency below to your Spring Boot project.',
+      'Add the GitHub Packages repository of Plaintext GmbH and the dependency below to your Spring Boot project. GitHub Packages requires a personal access token with the scope read:packages.',
       'Follow the getting-started guide for the database, the first login and your first menu entry.',
     ],
     links: {
@@ -104,28 +111,29 @@ const de: typeof en = {
     title: 'Zwei Wege zum Start',
     online: {
       head: 'Online',
-      body: 'Eine gemeinsame Instanz, ohne Installation. Die Daten werden regelmässig zurückgesetzt, Sie dürfen also alles verändern.',
+      body: 'Eine gemeinsame Instanz, ohne Installation. Die Daten werden jede Nacht zurückgesetzt, Sie dürfen also alles verändern.',
       link: 'demo.plaintext.ch öffnen',
     },
     local: {
       head: 'Auf Ihrem Rechner',
-      body: 'Ein Befehl lädt die Demo herunter, startet sie und öffnet die Login-Seite im Browser. Die Datenbank ist eine H2-Datei neben dem Jar, es muss nichts weiter installiert werden.',
+      body: 'Ein Befehl lädt die Demo herunter, startet sie und öffnet die Login-Seite im Browser. Sie läuft auf http://localhost:8080. Die Datenbank ist eine H2-Datei neben dem Jar, es muss nichts weiter installiert werden.',
       note: 'Benötigt Java 25 oder neuer · macOS · Linux',
+      options: 'Optionen: anderer Port, frische Datenbank, ohne Browser.',
       link: 'Zum Repository auf GitHub',
     },
   },
   login: {
     label: 'Anmelden',
     title: 'Vier Benutzer, zwei Mandate',
-    body: 'Die Demo bringt ihren eigenen Anmeldeserver mit (ein OAuth-Mock-Modul), ein Konto ist nicht nötig. Der Benutzername ist zugleich das Passwort.',
+    body: 'Die Demo bringt ihren eigenen OAuth2/OIDC-Anmeldeserver mit, ein Konto ist nicht nötig. Der Benutzername ist zugleich das Passwort. Die Oberfläche ist englisch, Deutsch lässt sich in den Benutzereinstellungen wählen.',
     cols: ['Benutzer', 'Passwort', 'Rolle', 'Mandat', 'Was Sie sehen'],
     users: [
-      ['root', 'root', 'Root', 'default', 'Alles, inklusive der Plattform-Administration über alle Mandate.'],
+      ['root', 'root', 'Alle Rollen', 'default und extra', 'Alles, inklusive der Plattform-Administration. Kann zwischen den beiden Mandaten wechseln.'],
       ['admin', 'admin', 'Admin', 'default', 'Die Administrationsseiten des Mandats: Einstellungen, Benutzer, Rollen.'],
       ['user', 'user', 'User', 'default', 'Die Anwendungsseiten ohne Administration.'],
-      ['extra', 'extra', 'User', 'extra', 'Dieselben Seiten mit den Daten des zweiten Mandats.'],
+      ['extra', 'extra', 'Admin', 'extra', 'Dieselben Seiten mit den Daten des zweiten Mandats. Dessen Einträge tragen das Präfix EX-.'],
     ],
-    note: 'Melden Sie sich als user und als extra an, um die Mandantentrennung zu sehen: gleiche Seiten, andere Daten.',
+    note: 'Melden Sie sich als admin und als extra an, um die Mandantentrennung zu sehen: gleiche Seiten, andere Daten.',
   },
   shows: {
     label: 'Was die Demo zeigt',
@@ -143,7 +151,7 @@ const de: typeof en = {
     body: 'plaintext-demo ist eine gewöhnliche plaintext-root-Anwendung. Für Ihre eigene Anwendung binden Sie die Anwendungshülle als Maven-Abhängigkeit ein und schreiben Ihre Seiten und Module darauf. Security, Mandate, Menüs und die Admin-Module sind dabei.',
     steps: [
       'Lesen Sie den Code von plaintext-demo: Er ist das kleinste vollständige Beispiel, inklusive eigener Module.',
-      'Fügen Sie das GitHub-Packages-Repository der Plaintext GmbH und die folgende Abhängigkeit in Ihr Spring-Boot-Projekt ein.',
+      'Fügen Sie das GitHub-Packages-Repository der Plaintext GmbH und die folgende Abhängigkeit in Ihr Spring-Boot-Projekt ein. GitHub Packages verlangt ein persönliches Zugriffstoken mit dem Recht read:packages.',
       'Folgen Sie der Einstiegsanleitung für Datenbank, erstes Login und den ersten Menüeintrag.',
     ],
     links: {
