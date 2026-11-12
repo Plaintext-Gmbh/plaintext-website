@@ -45,7 +45,7 @@ const en = {
     local: {
       head: 'On your machine',
       body: 'One command downloads the demo, starts it and opens the login page in your browser. It runs on http://localhost:8080. The database is an H2 file next to the jar, so nothing else has to be installed.',
-      note: 'Requires Java 25 or newer · macOS · Linux',
+      note: 'Requires Java 25 or newer · macOS · Linux · the first start takes a minute or two',
       copy: 'Copy',
       copied: 'copied ✓',
       link: 'View the repository on GitHub',
@@ -117,7 +117,7 @@ const de: typeof en = {
     local: {
       head: 'Auf Ihrem Rechner',
       body: 'Ein Befehl lädt die Demo herunter, startet sie und öffnet die Login-Seite im Browser. Sie läuft auf http://localhost:8080. Die Datenbank ist eine H2-Datei neben dem Jar, es muss nichts weiter installiert werden.',
-      note: 'Benötigt Java 25 oder neuer · macOS · Linux',
+      note: 'Benötigt Java 25 oder neuer · macOS · Linux · der erste Start dauert ein bis zwei Minuten',
       copy: 'Kopieren',
       copied: 'kopiert ✓',
       link: 'Zum Repository auf GitHub',
