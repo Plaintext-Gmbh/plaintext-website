@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../i18n/strings';
-import { t } from '../i18n/strings';
+import { t, routes } from '../i18n/strings';
+import { demo } from '../i18n/demo';
 import Section from './Section.astro';
 
 interface Props {
@@ -15,8 +16,9 @@ const s = t(lang).others;
     <article class="panel max-w-3xl mx-auto">
       <p class="label flex justify-between gap-4"><span class="text-ink-900">{item.name}</span><span>MPL-2.0</span></p>
       <p class="mt-4 text-ink-500 leading-relaxed">{item.body}</p>
-      <p class="mt-5">
+      <p class="mt-5 flex flex-wrap gap-x-8 gap-y-3">
         <a href={item.link} target="_blank" rel="noopener" class="link-arrow text-sm">{item.linkLabel}</a>
+        <a href={`${import.meta.env.BASE_URL}${routes.demo[lang]}`} class="link-arrow text-sm">{demo(lang).teaser}</a>
       </p>
     </article>
   ))}

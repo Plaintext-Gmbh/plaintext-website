@@ -1,0 +1,82 @@
+---
+import type { Lang } from '../i18n/strings';
+import { demo, demoFacts as f } from '../i18n/demo';
+import Hero from './Hero.astro';
+import Section from './Section.astro';
+import CopyCommand from './CopyCommand.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = demo(lang);
+const ext = { target: '_blank', rel: 'noopener' };
+---
+
+<Hero title={s.hero.title} title2={s.hero.subtitle} label={s.hero.label} facts={s.hero.facts} body={s.hero.body} />
+
+<Section id="try" label={s.try.label} title={s.try.title}>
+  <div class="grid lg:grid-cols-[2fr_3fr] gap-5">
+    <div class="panel">
+      <h3 class="text-lg font-semibold tracking-tight">{s.try.online.head}</h3>
+      <p class="mt-2 text-ink-500 leading-relaxed">{s.try.online.body}</p>
+      <p class="mt-5"><a href={f.live} {...ext} class="btn">{s.try.online.link}</a></p>
+    </div>
+    <div class="panel min-w-0">
+      <h3 class="text-lg font-semibold tracking-tight">{s.try.local.head}</h3>
+      <p class="mt-2 text-ink-500 leading-relaxed">{s.try.local.body}</p>
+      <div class="mt-5"><CopyCommand cmd={f.startCmd} label={s.try.local.copy} copied={s.try.local.copied} /></div>
+      <p class="label mt-3">{s.try.local.note}</p>
+      <p class="mt-5"><a href={f.repo} {...ext} class="link-arrow text-sm">{s.try.local.link}</a></p>
+    </div>
+  </div>
+</Section>
+
+<Section id="login" label={s.login.label} tone="grey" title={s.login.title} body={s.login.body}>
+  <div class="panel max-w-4xl mx-auto overflow-x-auto">
+    <table class="w-full text-left text-sm">
+      <thead>
+        <tr class="label">{s.login.cols.map((c) => <th scope="col" class="pb-3 pr-4 font-normal">{c}</th>)}</tr>
+      </thead>
+      <tbody>
+        {s.login.users.map(([user, pw, role, tenant, sees]) => (
+          <tr class="border-t border-ink-100 align-top">
+            <th scope="row" class="py-3 pr-4 font-mono font-normal">{user}</th>
+            <td class="py-3 pr-4 font-mono">{pw}</td>
+            <td class="py-3 pr-4">{role}</td>
+            <td class="py-3 pr-4 font-mono">{tenant}</td>
+            <td class="py-3 text-ink-500 min-w-56">{sees}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-6 text-center text-ink-500">{s.login.note}</p>
+</Section>
+
+<Section id="features" label={s.shows.label}>
+  <dl class="grid sm:grid-cols-2 gap-5">
+    {s.shows.items.map(([head, body]) => (
+      <div class="panel">
+        <dt class="text-lg font-semibold tracking-tight">{head}</dt>
+        <dd class="mt-2 text-ink-500 leading-relaxed">{body}</dd>
+      </div>
+    ))}
+  </dl>
+  <p class="mt-6 text-center text-ink-500">{s.shows.note}</p>
+</Section>
+
+<Section id="root" label={s.root.label} tone="grey" title={s.root.title} body={s.root.body}>
+  <div class="max-w-3xl mx-auto">
+    <ol class="list-decimal pl-5 space-y-2 text-ink-700 leading-relaxed">
+      {s.root.steps.map((step) => <li>{step}</li>)}
+    </ol>
+    <div class="code-block mt-6"><code>{f.dependency}</code></div>
+    <p class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+      <a href={f.rootRepo} {...ext} class="link-arrow">{s.root.links.repo}</a>
+      <a href={f.rootDocs} {...ext} class="link-arrow">{s.root.links.docs}</a>
+      <a href={f.packages} {...ext} class="link-arrow">{s.root.links.packages}</a>
+    </p>
+    <p class="label mt-6">{s.root.license}</p>
+  </div>
+</Section>

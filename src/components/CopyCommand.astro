@@ -1,0 +1,32 @@
+---
+// Befehlszeile mit Kopier-Knopf.
+interface Props {
+  cmd: string;
+  label: string;
+  copied: string;
+}
+const { cmd, label, copied } = Astro.props;
+---
+
+<div class="code-block text-left" data-copy-cmd>
+  <span class="prompt">$</span>
+  <code>{cmd}</code>
+  <button type="button" class="copy-btn" data-default-label={label} data-copied-label={copied}>{label}</button>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('[data-copy-cmd] button').forEach((btn) => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', async () => {
+      const code = btn.closest('[data-copy-cmd]').querySelector('code').textContent;
+      try {
+        await navigator.clipboard.writeText(code);
+        btn.textContent = btn.dataset.copiedLabel;
+        setTimeout(() => { btn.textContent = btn.dataset.defaultLabel; }, 1600);
+      } catch {
+        // Zwischenablage gesperrt: still bleiben.
+      }
+    });
+  });
+</script>
