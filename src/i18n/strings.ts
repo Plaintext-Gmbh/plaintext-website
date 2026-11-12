@@ -7,6 +7,7 @@ export const routes = {
   projectmind: { de: 'projectmind/', en: 'en/projectmind/' },
   imprint: { de: 'impressum/', en: 'en/imprint/' },
   cv: { de: 'lebenslauf/', en: 'en/cv/' },
+  demo: { de: 'demo/', en: 'en/demo/' },
 } as const;
 export type Page = keyof typeof routes;
 
