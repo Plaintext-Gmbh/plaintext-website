@@ -203,7 +203,7 @@ const de = {
       {
         kicker: 'SBB · Öffentlicher Verkehr · Leadership',
         title: 'Product Owner der Entwicklungsstacks',
-        body: 'Als Product Owner der Entwicklungsstacks der SBB führte unser Geschäftsführer Daniel Marthaler das Produkt und die Community der Entwicklungsteams, die damit arbeiten. Ergebnis: eine einheitliche Build-, Deployment- und Staging-Pipeline für die gesamte Informatik, dazu gepflegte Blueprints als Bausteine für Microservices. Zum Auftrag gehörten auch Support und Architekturberatung für die Teams sowie das Coaching eines Trainees.',
+        body: 'Als Product Owner der Entwicklungsstacks der SBB führte unser Geschäftsführer Daniel Marthaler das Produkt und die interne Entwickler-Community, die damit arbeitet. Ergebnis: eine einheitliche Build-, Deployment- und Staging-Pipeline für die gesamte Informatik, dazu gepflegte Blueprints als Bausteine für Microservices. Zum Auftrag gehörten auch Support und Architekturberatung für die Teams sowie das Coaching eines Trainees.',
         chips: ['Product Owner', 'Community', 'Jenkins', 'Helm', 'OpenShift', 'Spring Boot', 'Angular', 'Go'],
       },
       {
@@ -215,7 +215,7 @@ const de = {
       {
         kicker: 'Gesundheits- und Sozialbereich · Datenschutz',
         title: 'Datenschutzkonzept für besonders schützenswerte Personendaten',
-        body: 'Für eine Organisation im Gesundheits- und Sozialbereich haben wir ein Konzept für Datenablage und Datenschutz erarbeitet. Die Klientendossiers enthalten Gesundheitsdaten und damit besonders schützenswerte Personendaten nach Art. 5 lit. c DSG. Das Konzept sieht zwei Stufen vor: zuerst den Wechsel von einem US-Anbieter zu einem Schweizer Cloud-Speicher, danach ein Fallführungssystem mit personenbezogener Zugriffsprotokollierung und Revisionssicherheit. Leitgedanke ist die Datensouveränität: Die Daten liegen bei einem Schweizer Anbieter in der Schweiz und nicht mehr im Geltungsbereich des US CLOUD Act. Die clientseitige Verschlüsselung übernimmt die Open-Source-Software Cryptomator, der Cloud-Anbieter sieht nur verschlüsselte Inhalte. Geregelt sind zudem die Rollen von Verantwortlichem und Auftragsbearbeitern, die Auftragsbearbeitungsverträge, Backup sowie Ein- und Austritt von Mitarbeitenden.',
+        body: 'Für eine Organisation im Gesundheits- und Sozialbereich haben wir ein Konzept für Datenablage und Datenschutz erarbeitet und die Umsetzung begleitet. Die Klientendossiers enthalten Gesundheitsdaten und damit besonders schützenswerte Personendaten nach Art. 5 lit. c DSG. Das Konzept sieht zwei Stufen vor: zuerst den Wechsel von einem US-Anbieter zu einem Schweizer Cloud-Speicher, danach ein Fallführungssystem mit personenbezogener Zugriffsprotokollierung und Revisionssicherheit. Leitgedanke ist die Datensouveränität: Die Daten liegen bei einem Schweizer Anbieter in der Schweiz und nicht mehr im Geltungsbereich des US CLOUD Act. Die clientseitige Verschlüsselung übernimmt die Open-Source-Software Cryptomator, der Cloud-Anbieter sieht nur verschlüsselte Inhalte. Geregelt sind zudem die Rollen von Verantwortlichem und Auftragsbearbeitern, die Auftragsbearbeitungsverträge, Backup sowie Ein- und Austritt von Mitarbeitenden.',
         chips: ['DSG', 'Gesundheitsdaten', 'Datensouveränität', 'Cryptomator', 'Open Source', 'Auftragsbearbeitung'],
       },
       {
@@ -545,7 +545,7 @@ const en: typeof de = {
       {
         kicker: 'SBB · Public transport · Leadership',
         title: 'Product owner of the development stacks',
-        body: 'As product owner of the development stacks at SBB (Swiss Federal Railways), our managing director Daniel Marthaler led the product and the community of development teams working with it. The result: one build, deployment and staging pipeline for the whole IT organisation, plus maintained blueprints as building blocks for microservices. The role also covered support and architecture advice for the teams and the coaching of a trainee.',
+        body: 'As product owner of the development stacks at SBB (Swiss Federal Railways), our managing director Daniel Marthaler led the product and the internal developer community working with it. The result: one build, deployment and staging pipeline for the whole IT organisation, plus maintained blueprints as building blocks for microservices. The role also covered support and architecture advice for the teams and the coaching of a trainee.',
         chips: ['Product owner', 'Community', 'Jenkins', 'Helm', 'OpenShift', 'Spring Boot', 'Angular', 'Go'],
       },
       {
@@ -557,7 +557,7 @@ const en: typeof de = {
       {
         kicker: 'Health and social sector · Data protection',
         title: 'Data protection concept for sensitive personal data',
-        body: 'For an organisation in the health and social sector we drew up a concept for data storage and data protection. The client files contain health data and therefore sensitive personal data under Art. 5 let. c of the Swiss Federal Act on Data Protection (FADP). The concept has two stages: first the move from a US provider to Swiss cloud storage, then a case management system with per-person access logging and audit-proof records. The guiding principle is data sovereignty: the data sits with a Swiss provider in Switzerland and no longer within the reach of the US CLOUD Act. Client-side encryption is handled by the open-source software Cryptomator, so the cloud provider only ever sees encrypted content. It also defines the roles of controller and processors, the data processing agreements, backup, and the onboarding and offboarding of staff.',
+        body: 'For an organisation in the health and social sector we drew up a concept for data storage and data protection and supported its implementation. The client files contain health data and therefore sensitive personal data under Art. 5 let. c of the Swiss Federal Act on Data Protection (FADP). The concept has two stages: first the move from a US provider to Swiss cloud storage, then a case management system with per-person access logging and audit-proof records. The guiding principle is data sovereignty: the data sits with a Swiss provider in Switzerland and no longer within the reach of the US CLOUD Act. Client-side encryption is handled by the open-source software Cryptomator, so the cloud provider only ever sees encrypted content. It also defines the roles of controller and processors, the data processing agreements, backup, and the onboarding and offboarding of staff.',
         chips: ['FADP', 'Health data', 'Data sovereignty', 'Cryptomator', 'Open source', 'Data processing'],
       },
       {
