@@ -10,7 +10,8 @@ interface Props {
 const { lang } = Astro.props;
 const s = t(lang).cases;
 // Die GIS-Referenz der Legacy-Seite steht auch hier, ohne den Text zu duplizieren.
-const items = [t(lang).legacy.reference.items[0], ...s.items];
+// Zuerst das hervorgehobene Mandat, dann die GIS-Referenz, dann der Rest.
+const items = [s.items[0], t(lang).legacy.reference.items[0], ...s.items.slice(1)];
 ---
 
 <Section id="cases" label={s.eyebrow} tone="grey" title={s.title} body={s.body}>

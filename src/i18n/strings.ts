@@ -182,8 +182,8 @@ const de = {
       items: [
         {
           kicker: 'SaaS · Medienbranche',
-          title: 'Migration einer GIS-Anwendung inklusive eigener Kachel-Renderjobs',
-          body: 'Eine in die Jahre gekommene GIS-Webanwendung wurde auf eine neue technische Basis gebracht, inklusive der eigenen Renderjobs für Kartenkacheln auf Basis von OpenStreetMap und der politischen Gemeinden der Schweiz. Die Anwendung läuft neu in Docker-Containern, Build und Deployment erfolgen über eine CI/CD-Pipeline. Zum Auftrag gehörte auch die Migration zu einem neuen Cloud-Provider.',
+          title: 'Migration einer GIS-Anwendung mit selbst gehostetem Tile-Server',
+          body: 'Eine in die Jahre gekommene GIS-Webanwendung wurde auf eine neue technische Basis gebracht. Die Kartenkacheln kommen nicht von einem Drittanbieter: Eine eigene Tile-Rendering-Pipeline erzeugt sie aus OpenStreetMap-Daten und den politischen Gemeinden der Schweiz, ein selbst gehosteter Tile-Server liefert sie aus. Die Anwendung läuft neu in Docker-Containern, Build und Deployment erfolgen über eine CI/CD-Pipeline. Zum Auftrag gehörte auch die Migration zu einem neuen Cloud-Provider.',
           chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud-Migration'],
         },
         {
@@ -200,6 +200,24 @@ const de = {
     title: 'Ausgewählte Mandate',
     body: 'Ein Auszug aus den letzten Jahren, aus Diskretion ohne Namen. Auf Anfrage erzählen wir gern mehr.',
     items: [
+      {
+        kicker: 'Öffentlicher Verkehr · Leadership',
+        title: 'Product Owner der Entwicklungsstacks',
+        body: 'Als Product Owner der Entwicklungsstacks einer grossen Schweizer Bahn führte unser Geschäftsführer Daniel Marthaler das Produkt und die Community der Entwicklungsteams, die damit arbeiten. Ergebnis: eine einheitliche Build-, Deployment- und Staging-Pipeline für die gesamte Informatik, dazu gepflegte Blueprints als Bausteine für Microservices. Zum Auftrag gehörten auch Support und Architekturberatung für die Teams sowie das Coaching eines Trainees.',
+        chips: ['Product Owner', 'Community', 'Jenkins', 'Helm', 'OpenShift', 'Spring Boot', 'Angular', 'Go'],
+      },
+      {
+        kicker: 'Öffentlicher Verkehr · Fahrplanplanung',
+        title: 'Entwicklung ins eigene Haus geholt',
+        body: 'Als Lead Architekt in der Fahrplanplanung einer grossen Schweizer Bahn verantwortete Daniel Marthaler das Vorhaben, eine grosse JEE-Anwendung vom externen Lieferanten auf die eigene Entwicklungs- und Build-Infrastruktur zu überführen. Seither kann der Betreiber die Anwendung selbst bauen und weiterentwickeln.',
+        chips: ['JEE', 'Insourcing', 'Build-Infrastruktur', 'Architektur'],
+      },
+      {
+        kicker: 'Gesundheits- und Sozialbereich · Datenschutz',
+        title: 'Datenschutzkonzept für besonders schützenswerte Personendaten',
+        body: 'Für eine Organisation der beruflichen Integration haben wir ein Konzept für Datenablage und Datenschutz erarbeitet. Die Klientendossiers enthalten Gesundheitsdaten und damit besonders schützenswerte Personendaten nach Art. 5 lit. c DSG. Das Konzept sieht zwei Stufen vor: zuerst den Wechsel von einem US-Anbieter zu einem Schweizer Cloud-Speicher, danach ein Fallführungssystem mit personenbezogener Zugriffsprotokollierung und Revisionssicherheit. Leitgedanke ist die Datensouveränität: Die Daten liegen bei einem Schweizer Anbieter in der Schweiz und nicht mehr im Geltungsbereich des US CLOUD Act. Die clientseitige Verschlüsselung übernimmt die Open-Source-Software Cryptomator, der Cloud-Anbieter sieht nur verschlüsselte Inhalte. Geregelt sind zudem die Rollen von Verantwortlichem und Auftragsbearbeitern, die Auftragsbearbeitungsverträge, Backup sowie Ein- und Austritt von Mitarbeitenden.',
+        chips: ['DSG', 'Gesundheitsdaten', 'Datensouveränität', 'Cryptomator', 'Open Source', 'Auftragsbearbeitung'],
+      },
       {
         kicker: 'SaaS · Medienbranche',
         title: 'Login- und Abo-System auf Basis von Keycloak',
@@ -506,8 +524,8 @@ const en: typeof de = {
       items: [
         {
           kicker: 'SaaS · Media industry',
-          title: 'Migrating a GIS application including its own tile rendering jobs',
-          body: 'An ageing GIS web application was moved onto a new technical foundation, including its own rendering jobs for map tiles based on OpenStreetMap and the political municipalities of Switzerland. The application now runs in Docker containers, with build and deployment handled by a CI/CD pipeline. The engagement also included the migration to a new cloud provider.',
+          title: 'Migrating a GIS application with a self-hosted tile server',
+          body: 'An ageing GIS web application was moved onto a new technical foundation. The map tiles do not come from a third party: a dedicated tile rendering pipeline generates them from OpenStreetMap data and the political municipalities of Switzerland, and a self-hosted tile server delivers them. The application now runs in Docker containers, with build and deployment handled by a CI/CD pipeline. The engagement also included the migration to a new cloud provider.',
           chips: ['GIS', 'OpenStreetMap', 'Docker', 'CI/CD', 'Cloud migration'],
         },
         {
@@ -524,6 +542,24 @@ const en: typeof de = {
     title: 'Selected engagements',
     body: 'A sample from recent years, kept anonymous out of discretion. Happy to tell you more on request.',
     items: [
+      {
+        kicker: 'Public transport · Leadership',
+        title: 'Product owner of the development stacks',
+        body: 'As product owner of the development stacks at a large Swiss railway, our managing director Daniel Marthaler led the product and the community of development teams working with it. The result: one build, deployment and staging pipeline for the whole IT organisation, plus maintained blueprints as building blocks for microservices. The role also covered support and architecture advice for the teams and the coaching of a trainee.',
+        chips: ['Product owner', 'Community', 'Jenkins', 'Helm', 'OpenShift', 'Spring Boot', 'Angular', 'Go'],
+      },
+      {
+        kicker: 'Public transport · Timetable planning',
+        title: 'Bringing development in-house',
+        body: 'As lead architect in timetable planning at a large Swiss railway, Daniel Marthaler was responsible for moving a large JEE application from the external supplier to the company\'s own development and build infrastructure. Since then the operator can build and evolve the application itself.',
+        chips: ['JEE', 'Insourcing', 'Build infrastructure', 'Architecture'],
+      },
+      {
+        kicker: 'Health and social sector · Data protection',
+        title: 'Data protection concept for sensitive personal data',
+        body: 'For an organisation in vocational integration we drew up a concept for data storage and data protection. The client files contain health data and therefore sensitive personal data under Art. 5 let. c of the Swiss Federal Act on Data Protection (FADP). The concept has two stages: first the move from a US provider to Swiss cloud storage, then a case management system with per-person access logging and audit-proof records. The guiding principle is data sovereignty: the data sits with a Swiss provider in Switzerland and no longer within the reach of the US CLOUD Act. Client-side encryption is handled by the open-source software Cryptomator, so the cloud provider only ever sees encrypted content. It also defines the roles of controller and processors, the data processing agreements, backup, and the onboarding and offboarding of staff.',
+        chips: ['FADP', 'Health data', 'Data sovereignty', 'Cryptomator', 'Open source', 'Data processing'],
+      },
       {
         kicker: 'SaaS · Media industry',
         title: 'Login and subscription system based on Keycloak',
