@@ -4,6 +4,7 @@ import { t } from '../i18n/strings';
 import Hero from './Hero.astro';
 import Section from './Section.astro';
 import Keywords from './Keywords.astro';
+import CalculatorTeaser from './CalculatorTeaser.astro';
 
 interface Props {
   lang: Lang;
@@ -50,6 +51,10 @@ const s = t(lang).legacy;
     ))}
   </div>
 </Section>
+
+<div class="wrap pb-16 md:pb-24" id="preisrechner">
+  <CalculatorTeaser lang={lang} />
+</div>
 
 <Section id="reference" label={s.reference.label} tone="grey">
   <div class="space-y-5">
