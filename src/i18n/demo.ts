@@ -16,7 +16,7 @@ export const demoFacts = {
 <dependency>
   <groupId>ch.plaintext.v2</groupId>
   <artifactId>plaintext-root-webapp</artifactId>
-  <version>3.19.0</version>
+  <version>3.77.0</version>
 </dependency>`,
 };
 
