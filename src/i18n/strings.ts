@@ -8,6 +8,8 @@ export const routes = {
   imprint: { de: 'impressum/', en: 'en/imprint/' },
   cv: { de: 'lebenslauf/', en: 'en/cv/' },
   demo: { de: 'demo/', en: 'en/demo/' },
+  // ponytail: Preisrechner gibt es nur deutsch; EN zeigt auf die Legacy-Seite, bis es eine Übersetzung gibt.
+  calculator: { de: 'preisrechner/', en: 'en/legacy-migration/' },
 } as const;
 export type Page = keyof typeof routes;
 
@@ -109,6 +111,19 @@ const de = {
         chips: ['MCP', 'Claude Code', 'Codex', 'Local LLMs'],
       },
     ],
+  },
+  calculator: {
+    meta: {
+      title: 'Preisrechner Legacy-Migration · Plaintext GmbH',
+      description:
+        'Richtpreis für die Migration Ihrer Legacy-Applikation in einer Minute: Lines of Code, SonarQube-Ratings und Umsysteme eingeben, Fixpreis bis TCHF 150 exkl. MWST, POC direkt anfragen.',
+    },
+    teaser: {
+      kicker: 'Preisrechner',
+      title: 'Was kostet die Migration Ihrer Applikation?',
+      body: 'Ein paar Kennzahlen eingeben und in einer Minute einen Richtpreis erhalten, danach direkt einen kostenlosen POC anfragen.',
+      link: 'Zum Preisrechner',
+    },
   },
   legacy: {
     meta: {
@@ -451,6 +466,18 @@ const en: typeof de = {
         chips: ['MCP', 'Claude Code', 'Codex', 'Local LLMs'],
       },
     ],
+  },
+  calculator: {
+    meta: {
+      title: 'Legacy migration price calculator · Plaintext GmbH',
+      description: 'Indicative price for migrating your legacy application.',
+    },
+    teaser: {
+      kicker: 'Price calculator',
+      title: 'What does migrating your application cost?',
+      body: 'Enter a few key figures and get an indicative price in a minute, then request a free POC. The calculator is in German.',
+      link: 'Open the price calculator (German)',
+    },
   },
   legacy: {
     meta: {
