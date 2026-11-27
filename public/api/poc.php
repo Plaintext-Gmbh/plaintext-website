@@ -6,7 +6,8 @@ declare(strict_types=1);
 
 const TO = 'hello@plaintext.ch';
 const FROM = 'Plaintext Website <hello@plaintext.ch>';
-const MAX_ZIP = 20 * 1024 * 1024;
+// Cloudflare nimmt höchstens 100 MB je Anfrage an, darum etwas Luft für die übrigen Felder.
+const MAX_ZIP = 95 * 1024 * 1024;
 const LIMIT_IP = [3, 3600];      // höchstens 3 Anfragen je Stunde und IP
 const LIMIT_ALL = [30, 86400];   // höchstens 30 Anfragen je Tag insgesamt
 
@@ -82,7 +83,7 @@ if ($quelle === 'zip') {
     if (!$f || !is_array($f) || ($f['error'] ?? 1) !== UPLOAD_ERR_OK || !is_uploaded_file($f['tmp_name'])) {
         $fehlt[] = 'ZIP-Datei';
     } elseif ($f['size'] > MAX_ZIP) {
-        antwort(413, 'ZIP-Datei grösser als 20 MB');
+        antwort(413, 'ZIP-Datei grösser als 95 MB');
     } elseif (file_get_contents($f['tmp_name'], false, null, 0, 4) !== "PK\x03\x04") {
         antwort(400, 'Datei ist kein ZIP');
     } else {
@@ -106,26 +107,32 @@ if (limitErreicht("$dir/ip-" . hash('sha256', $ip), ...LIMIT_IP) || limitErreich
 if ($text === '') {
     $text = "Firma: $firma\nName: $name\nE-Mail: $email\nTelefon: $telefon\n\nApplikation und Ziel:\n$app\n\nRepository: $repo";
 }
-$text .= "\n\n-- \nGesendet über das POC-Formular auf plaintext.ch (" . ($_SERVER['HTTP_HOST'] ?? '') . ($_SERVER['REQUEST_URI'] ?? '') . ')';
 
 $betreff = mb_encode_mimeheader('POC-Anfrage Legacy-Migration · ' . preg_replace('/[\x00-\x1F\x7F]/u', '', $firma), 'UTF-8');
 $kopf = ['From' => FROM, 'Reply-To' => $email, 'MIME-Version' => '1.0'];
 
+// ZIP ausserhalb des Web-Roots ablegen (~/poc-uploads, 0700): nicht über HTTP erreichbar, kein Deploy löscht es.
 if ($zip) {
-    $grenze = 'ptx-' . bin2hex(random_bytes(12));
-    $dateiname = preg_replace('/[^A-Za-z0-9._-]/', '_', basename((string) $zip['name']));
-    $kopf['Content-Type'] = "multipart/mixed; boundary=\"$grenze\"";
-    $body = "--$grenze\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n"
-        . chunk_split(base64_encode($text))
-        . "--$grenze\r\nContent-Type: application/zip; name=\"$dateiname\"\r\nContent-Transfer-Encoding: base64\r\n"
-        . "Content-Disposition: attachment; filename=\"$dateiname\"\r\n\r\n"
-        . chunk_split(base64_encode((string) file_get_contents($zip['tmp_name'])))
-        . "--$grenze--\r\n";
-} else {
-    $kopf['Content-Type'] = 'text/plain; charset=UTF-8';
-    $kopf['Content-Transfer-Encoding'] = 'base64';
-    $body = chunk_split(base64_encode($text));
+    $home = preg_replace('~/www/.*$~', '', __DIR__);
+    $ablage = (getenv('POC_UPLOAD_DIR') ?: "$home/poc-uploads");
+    if ($home === __DIR__ && !getenv('POC_UPLOAD_DIR')) {
+        antwort(500, 'Ablage nicht gefunden');
+    }
+    if (!is_dir($ablage) && !@mkdir($ablage, 0700, true)) {
+        antwort(500, 'Ablage fehlgeschlagen');
+    }
+    $dateiname = date('Ymd-His') . '-' . bin2hex(random_bytes(4)) . '-'
+        . preg_replace('/[^A-Za-z0-9._-]/', '_', basename((string) $zip['name']));
+    if (!move_uploaded_file($zip['tmp_name'], "$ablage/$dateiname")) {
+        antwort(500, 'Ablage fehlgeschlagen');
+    }
+    chmod("$ablage/$dateiname", 0600);
+    $text .= "\n\nZIP-Datei (" . round($zip['size'] / 1048576, 1) . " MB) liegt auf Hostpoint: ~/poc-uploads/$dateiname";
 }
+$text .= "\n\n-- \nGesendet über das POC-Formular auf plaintext.ch (" . ($_SERVER['HTTP_HOST'] ?? '') . ($_SERVER['REQUEST_URI'] ?? '') . ')';
+$kopf['Content-Type'] = 'text/plain; charset=UTF-8';
+$kopf['Content-Transfer-Encoding'] = 'base64';
+$body = chunk_split(base64_encode($text));
 
 if (!mail(TO, $betreff, $body, $kopf)) {
     antwort(500, 'Versand fehlgeschlagen');
