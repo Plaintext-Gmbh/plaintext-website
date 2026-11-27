@@ -282,7 +282,7 @@ const endpoint = `${import.meta.env.BASE_URL}api/poc.php`;
                 <label class="drop" id="drop">
                   <input type="file" id="fZip" name="source" accept=".zip,application/zip" class="sr">
                   <b id="dropTitle">ZIP-Datei hierher ziehen oder auswählen</b>
-                  <span class="label" id="dropSub">max. 20 MB · ohne Binaries, Secrets und Kundendaten</span>
+                  <span class="label" id="dropSub">max. 95 MB · ohne Binaries, Secrets und Kundendaten</span>
                 </label>
               </div>
             </div>
@@ -486,7 +486,7 @@ const endpoint = `${import.meta.env.BASE_URL}api/poc.php`;
 const CFG = {
   endpoint: document.getElementById('pocForm').action,   // public/api/poc.php
   cap: 150000, floor: 18000,
-  maxZipMB: 20,          // geht als Mail-Anhang mit, darum nicht grösser
+  maxZipMB: 95,          // Cloudflare-Grenze 100 MB je Anfrage
 };
 const S = { loc: 60000, langs: 2, ui: 'web', mig: 'platform', sqale: 3, rel: 2, sec: 2, dup: 8, cov: 15,
             ifaces: 4, dbs: 1, docs: 'partial', knowledge: true, dataMig: false, rate: 1500, team: 2 };

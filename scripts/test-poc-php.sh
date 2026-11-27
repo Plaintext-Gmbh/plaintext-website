@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 NAME=poc-php-test-$$
-docker run -d --rm --name "$NAME" -p 127.0.0.1:18085:8080 -v "$PWD/public/api:/app:ro" php:8.3-cli \
+docker run -d --rm --name "$NAME" -e POC_UPLOAD_DIR=/tmp/up -p 127.0.0.1:18085:8080 -v "$PWD/public/api:/app:ro" php:8.3-cli \
   php -d 'sendmail_path=tee -a /tmp/mail.eml >/dev/null' -S 0.0.0.0:8080 -t /app >/dev/null
 trap 'docker rm -f "$NAME" >/dev/null 2>&1 || true' EXIT
 U=http://127.0.0.1:18085/poc.php
@@ -28,9 +28,9 @@ check "gültig mit Repo" 200 "${OK[@]}"
 check "dritte gültige" 200 "${OK[@]}"
 check "Rate-Limit je IP" 429 "${OK[@]}"
 mails=$(docker exec "$NAME" grep -c '^To: hello@plaintext.ch' /tmp/mail.eml || true)
-att=$(docker exec "$NAME" grep -c 'filename="co_de.zip"' /tmp/mail.eml || true)
+att=$(docker exec "$NAME" sh -c 'ls /tmp/up | grep -c -- "-co_de.zip$"' || true)
 bcc=$(docker exec "$NAME" grep -ci '^Bcc:' /tmp/mail.eml || true)
-echo "Mails: $mails (erwartet 3), Anhang: $att (erwartet 1), Bcc-Kopfzeilen: $bcc (erwartet 0)"
+echo "Mails: $mails (erwartet 3), abgelegte ZIP: $att (erwartet 1), Bcc-Kopfzeilen: $bcc (erwartet 0)"
 [[ "$mails" == 3 && "$att" == 1 && "$bcc" == 0 ]] || fails=$((fails+1))
 rm -f /tmp/poc-body.$$ /tmp/poc-$$.zip
 echo "Fehler: $fails"; exit $fails
