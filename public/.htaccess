@@ -1,0 +1,7 @@
+# Karte 2434: HTML ohne Cache-Control wurde vom Browser heuristisch gecacht (alte Fassung nach Deploy).
+# no-cache = immer beim Server nachfragen. Gehashte Assets unter _astro/ bleiben cachebar.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|xml|txt|webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
