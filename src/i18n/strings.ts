@@ -8,8 +8,7 @@ export const routes = {
   imprint: { de: 'impressum/', en: 'en/imprint/' },
   cv: { de: 'lebenslauf/', en: 'en/cv/' },
   demo: { de: 'demo/', en: 'en/demo/' },
-  // ponytail: Preisrechner gibt es nur deutsch; EN zeigt auf die Legacy-Seite, bis es eine Übersetzung gibt.
-  calculator: { de: 'preisrechner/', en: 'en/legacy-migration/' },
+  calculator: { de: 'preisrechner/', en: 'en/price-calculator/' },
 } as const;
 export type Page = keyof typeof routes;
 
@@ -470,13 +469,14 @@ const en: typeof de = {
   calculator: {
     meta: {
       title: 'Legacy migration price calculator · Plaintext GmbH',
-      description: 'Indicative price for migrating your legacy application.',
+      description:
+        'Indicative price for migrating your legacy application in one minute: enter lines of code, SonarQube ratings and surrounding systems, fixed price up to TCHF 150 excl. VAT, request a POC directly.',
     },
     teaser: {
       kicker: 'Price calculator',
       title: 'What does migrating your application cost?',
-      body: 'Enter a few key figures and get an indicative price in a minute, then request a free POC. The calculator is in German.',
-      link: 'Open the price calculator (German)',
+      body: 'Enter a few key figures and get an indicative price in a minute, then request a free POC.',
+      link: 'Open the price calculator',
     },
   },
   legacy: {
